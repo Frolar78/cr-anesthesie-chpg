@@ -27,7 +27,7 @@ const DATA = {
 
   monitorage: ["Scope","SpO2","VVP","KTA","KTC","BIS","TOF"],
 
-  induction: ["Sufentanil","Rémifentanil","Kétamine","Propofol"],
+  induction: ["Sufentanil","Rémifentanil","Kétamine","Etomidate","Propofol"],
 
   entretien: ["Sevoflurane","Propofol AIVOC"],
 

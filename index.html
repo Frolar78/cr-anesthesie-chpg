@@ -12,10 +12,11 @@
 
   <header class="topbar">
     <div class="brand">
-      <div class="logo">CHPG</div>
-      <div>
-        <h1>Compte-rendu d'anesthésie – CHPG Monaco</h1>
-        <p>Assistant de rédaction clinique</p>
+      <img src="./logo-chpg.png" alt="CHPG" class="brand-logo">
+
+      <div class="brand-text">
+        <h1>Compte-rendu d’anesthésie</h1>
+        <p>Centre Hospitalier Princesse Grace — Monaco</p>
       </div>
     </div>
 
@@ -24,7 +25,7 @@
 
   <main class="layout">
 
-    <!-- GAUCHE -->
+    <!-- COLONNE GAUCHE -->
     <section class="panel left-panel">
       <div class="panel-title">Intervention</div>
 
@@ -46,13 +47,13 @@
       <div id="chirContainer"></div>
       <button class="action-btn" id="addChirBtn" type="button">+ Chirurgien</button>
 
-      <div style="height:12px"></div>
+      <div style="height:14px"></div>
 
       <div id="gesteContainer"></div>
       <button class="action-btn" id="addGesteBtn" type="button">+ Intervention</button>
     </section>
 
-    <!-- MILIEU -->
+    <!-- COLONNE MILIEU -->
     <section class="panel middle-panel">
 
       <div class="mini-card">
@@ -77,9 +78,9 @@
         <div id="vaDetails"></div>
 
         <div id="srBlock" class="hidden" style="margin-top:10px;">
-          <label style="display:flex;align-items:center;gap:8px;">
+          <label class="checkbox-row">
             <input type="checkbox" id="sequenceRapide">
-            Séquence rapide
+            <span>Séquence rapide</span>
           </label>
         </div>
       </div>
@@ -99,7 +100,13 @@
             <option>Ropivacaïne 0,375%</option>
             <option>Ropivacaïne 0,5%</option>
           </select>
-          <input type="number" id="localVolume" value="20" placeholder="mL">
+
+          <input
+            type="number"
+            id="localVolume"
+            value="20"
+            placeholder="mL"
+          >
         </div>
       </div>
 
@@ -108,26 +115,42 @@
 
         <div class="field">
           <label>Diurèse (mL)</label>
-          <input type="number" id="diurese" placeholder="0">
+          <input
+            type="number"
+            id="diurese"
+            placeholder="Ex : 450"
+          >
         </div>
 
         <div class="field">
           <label>Saignement (mL)</label>
-          <input type="number" id="saignement" placeholder="0">
+          <input
+            type="number"
+            id="saignement"
+            placeholder="Ex : 200"
+          >
         </div>
 
         <div class="field">
           <label>Remplissage</label>
-          <input type="text" id="remplissage" placeholder="ex : 1500 mL cristalloïdes">
+          <input
+            type="text"
+            id="remplissage"
+            placeholder="Ex : 1500 mL cristalloïdes"
+          >
         </div>
 
-        <label style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+        <label class="checkbox-row">
           <input type="checkbox" id="noradCheck">
-          Noradrénaline
+          <span>Noradrénaline</span>
         </label>
 
-        <div id="noradBlock" class="hidden" style="margin-top:8px;">
-          <input type="text" id="noradText" placeholder="ex : max 0,08 µg/kg/min">
+        <div id="noradBlock" class="hidden" style="margin-top:10px;">
+          <input
+            type="text"
+            id="noradText"
+            placeholder="Ex : maximum 0,08 µg/kg/min"
+          >
         </div>
       </div>
 
@@ -138,7 +161,7 @@
 
     </section>
 
-    <!-- DROITE -->
+    <!-- COLONNE DROITE -->
     <section class="panel report-panel">
       <div class="panel-title">Compte-rendu généré</div>
       <textarea id="report"></textarea>

@@ -11,9 +11,11 @@ const state = {
   va: "",
   ventilation: "",
   entretien: "",
+  analgesie: [],
   antibio: "",
   alr: [],
-  neuraxial: []
+  neuraxial: [],
+  peropForced: false
 };
 
 const ALR_PERIPHERIQUE_MAP = {
@@ -134,6 +136,42 @@ const ANTIBIO_MAP = {
   "Cataracte": "Céfuroxime"
 };
 
+const ANTIBIO_DOSES = {
+  "Céfazoline": "2 g",
+  "Céfoxitine": "2 g",
+  "Amoxicilline / Acide clavulanique": "2 g",
+  "Métronidazole": "1 g",
+  "Céfuroxime": ""
+};
+
+const SIMPLE_PEROP_SPECIALITES = [
+  "Endoscopie digestive",
+  "ORL",
+  "Ophtalmologie",
+  "Cardiologie interventionnelle",
+  "Radiologie interventionnelle"
+];
+
+const SIMPLE_PEROP_GESTES = [
+  "Vertébroplastie",
+  "Canal carpien",
+  "Ostéosynthèse poignet",
+  "Ostéosynthèse cheville",
+  "Arthroscopie de genou",
+  "Arthroscopie d'épaule",
+  "Appendicectomie",
+  "Cholécystectomie",
+  "Hernie inguinale",
+  "Hernie ombilicale",
+  "Conisation",
+  "Cerclage",
+  "Nymphoplastie de réduction",
+  "Biopsies de prostate",
+  "REV",
+  "URS + Laser",
+  "Montée de JJ"
+];
+
 function fillSelect(select, list, placeholder=""){
   select.innerHTML = "";
 
@@ -197,6 +235,7 @@ function createChips(id, list, key, single=false){
       if(key === "antibio") renderAntibioDetails();
 
       renderALR();
+      renderPeropVisibility();
       renderReport();
     };
 
@@ -206,6 +245,7 @@ function createChips(id, list, key, single=false){
 
 function initDate(){
   const d = new Date();
+
   $("date").value = new Date(d.getTime() - d.getTimezoneOffset() * 60000)
     .toISOString()
     .split("T")[0];
@@ -264,8 +304,10 @@ function addGeste(removable=true){
   if(removable){
     wrapper.querySelector(".remove-btn").onclick = ()=>{
       wrapper.remove();
+      state.peropForced = false;
       renderALR();
       renderAntibio();
+      renderPeropVisibility();
       renderReport();
     };
   }
@@ -276,9 +318,11 @@ function addGeste(removable=true){
   fillSelect(sel, list, "Intervention...");
 
   sel.addEventListener("change", ()=>{
+    state.peropForced = false;
     renderGesteExtra(wrapper, sel.value);
     renderALR();
     renderAntibio();
+    renderPeropVisibility();
     renderReport();
   });
 }
@@ -344,17 +388,22 @@ function getSelectedGestesRaw(){
 
 function renderMonitorageDetails(){
   const box = $("monitorageDetails");
+
+  const previousKta = $("ktaSite")?.value || "";
+  const previousKtc = $("ktcSite")?.value || "";
+
   box.innerHTML = "";
 
   if(state.monitorage.includes("KTA")){
     const s = document.createElement("select");
     s.id = "ktaSite";
 
-    fillSelect(
-      s,
-      ["Radial droit","Radial gauche","Fémoral droit","Fémoral gauche"],
-      "Localisation KTA..."
-    );
+    const list = ["Radial droit","Radial gauche","Fémoral droit","Fémoral gauche"];
+    fillSelect(s, list, "Localisation KTA...");
+
+    if(list.includes(previousKta)){
+      s.value = previousKta;
+    }
 
     box.appendChild(s);
   }
@@ -363,18 +412,20 @@ function renderMonitorageDetails(){
     const s = document.createElement("select");
     s.id = "ktcSite";
 
-    fillSelect(
-      s,
-      [
-        "Jugulaire interne droite",
-        "Jugulaire interne gauche",
-        "Sous-clavier droit",
-        "Sous-clavier gauche",
-        "Fémoral droit",
-        "Fémoral gauche"
-      ],
-      "Localisation KTC..."
-    );
+    const list = [
+      "Jugulaire interne droite",
+      "Jugulaire interne gauche",
+      "Sous-clavier droit",
+      "Sous-clavier gauche",
+      "Fémoral droit",
+      "Fémoral gauche"
+    ];
+
+    fillSelect(s, list, "Localisation KTC...");
+
+    if(list.includes(previousKtc)){
+      s.value = previousKtc;
+    }
 
     box.appendChild(s);
   }
@@ -539,6 +590,33 @@ function renderAntibioDetails(){
   }
 }
 
+function shouldHidePeropByDefault(){
+  const spec = specialiteSelect.value;
+  const gestes = getSelectedGestesRaw();
+
+  if(!gestes.length){
+    return false;
+  }
+
+  if(SIMPLE_PEROP_SPECIALITES.includes(spec)){
+    return true;
+  }
+
+  return gestes.every(g=>SIMPLE_PEROP_GESTES.includes(g));
+}
+
+function renderPeropVisibility(){
+  const hideByDefault = shouldHidePeropByDefault();
+
+  if(hideByDefault && !state.peropForced){
+    $("peropCard").classList.add("hidden");
+    $("showPeropBtn").classList.remove("hidden");
+  }else{
+    $("peropCard").classList.remove("hidden");
+    $("showPeropBtn").classList.add("hidden");
+  }
+}
+
 async function copyReport(){
   try{
     await navigator.clipboard.writeText(report.value);
@@ -612,7 +690,7 @@ function renderReport(){
     txt += "\n";
   }
 
-  const ordre = ["Sufentanil","Rémifentanil","Kétamine","Propofol"];
+  const ordre = ["Sufentanil","Rémifentanil","Kétamine","Etomidate","Propofol"];
   const meds = ordre.filter(x=>state.induction.includes(x));
   const curares = state.curare.filter(x=>x !== "Aucun");
 
@@ -669,6 +747,11 @@ function renderReport(){
       : "Entretien anesthésique par propofol en AIVOC.\n\n";
   }
 
+  if(state.analgesie.length){
+    txt += "ANALGÉSIE\n";
+    txt += `Analgésie multimodale par ${state.analgesie.join(", ")}.\n\n`;
+  }
+
   if(state.alr.length){
     txt += "ALR PÉRIPHÉRIQUE\n";
     txt += `ALR de type ${state.alr.join(", ")} réalisée de manière échoguidée avec ${$("localVolume").value} mL de ${$("localAgent").value}.\n\n`;
@@ -691,6 +774,7 @@ function renderReport(){
     txt += "\n";
   }
 
+  const peropVisible = !$("peropCard").classList.contains("hidden");
   const diurese = $("diurese").value;
   const saignement = $("saignement").value;
   const remplissage = $("remplissage").value;
@@ -699,8 +783,8 @@ function renderReport(){
   const incident = $("incidentCheck").checked;
   const incidentText = $("incidentText").value;
 
-  if(diurese || saignement || remplissage || norad || incident){
-    txt += "PÉRI-OPÉRATOIRE\n";
+  if(peropVisible && (diurese || saignement || remplissage || norad || incident)){
+    txt += "PER-OPÉRATOIRE\n";
 
     if(diurese) txt += `Diurèse : ${diurese} mL.\n`;
     if(saignement) txt += `Saignement estimé : ${saignement} mL.\n`;
@@ -729,7 +813,10 @@ function renderReport(){
       ? `Antibioprophylaxie par ${autre}.\n`
       : "Antibioprophylaxie par autre antibiotique à préciser.\n";
   }else{
-    txt += `Antibioprophylaxie par ${state.antibio}.\n`;
+    const dose = ANTIBIO_DOSES[state.antibio];
+    txt += dose
+      ? `Antibioprophylaxie par ${state.antibio} ${dose}.\n`
+      : `Antibioprophylaxie par ${state.antibio}.\n`;
   }
 
   report.value = txt;
@@ -763,11 +850,23 @@ function init(){
 
   createChips("entretienOptions", DATA.entretien, "entretien", true);
 
+  createChips(
+    "analgesieOptions",
+    ["Paracétamol", "Kétoprofène", "Néfopam", "Tramadol", "Morphine"],
+    "analgesie"
+  );
+
   renderAntibio();
 
   $("addChirBtn").onclick = ()=>addChir(true);
   $("addGesteBtn").onclick = ()=>addGeste(true);
   $("copyBtn").onclick = copyReport;
+
+  $("showPeropBtn").onclick = ()=>{
+    state.peropForced = true;
+    renderPeropVisibility();
+    renderReport();
+  };
 
   $("sequenceRapide").addEventListener("change", handleSequenceRapideChange);
 
@@ -782,6 +881,7 @@ function init(){
   });
 
   specialiteSelect.onchange = ()=>{
+    state.peropForced = false;
     updateChirurgiens();
 
     document.querySelectorAll(".field").forEach(block=>{
@@ -798,6 +898,7 @@ function init(){
 
     renderALR();
     renderAntibio();
+    renderPeropVisibility();
     renderReport();
   };
 
@@ -806,6 +907,7 @@ function init(){
 
   renderALR();
   renderAntibio();
+  renderPeropVisibility();
   renderReport();
 }
 

@@ -25,11 +25,15 @@ const DATA = {
     "Dr Félix ZAMARON"
   ],
 
-  laterality: [
-    "Droite",
-    "Gauche",
-    "Bilatéral"
-  ],
+  monitorage: ["Scope","SpO2","VVP","KTA","KTC","BIS","TOF"],
+
+  induction: ["Sufentanil","Rémifentanil","Kétamine","Propofol"],
+
+  entretien: ["Sevoflurane","Propofol AIVOC"],
+
+  antibio: ["Céfazoline","Non"],
+
+  laterality: ["Droite","Gauche","Bilatéral"],
 
   lateralizedGestes: [
     "PTH","PTG","Hallux valgus","Varices",
@@ -44,7 +48,8 @@ const DATA = {
     "Segmentectomie",
     "Recalibrage",
     "Vertébroplastie",
-    "Segmentectomie hépatique"
+    "Segmentectomie hépatique",
+    "Embolisation"
   ],
 
   specialites: {
@@ -64,6 +69,39 @@ const DATA = {
       ]
     },
 
+    "Viscéral": {
+      chirurgiens: [
+        "Pr Fabrizio PANARO",
+        "Dr Adolfo GAVELLI",
+        "Dr Marie-Christine MISSANA",
+        "Dr Hubert PERRIN",
+        "Dr Anna MARMORALE",
+        "Dr Anne DUBOIS-VERDIER",
+        "Dr Nicoletta AMBROSIANI"
+      ],
+      interventions: [
+        "Duodénopancréatectomie céphalique",
+        "Œsophagectomie Lewis-Santy",
+        "Appendicectomie",
+        "Hernie inguinale",
+        "Hernie ombilicale",
+        "Hémorroïdectomie",
+        "Colectomie",
+        "Coelioscopie exploratrice",
+        "Cholécystectomie",
+        "Promontofixation",
+        "Mastectomie partielle",
+        "Mastectomie totale",
+        "Injection Bulkamide",
+        "Annexectomie",
+        "Hystérectomie",
+        "CHIP",
+        "Kystectomie ovarienne",
+        "Segmentectomie hépatique",
+        "Autre..."
+      ]
+    },
+
     "Thoracique": {
       chirurgiens: [
         "Dr Tayeb BENKIRAN",
@@ -76,8 +114,90 @@ const DATA = {
         "Médiastinoscopie",
         "Autre..."
       ]
-    }
-  },
+    },
 
-  monitorage:["Scope","SpO2","VVP","KTA","KTC","BIS","TOF"]
+    "Endoscopie digestive": {
+      chirurgiens: [
+        "Dr Alexandre CHARACHON",
+        "Dr Luc DIEZ",
+        "Dr Juliette LAVAYSSIERE",
+        "Dr Daniela AGREFILO",
+        "Dr Jean-François DEMARQUAY"
+      ],
+      interventions: [
+        "Gastroscopie","Coloscopie","Echo-endoscopie haute","RSF","ERCP",
+        "Pose de prothèse biliaire","Dissection sous-muqueuse","Mucosectomie",
+        "POEM","Autre..."
+      ]
+    },
+
+    "Cardiologie interventionnelle": {
+      chirurgiens: ["Dr Gabriel LATCU","Dr Denis GATY"],
+      interventions: ["Ablation de FA","Ablation de flutter","Autre..."]
+    },
+
+    "Radiologie interventionnelle": {
+      chirurgiens: [
+        "Pr Giuseppe GUZZARDI",
+        "Dr Federico TORRE",
+        "Dr Mathieu LIBERATORE"
+      ],
+      interventions: ["Vertébroplastie","Embolisation","Autre..."]
+    },
+
+    "Gynécologie / Obstétrique": {
+      chirurgiens: [
+        "Pr Bruno CARBONNE","Dr Jacques RAIGA","Dr Bernard BENOIT",
+        "Dr Guillaume DOUCEDE","Dr Reda DJAFER","Dr Julia AUMIPHIN",
+        "Dr Adrien GAUDINEAU","Dr Wafaa EL AHMADI-LAACHOURI",
+        "Pr Guillaume BENOIST"
+      ],
+      interventions: [
+        "Césarienne","Hystérectomie","Annexectomie",
+        "Conisation","Nymphoplastie de réduction",
+        "Curetage","Cerclage","Autre..."
+      ]
+    },
+
+    "Urologie": {
+      chirurgiens: [
+        "Dr Xavier CARPENTIER","Dr Raffaele CURSIO",
+        "Dr Maher KECHAOU","Dr Patrick-Julien TREACY"
+      ],
+      interventions: [
+        "Prostatectomie totale","Biopsies de prostate",
+        "REP","REV","URS + Laser","Montée de JJ","Autre..."
+      ]
+    },
+
+    "ORL": {
+      chirurgiens: [
+        "Dr Diane LAZARD","Dr Riadh BERGUIGA",
+        "Dr Sandrine CANIVET","Dr Albert VAN HOVE"
+      ],
+      interventions: [
+        "Septoplastie","Rhinoplastie","Thyroïdectomie totale",
+        "Thyroïdectomie partielle","Parathyroidectomie",
+        "Extraction DDS","Carcinome cutané","Cholestéatome",
+        "Adénoidectomie","DTT","Turbinoplastie",
+        "Adénoamygdalectomie","Autre..."
+      ]
+    },
+
+    "Vasculaire": {
+      chirurgiens: ["Dr Gianvittorio TOMMASI"],
+      interventions: ["Varices","Autre..."]
+    },
+
+    "Ophtalmologie": {
+      chirurgiens: [
+        "Dr Frédéric BETIS","Dr Florence GASTAUD-NEGRE",
+        "Dr Emilie MATAMOROS","Dr Alissa BARRADE-CARZOLI",
+        "Dr Philippe BERROS","Dr Liliane LASSERRE",
+        "Dr Valérie ELMALEH","Dr Cécilia LEAL",
+        "Dr Thierry FERRETE"
+      ],
+      interventions: ["Cataracte","Autre..."]
+    }
+  }
 };

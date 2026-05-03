@@ -18,160 +18,6 @@ const state = {
   peropForced: false
 };
 
-const ALR_PERIPHERIQUE_MAP = {
-  "PTH": ["PENG bloc", "Bloc fémoral"],
-  "PTG": ["Bloc saphène", "Bloc obturateur", "Bloc fémoral"],
-  "Ostéosynthèse cheville": ["Bloc sciatique au creux poplité", "Bloc saphène"],
-  "Ostéosynthèse poignet": ["Bloc axillaire", "Blocs distaux"],
-  "Canal carpien": ["Bloc axillaire", "Blocs distaux"],
-  "Hallux valgus": ["Bloc sciatique", "Blocs de cheville"],
-  "Clou gamma": ["Bloc cutané latéral de cuisse", "Bloc fémoral"],
-  "Prothèse d'épaule": ["Bloc inter-scalénique"],
-  "Arthroscopie de genou": ["Bloc saphène", "Bloc fémoral"],
-  "Arthroscopie d'épaule": ["Bloc inter-scalénique"],
-
-  "Hernie inguinale": ["Bloc ilio-inguinal", "TAP bloc"],
-  "Hernie ombilicale": ["TAP bloc", "Bloc des grands droits"],
-  "Hémorroïdectomie": ["Bloc pudendal"],
-  "Colectomie": ["TAP bloc"],
-  "Mastectomie totale": ["Bloc paravertébral", "PECS bloc"],
-
-  "Lobectomie pulmonaire": ["Bloc paravertébral", "Bloc érecteur du rachis"],
-  "Segmentectomie": ["Bloc paravertébral", "Bloc érecteur du rachis"],
-  "Talcage pleural": ["Bloc paravertébral", "Bloc érecteur du rachis"]
-};
-
-const ALR_NEURAXIAL_MAP = {
-  "Duodénopancréatectomie céphalique": ["Péridurale thoracique"],
-  "Œsophagectomie Lewis-Santy": ["Péridurale thoracique"],
-  "CHIP": ["Péridurale thoracique"],
-  "Lobectomie pulmonaire": ["Péridurale thoracique"],
-  "Césarienne": ["Rachianesthésie", "Péridurale"],
-  "Curetage": ["Rachianesthésie"],
-  "Cerclage": ["Rachianesthésie"],
-  "Cystectomie totale": ["Péridurale thoracique"]
-};
-
-const ANTIBIO_MAP = {
-  "PTH": "Céfazoline",
-  "PTG": "Céfazoline",
-  "Ostéosynthèse cheville": "Céfazoline",
-  "Ostéosynthèse poignet": "Céfazoline",
-  "Recalibrage": "Céfazoline",
-  "Canal carpien": "Aucune",
-  "Hallux valgus": "Céfazoline",
-  "Clou gamma": "Céfazoline",
-  "Prothèse d'épaule": "Céfazoline",
-  "Arthroscopie de genou": "Aucune",
-  "Arthroscopie d'épaule": "Aucune",
-
-  "Duodénopancréatectomie céphalique": "Céfoxitine",
-  "Œsophagectomie Lewis-Santy": "Céfazoline",
-  "Appendicectomie": "Céfoxitine",
-  "Hernie inguinale": "Céfazoline",
-  "Hernie ombilicale": "Céfazoline",
-  "Hémorroïdectomie": "Métronidazole",
-  "Colectomie": "Céfoxitine",
-  "Coelioscopie exploratrice": "Aucune",
-  "Cholécystectomie": "Aucune",
-  "Promontofixation": "Céfazoline",
-  "Mastectomie partielle": "Céfazoline",
-  "Mastectomie totale": "Céfazoline",
-  "Injection Bulkamide": "Aucune",
-  "Annexectomie": "Céfazoline",
-  "Hystérectomie": "Céfazoline",
-  "CHIP": "Céfoxitine",
-  "Kystectomie ovarienne": "Céfazoline",
-  "Segmentectomie hépatique": "Céfoxitine",
-
-  "Lobectomie pulmonaire": "Céfazoline",
-  "Segmentectomie": "Céfazoline",
-  "Talcage pleural": "Aucune",
-  "Médiastinoscopie": "Aucune",
-
-  "Gastroscopie": "Aucune",
-  "Coloscopie": "Aucune",
-  "Echo-endoscopie haute": "Aucune",
-  "RSF": "Aucune",
-  "ERCP": "Céfoxitine",
-  "Pose de prothèse biliaire": "Céfoxitine",
-  "Dissection sous-muqueuse": "Aucune",
-  "Mucosectomie": "Aucune",
-  "POEM": "Amoxicilline / Acide clavulanique",
-
-  "Ablation de FA": "Aucune",
-  "Ablation de flutter": "Aucune",
-
-  "Vertébroplastie": "Céfazoline",
-  "Embolisation": "Aucune",
-
-  "Césarienne": "Céfazoline",
-  "Conisation": "Aucune",
-  "Nymphoplastie de réduction": "Aucune",
-  "Curetage": "Aucune",
-  "Cerclage": "Aucune",
-
-  "Prostatectomie totale": "Aucune",
-  "Biopsies de prostate": "Céfazoline",
-  "REP": "Céfazoline",
-  "REV": "Céfazoline",
-  "URS + Laser": "Céfazoline",
-  "Montée de JJ": "Céfazoline",
-  "Cystectomie totale": "Céfoxitine",
-
-  "Septoplastie": "Aucune",
-  "Rhinoplastie": "Aucune",
-  "Thyroïdectomie totale": "Aucune",
-  "Thyroïdectomie partielle": "Aucune",
-  "Parathyroidectomie": "Aucune",
-  "Extraction DDS": "Amoxicilline / Acide clavulanique",
-  "Carcinome cutané": "Aucune",
-  "Cholestéatome": "Aucune",
-  "Adénoidectomie": "Aucune",
-  "DTT": "Aucune",
-  "Turbinoplastie": "Aucune",
-  "Adénoamygdalectomie": "Aucune",
-
-  "Varices": "Aucune",
-  "Cataracte": "Céfuroxime"
-};
-
-const ANTIBIO_DOSES = {
-  "Céfazoline": "2 g",
-  "Céfoxitine": "2 g",
-  "Amoxicilline / Acide clavulanique": "2 g",
-  "Métronidazole": "1 g",
-  "Céfuroxime": ""
-};
-
-const SIMPLE_PEROP_SPECIALITES = [
-  "Endoscopie digestive",
-  "ORL",
-  "Ophtalmologie",
-  "Cardiologie interventionnelle",
-  "Radiologie interventionnelle"
-];
-
-const SIMPLE_PEROP_GESTES = [
-  "Vertébroplastie",
-  "Canal carpien",
-  "Ostéosynthèse poignet",
-  "Ostéosynthèse cheville",
-  "Arthroscopie de genou",
-  "Arthroscopie d'épaule",
-  "Appendicectomie",
-  "Cholécystectomie",
-  "Hernie inguinale",
-  "Hernie ombilicale",
-  "Conisation",
-  "Cerclage",
-  "Nymphoplastie de réduction",
-  "Biopsies de prostate",
-  "REV",
-  "URS + Laser",
-  "Montée de JJ"
-];
-
 function fillSelect(select, list, placeholder=""){
   select.innerHTML = "";
 
@@ -204,32 +50,17 @@ function createChips(id, list, key, single=false){
 
     chip.onclick = ()=>{
       if(single){
-        if(state[key] === item){
-          state[key] = "";
-          chip.classList.remove("active");
-        }else{
-          state[key] = item;
-          [...box.children].forEach(c=>c.classList.remove("active"));
-          chip.classList.add("active");
-        }
+        state[key] = state[key] === item ? "" : item;
       }else{
         const arr = state[key];
         const idx = arr.indexOf(item);
-
-        if(idx > -1){
-          arr.splice(idx, 1);
-          chip.classList.remove("active");
-        }else{
-          arr.push(item);
-          chip.classList.add("active");
-        }
+        idx > -1 ? arr.splice(idx, 1) : arr.push(item);
       }
+
+      createChips(id, list, key, single);
 
       if(key === "monitorage") renderMonitorageDetails();
-      if(key === "va"){
-        renderVADetails();
-        updateCurare();
-      }
+      if(key === "va") renderVADetails();
       if(key === "ventilation") renderVentilationDetails();
       if(key === "neuraxial") renderNeuraxialDetails();
       if(key === "antibio") renderAntibioDetails();
@@ -402,9 +233,7 @@ function renderMonitorageDetails(){
     const list = ["3 dérivations", "5 dérivations"];
     fillSelect(s, list, "");
 
-    if(list.includes(previousScope)){
-      s.value = previousScope;
-    }
+    if(list.includes(previousScope)) s.value = previousScope;
 
     box.appendChild(s);
   }
@@ -416,9 +245,7 @@ function renderMonitorageDetails(){
     const list = ["Radial droit","Radial gauche","Fémoral droit","Fémoral gauche"];
     fillSelect(s, list, "Localisation KTA...");
 
-    if(list.includes(previousKta)){
-      s.value = previousKta;
-    }
+    if(list.includes(previousKta)) s.value = previousKta;
 
     box.appendChild(s);
   }
@@ -438,9 +265,7 @@ function renderMonitorageDetails(){
 
     fillSelect(s, list, "Localisation KTC...");
 
-    if(list.includes(previousKtc)){
-      s.value = previousKtc;
-    }
+    if(list.includes(previousKtc)) s.value = previousKtc;
 
     box.appendChild(s);
   }
@@ -490,10 +315,11 @@ function renderVADetails(){
 }
 
 function renderVentilationDetails(){
-  if(state.ventilation === "Autre"){
-    $("ventilationPrecision").classList.remove("hidden");
-  }else{
-    $("ventilationPrecision").classList.add("hidden");
+  const isOther = state.ventilation === "Autre";
+
+  $("ventilationPrecision").classList.toggle("hidden", !isOther);
+
+  if(!isOther){
     $("ventilationPrecision").value = "";
   }
 }
@@ -542,7 +368,7 @@ function renderALR(){
     state.alr = [];
   }else{
     $("alrCard").classList.remove("hidden");
-    createChips("alrOptions", alrList, "alr", false);
+    createChips("alrOptions", alrList, "alr");
   }
 
   if(neuraxialList.length === 0){
@@ -552,7 +378,7 @@ function renderALR(){
     $("periduraleNiveau").value = "";
   }else{
     $("neuraxialCard").classList.remove("hidden");
-    createChips("neuraxialOptions", neuraxialList, "neuraxial", false);
+    createChips("neuraxialOptions", neuraxialList, "neuraxial");
     renderNeuraxialDetails();
   }
 }
@@ -562,10 +388,9 @@ function renderNeuraxialDetails(){
     state.neuraxial.includes("Péridurale") ||
     state.neuraxial.includes("Péridurale thoracique");
 
-  if(hasPeridurale){
-    $("periduraleDetails").classList.remove("hidden");
-  }else{
-    $("periduraleDetails").classList.add("hidden");
+  $("periduraleDetails").classList.toggle("hidden", !hasPeridurale);
+
+  if(!hasPeridurale){
     $("periduraleNiveau").value = "";
   }
 }
@@ -597,10 +422,11 @@ function renderAntibio(){
 }
 
 function renderAntibioDetails(){
-  if(state.antibio === "Autre"){
-    $("antibioOtherBlock").classList.remove("hidden");
-  }else{
-    $("antibioOtherBlock").classList.add("hidden");
+  const isOther = state.antibio === "Autre";
+
+  $("antibioOtherBlock").classList.toggle("hidden", !isOther);
+
+  if(!isOther){
     $("antibioOtherText").value = "";
   }
 }
@@ -635,21 +461,16 @@ function renderPeropVisibility(){
 async function copyReport(){
   try{
     await navigator.clipboard.writeText(report.value);
-    $("copyBtn").textContent = "Copié ✓";
-
-    setTimeout(()=>{
-      $("copyBtn").textContent = "Copier le CR";
-    }, 1500);
   }catch{
     report.select();
     document.execCommand("copy");
-
-    $("copyBtn").textContent = "Copié ✓";
-
-    setTimeout(()=>{
-      $("copyBtn").textContent = "Copier le CR";
-    }, 1500);
   }
+
+  $("copyBtn").textContent = "Copié ✓";
+
+  setTimeout(()=>{
+    $("copyBtn").textContent = "Copier le CR";
+  }, 1500);
 }
 
 function renderReport(){
@@ -715,7 +536,6 @@ function renderReport(){
 
   if(meds.length){
     txt += "INDUCTION\n";
-
     txt += $("sequenceRapide").checked
       ? "Induction en séquence rapide par "
       : "Induction par ";
@@ -760,7 +580,6 @@ function renderReport(){
 
   if(state.entretien){
     txt += "ENTRETIEN\n";
-
     txt += state.entretien === "Sevoflurane"
       ? "Entretien anesthésique par sévoflurane.\n\n"
       : "Entretien anesthésique par propofol en AIVOC.\n\n";
@@ -905,12 +724,14 @@ function init(){
 
     document.querySelectorAll(".field").forEach(block=>{
       const sel = block.querySelector(".geste-select");
+
       if(sel){
         fillSelect(
           sel,
           DATA.specialites[specialiteSelect.value]?.interventions || [],
           "Intervention..."
         );
+
         renderGesteExtra(block, sel.value);
       }
     });

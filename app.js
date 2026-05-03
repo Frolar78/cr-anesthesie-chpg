@@ -8,6 +8,23 @@ const autreInterventionBox = $("autreInterventionBox");
 const autreIntervention = $("autreIntervention");
 const report = $("report");
 
+const state = {
+  monitorage: [],
+  induction: [],
+  curare: [],
+  va: [],
+  entretien: "",
+  antibio: "",
+  alr: ""
+};
+
+const ALR_SPECIALITES = [
+  "Orthopédie",
+  "Viscéral",
+  "Thoracique",
+  "Gynécologie / Obstétrique"
+];
+
 const ALR_MAP = {
   "PTH":["Bloc fémoral"],
   "PTG":["Bloc fémoral","Bloc saphène au canal des adducteurs"],
@@ -21,18 +38,8 @@ const ALR_MAP = {
   "Césarienne":["TAP-bloc"]
 };
 
-const state = {
-  monitorage: [],
-  induction: [],
-  curare: [],
-  va: "",
-  entretien: "",
-  antibio: "",
-  alr: ""
-};
-
 function fillSelect(select, list){
-  select.innerHTML = "";
+  select.innerHTML="";
   list.forEach(v=>{
     const o=document.createElement("option");
     o.value=v;
@@ -43,7 +50,7 @@ function fillSelect(select, list){
 
 function createChips(containerId, list, key, single=false){
   const container = $(containerId);
-  container.innerHTML = "";
+  container.innerHTML="";
 
   list.forEach(item=>{
     const chip=document.createElement("div");
@@ -67,7 +74,11 @@ function createChips(containerId, list, key, single=false){
         }
       }
 
-      if(key==="va") renderVADetails();
+      if(key==="va"){
+        renderVADetails();
+        updateCurare();
+      }
+
       renderReport();
     };
 
@@ -85,54 +96,51 @@ function updateSpecialite(){
 function updateIntervention(){
   const val = interventionSelect.value;
 
-  autreInterventionBox.classList.toggle(
-    "hidden",
-    val!=="Autre..."
-  );
-
+  autreInterventionBox.classList.toggle("hidden", val!=="Autre...");
   renderALR(val);
   renderReport();
 }
 
 function renderALR(intervention){
   const card = $("alrCard");
-  const list = ALR_MAP[intervention];
+  const spec = specialiteSelect.value;
 
-  if(!list){
+  if(!ALR_SPECIALITES.includes(spec) || !ALR_MAP[intervention]){
     card.classList.add("hidden");
     state.alr="";
     return;
   }
 
   card.classList.remove("hidden");
-  createChips("alrOptions",[...list,"Aucune"],"alr",true);
+  createChips("alrOptions",[...ALR_MAP[intervention],"Aucune"],"alr",true);
+}
+
+function updateCurare(){
+  const sr = state.va.includes("Séquence rapide");
+  const list = sr
+    ? ["Aucun","Atracurium","Rocuronium","Célocurine"]
+    : ["Aucun","Atracurium","Rocuronium"];
+
+  state.curare=[];
+  createChips("curare",list,"curare");
 }
 
 function renderVADetails(){
-  const zone=$("vaDetails");
+  const zone = $("vaDetails");
   zone.innerHTML="";
 
-  if(state.va==="Masque laryngé"){
-    zone.innerHTML=`
-      <div class="mt8">
-        <input id="mlSize" placeholder="Taille (ex 4)">
-      </div>
-    `;
+  if(state.va.includes("Masque laryngé")){
+    zone.innerHTML += `<div class="mt8"><input id="mlSize" placeholder="Taille masque (4)"></div>`;
   }
 
-  if(state.va==="Intubation oro-trachéale"){
-    zone.innerHTML=`
-      <div class="mt8">
-        <input id="tubeSize" placeholder="Sonde (ex 7.5)">
-      </div>
-    `;
+  if(state.va.includes("Intubation oro-trachéale")){
+    zone.innerHTML += `<div class="mt8"><input id="tubeSize" placeholder="Sonde (7.5)"></div>`;
   }
 }
 
 function formatDateFR(dateStr){
   if(!dateStr) return "";
-  const d=new Date(dateStr);
-  return d.toLocaleDateString("fr-FR");
+  return new Date(dateStr).toLocaleDateString("fr-FR");
 }
 
 function renderReport(){
@@ -140,7 +148,7 @@ function renderReport(){
   const anesth = anesthSelect.value;
   const chir = chirurgienSelect.value;
   const intervention = interventionSelect.value==="Autre..."
-    ? (autreIntervention.value||"Autre")
+    ? (autreIntervention.value || "Autre")
     : interventionSelect.value;
 
   let txt="";
@@ -151,36 +159,80 @@ function renderReport(){
   txt+=`Chirurgien : ${chir}\n`;
   txt+=`Intervention : ${intervention}\n\n`;
 
-  if(state.monitorage.length){
+  // INSTALLATION
+  const simple = [];
+  if(state.monitorage.includes("Scope")) simple.push("scope cardiotensionnel 3 dérivations");
+  if(state.monitorage.includes("SpO2")) simple.push("SpO2");
+  if(state.monitorage.includes("VVP")) simple.push("voie veineuse périphérique");
+  if(state.monitorage.includes("BIS")) simple.push("BIS");
+  if(state.monitorage.includes("TOF")) simple.push("TOF");
+
+  if(simple.length || state.monitorage.includes("KTA") || state.monitorage.includes("KTC")){
     txt+="INSTALLATION\n";
-    txt+=`Monitorage : ${state.monitorage.join(", ")}.\n\n`;
+    if(simple.length){
+      txt+=simple[0].charAt(0).toUpperCase()+simple[0].slice(1);
+      if(simple.length>1) txt+=", "+simple.slice(1).join(", ");
+      txt+=".\n";
+    }
+
+    if(state.monitorage.includes("KTA")){
+      txt+="Mise en place d'un cathéter artériel après test d'Allen négatif.\n";
+    }
+
+    if(state.monitorage.includes("KTC")){
+      txt+="Mise en place d'un cathéter veineux central échoguidé.\n";
+    }
+
+    txt+="\n";
   }
 
-  if(state.induction.length){
+  // INDUCTION
+  const ordre = ["Sufentanil","Rémifentanil","Kétamine","Propofol"];
+  const meds = ordre.filter(x=>state.induction.includes(x));
+  const curares = state.curare.filter(x=>x!=="Aucun");
+
+  if(meds.length){
     txt+="INDUCTION\n";
-    txt+=`Induction par ${state.induction.join(", ")}.\n\n`;
+
+    const sr = state.va.includes("Séquence rapide");
+
+    txt += sr
+      ? "Induction en séquence rapide par "
+      : "Induction par ";
+
+    txt += meds.join(", ");
+
+    if(curares.length){
+      txt += " puis curarisation par " + curares.join(", ");
+    }
+
+    txt += ".\n\n";
   }
 
-  if(state.curare.length){
-    txt+="CURARISATION\n";
-    txt+=`Curarisation : ${state.curare.join(", ")}.\n\n`;
-  }
-
-  if(state.va){
+  // VA
+  if(state.va.length){
     txt+="VOIES AÉRIENNES\n";
 
-    if(state.va==="Masque laryngé"){
-      txt+=`Mise en place d'un masque laryngé taille ${$("mlSize")?.value||""}.\n\n`;
-    }else if(state.va==="Intubation oro-trachéale"){
-      txt+=`Intubation oro-trachéale avec une sonde ${$("tubeSize")?.value||""}.\n\n`;
-    }else{
-      txt+="Ventilation spontanée conservée.\n\n";
+    if(state.va.includes("Ventilation spontanée")){
+      txt+="Geste effectué en ventilation spontanée.\n";
     }
+
+    if(state.va.includes("Masque laryngé")){
+      txt+=`Mise en place d'un masque laryngé taille ${$("mlSize")?.value||""}.\n`;
+    }
+
+    if(state.va.includes("Intubation oro-trachéale")){
+      txt+=`Intubation oro-trachéale avec une sonde ${$("tubeSize")?.value||""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre.\n`;
+    }
+
+    txt+="\n";
   }
 
   if(state.entretien){
     txt+="ENTRETIEN\n";
-    txt+=`Entretien anesthésique par ${state.entretien}.\n\n`;
+    txt += state.entretien==="Sevoflurane"
+      ? "Entretien anesthésique par sévoflurane.\n\n"
+      : "Entretien anesthésique par propofol en AIVOC.\n\n";
   }
 
   if(state.alr && state.alr!=="Aucune"){
@@ -189,17 +241,17 @@ function renderReport(){
   }
 
   txt+="ANTIBIOPROPHYLAXIE\n";
-  txt+=state.antibio==="Céfazoline"
+  txt += state.antibio==="Céfazoline"
     ? "Antibioprophylaxie par céfazoline.\n"
     : "Pas d'antibioprophylaxie.\n";
 
-  report.value=txt;
+  report.value = txt;
 }
 
 function copyReport(){
   navigator.clipboard.writeText(report.value);
   $("copyBtn").textContent="Copié ✓";
-  setTimeout(()=>$("copyBtn").textContent="Copier le CR",1200);
+  setTimeout(()=>{$("copyBtn").textContent="Copier le CR";},1200);
 }
 
 function init(){
@@ -207,32 +259,18 @@ function init(){
   fillSelect(specialiteSelect, Object.keys(DATA.specialites));
 
   createChips("monitorage", DATA.monitorage, "monitorage");
-  createChips("induction", DATA.induction, "induction");
-  createChips("curare", DATA.curare, "curare");
+  createChips("induction", ["Sufentanil","Rémifentanil","Kétamine","Propofol"], "induction");
+  createChips("vaOptions", ["Séquence rapide","Ventilation spontanée","Masque laryngé","Intubation oro-trachéale"], "va");
+  createChips("entretienOptions", ["Sevoflurane","Propofol AIVOC"], "entretien", true);
+  createChips("antibioOptions", ["Céfazoline","Non"], "antibio", true);
+  updateCurare();
 
-  createChips("vaOptions",[
-    "Ventilation spontanée",
-    "Masque laryngé",
-    "Intubation oro-trachéale"
-  ],"va",true);
-
-  createChips("entretienOptions",[
-    "Sevoflurane",
-    "Propofol AIVOC"
-  ],"entretien",true);
-
-  createChips("antibioOptions",[
-    "Céfazoline",
-    "Non"
-  ],"antibio",true);
+  specialiteSelect.onchange = updateSpecialite;
+  interventionSelect.onchange = updateIntervention;
+  document.addEventListener("input", renderReport);
+  $("copyBtn").onclick = copyReport;
 
   updateSpecialite();
-
-  document.addEventListener("input",renderReport);
-  specialiteSelect.onchange=updateSpecialite;
-  interventionSelect.onchange=updateIntervention;
-  $("copyBtn").onclick=copyReport;
-
   renderReport();
 }
 

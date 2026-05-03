@@ -75,7 +75,7 @@ const DATA = {
         "Dr Hubert PERRIN",
         "Dr Anna MARMORALE",
         "Dr Anne DUBOIS-VERDIER",
-        "Dr Nicoletta AMBROSIANI"
+        "Dr Nicoletta AMBROSIANI",
         "Dr Tayeb BENKIRAN",
       ],
       interventions: [

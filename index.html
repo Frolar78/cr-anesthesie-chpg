@@ -8,132 +8,120 @@
 </head>
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <!-- HEADER -->
-    <header class="topbar">
-      <div class="brand">
-        <div class="logo">CHPG</div>
-        <div>
-          <h1>Compte-rendu d'anesthésie – CHPG Monaco</h1>
-          <p>Assistant de rédaction clinique</p>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">CHPG</div>
+      <div>
+        <h1>Compte-rendu d'anesthésie – CHPG Monaco</h1>
+        <p>Assistant de rédaction clinique</p>
+      </div>
+    </div>
+
+    <button id="copyBtn">Copier le CR</button>
+  </header>
+
+  <main class="layout">
+
+    <!-- GAUCHE -->
+    <section class="panel left-panel">
+      <div class="panel-title">Intervention</div>
+
+      <div class="field">
+        <label>Date</label>
+        <input type="date" id="date">
+      </div>
+
+      <div class="field">
+        <label>Anesthésiste</label>
+        <select id="anesthesiste"></select>
+      </div>
+
+      <div class="field">
+        <label>Spécialité</label>
+        <select id="specialite"></select>
+      </div>
+
+      <div class="field">
+        <label>Chirurgien</label>
+        <select id="chirurgien"></select>
+      </div>
+
+      <div class="field">
+        <label>Intervention</label>
+        <div class="inline">
+          <select id="intervention"></select>
+          <button class="plus-btn">+</button>
         </div>
       </div>
 
-      <button id="copyBtn">Copier le CR</button>
-    </header>
+      <div class="field hidden" id="autreInterventionBox">
+        <label>Préciser</label>
+        <input type="text" id="autreIntervention">
+      </div>
+    </section>
 
-    <!-- CONTENU -->
-    <main class="layout">
+    <!-- MILIEU -->
+    <section class="panel middle-panel">
 
-      <!-- COLONNE 1 -->
-      <section class="panel">
-        <div class="panel-title">Intervention</div>
+      <div class="mini-card">
+        <h3>Monitorage</h3>
+        <div class="chip-zone" id="monitorage"></div>
+      </div>
 
-        <div class="field">
-          <label>Date</label>
-          <input type="date" id="date">
+      <div class="mini-card">
+        <h3>Induction</h3>
+        <div class="chip-zone" id="induction"></div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Curare</h3>
+        <div class="chip-zone" id="curare"></div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Voies aériennes</h3>
+        <div class="chip-zone" id="vaOptions"></div>
+        <div id="vaDetails"></div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Entretien</h3>
+        <div class="chip-zone" id="entretienOptions"></div>
+      </div>
+
+      <div class="mini-card hidden" id="alrCard">
+        <h3>ALR</h3>
+        <div class="chip-zone" id="alrOptions"></div>
+
+        <div class="inline mt8">
+          <select id="localAgent">
+            <option>Ropivacaïne 0,2%</option>
+            <option>Ropivacaïne 0,375%</option>
+            <option>Ropivacaïne 0,5%</option>
+          </select>
+          <input type="number" id="localVolume" value="20" placeholder="mL">
         </div>
+      </div>
 
-        <div class="field">
-          <label>Anesthésiste</label>
-          <select id="anesthesiste"></select>
-        </div>
+      <div class="mini-card">
+        <h3>Antibioprophylaxie</h3>
+        <div class="chip-zone" id="antibioOptions"></div>
+      </div>
 
-        <div class="field">
-          <label>Spécialité</label>
-          <select id="specialite"></select>
-        </div>
+    </section>
 
-        <div class="field">
-          <label>Chirurgien</label>
-          <select id="chirurgien"></select>
-        </div>
+    <!-- DROITE -->
+    <section class="panel report-panel">
+      <div class="panel-title">Compte-rendu généré</div>
+      <textarea id="report"></textarea>
+    </section>
 
-        <div class="field">
-          <label>Intervention</label>
-          <div class="inline">
-            <select id="intervention"></select>
-            <button class="plus-btn" id="addIntervention">+</button>
-          </div>
-        </div>
+  </main>
+</div>
 
-        <div class="field hidden" id="autreInterventionBox">
-          <label>Préciser</label>
-          <input type="text" id="autreIntervention" placeholder="Nom de l'intervention">
-        </div>
-
-        <div id="secondInterventionContainer"></div>
-
-        <div id="contextFields"></div>
-      </section>
-
-      <!-- COLONNE 2 -->
-      <section class="panel">
-        <div class="panel-title">Per-opératoire</div>
-
-        <div class="card">
-          <h3>Installation / monitorage</h3>
-          <div class="check-grid" id="monitorage"></div>
-        </div>
-
-        <div class="card">
-          <h3>Induction</h3>
-          <div class="check-grid" id="induction"></div>
-        </div>
-
-        <div class="card">
-          <h3>Curare</h3>
-          <div class="check-grid" id="curare"></div>
-        </div>
-
-        <div class="card">
-          <h3>Voies aériennes</h3>
-          <div id="vaOptions"></div>
-          <div id="vaDetails"></div>
-        </div>
-
-        <div class="card">
-          <h3>Entretien</h3>
-          <div id="entretienOptions"></div>
-        </div>
-
-        <div class="card hidden" id="alrCard">
-          <h3>ALR</h3>
-          <div id="alrOptions"></div>
-
-          <div class="field">
-            <label>Anesthésique local</label>
-            <select id="localAgent">
-              <option>Ropivacaïne 0,2%</option>
-              <option>Ropivacaïne 0,375%</option>
-              <option>Ropivacaïne 0,5%</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>Volume (mL)</label>
-            <input type="number" id="localVolume" value="20">
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Antibioprophylaxie</h3>
-          <div id="antibioOptions"></div>
-        </div>
-      </section>
-
-      <!-- COLONNE 3 -->
-      <section class="panel report-panel">
-        <div class="panel-title">Compte-rendu généré</div>
-        <textarea id="report"></textarea>
-      </section>
-
-    </main>
-
-  </div>
-
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

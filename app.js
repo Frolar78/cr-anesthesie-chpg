@@ -254,8 +254,8 @@ function initDate(){
 function formatDateFR(v){
   if(!v) return "";
 
-  const d = new Date(v);
-  return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}`;
+  const parts = v.split("-");
+  return `${parts[2]}/${parts[1]}/${parts[0]}`;
 }
 
 function updateChirurgiens(){
@@ -389,10 +389,25 @@ function getSelectedGestesRaw(){
 function renderMonitorageDetails(){
   const box = $("monitorageDetails");
 
+  const previousScope = $("scopeDerivations")?.value || "3 dérivations";
   const previousKta = $("ktaSite")?.value || "";
   const previousKtc = $("ktcSite")?.value || "";
 
   box.innerHTML = "";
+
+  if(state.monitorage.includes("Scope")){
+    const s = document.createElement("select");
+    s.id = "scopeDerivations";
+
+    const list = ["3 dérivations", "5 dérivations"];
+    fillSelect(s, list, "");
+
+    if(list.includes(previousScope)){
+      s.value = previousScope;
+    }
+
+    box.appendChild(s);
+  }
 
   if(state.monitorage.includes("KTA")){
     const s = document.createElement("select");
@@ -658,7 +673,11 @@ function renderReport(){
 
   const mon = [];
 
-  if(state.monitorage.includes("Scope")) mon.push("Scope cardiotensionnel 3 dérivations");
+  if(state.monitorage.includes("Scope")){
+    const derivations = $("scopeDerivations")?.value || "3 dérivations";
+    mon.push(`Scope cardiotensionnel ${derivations}`);
+  }
+
   if(state.monitorage.includes("SpO2")) mon.push("SpO2");
   if(state.monitorage.includes("VVP")) mon.push("Voie veineuse périphérique");
   if(state.monitorage.includes("PICC Line")) mon.push("Présence d'un PICC Line");

@@ -111,12 +111,7 @@
             <option>Ropivacaïne 0,5%</option>
           </select>
 
-          <input
-            type="number"
-            id="localVolume"
-            value="20"
-            placeholder="mL"
-          >
+          <input type="number" id="localVolume" value="20" placeholder="mL">
         </div>
       </div>
 
@@ -170,9 +165,17 @@
         </div>
       </div>
 
-      <div class="mini-card">
+      <div class="mini-card" id="antibioCard">
         <h3>Antibioprophylaxie</h3>
         <div class="chip-zone" id="antibioOptions"></div>
+
+        <div id="antibioOtherBlock" class="hidden" style="margin-top:10px;">
+          <input
+            type="text"
+            id="antibioOtherText"
+            placeholder="Préciser l’antibioprophylaxie..."
+          >
+        </div>
       </div>
 
     </section>

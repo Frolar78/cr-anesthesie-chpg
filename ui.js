@@ -127,8 +127,9 @@ function renderVADetails(){
   if(state.va === "Intubation oro-trachéale"){
   const gestes = getSelectedGestesRaw();
   const isThoracicSelective =
-    gestes.includes("Lobectomie pulmonaire") ||
-    gestes.includes("Segmentectomie");
+gestes.includes("Lobectomie pulmonaire") ||
+gestes.includes("Segmentectomie") ||
+gestes.includes("Œsophagectomie Lewis-Santy")
 
   if(isThoracicSelective){
     box.innerHTML += `

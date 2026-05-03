@@ -166,7 +166,9 @@ const DATA = {
       ],
       interventions: [
         "Prostatectomie totale","Biopsies de prostate",
-        "REP","REV","URS + Laser","Montée de JJ","Autre..."
+        "REP","REV","URS + Laser","Montée de JJ",
+        "Cystectomie totale",
+        "Autre..."
       ]
     },
 

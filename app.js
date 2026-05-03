@@ -1,196 +1,300 @@
 const $ = id => document.getElementById(id);
 
+const report = $("report");
 const anesthSelect = $("anesthesiste");
 const specialiteSelect = $("specialite");
-const report = $("report");
 
-function fillSelect(select, list, placeholder = "") {
+const state = {
+  monitorage: [],
+  induction: [],
+  curare: [],
+  va: [],
+  entretien: "",
+  antibio: "",
+  alr: ""
+};
+
+const ALR_SPECIALITES = [
+  "Orthopédie",
+  "Viscéral",
+  "Thoracique",
+  "Gynécologie / Obstétrique"
+];
+
+const ALR_MAP = {
+  "PTH":["Bloc fémoral","Bloc axillaire"],
+  "PTG":["Bloc fémoral","Bloc saphène au canal des adducteurs"],
+  "Hallux valgus":["Bloc sciatique au creux poplité"],
+  "Clou gamma":["Bloc cutané latéral de cuisse"],
+  "Lobectomie pulmonaire":["Bloc paravertébral","Bloc érecteur du rachis"],
+  "Appendicectomie":["TAP-bloc"],
+  "Hernie inguinale":["Bloc ilio-inguinal"],
+  "Hémorroïdectomie":["Bloc pudendal"],
+  "Colectomie":["Bloc des grands droits","TAP-bloc"],
+  "Césarienne":["TAP-bloc"]
+};
+
+function fillSelect(select, list, placeholder=""){
   select.innerHTML = "";
-
-  if (placeholder) {
-    const opt = document.createElement("option");
-    opt.value = "";
-    opt.textContent = placeholder;
+  if(placeholder){
+    const opt=document.createElement("option");
+    opt.value="";
+    opt.textContent=placeholder;
     select.appendChild(opt);
   }
-
-  list.forEach(v => {
-    const o = document.createElement("option");
-    o.value = v;
-    o.textContent = v;
+  list.forEach(v=>{
+    const o=document.createElement("option");
+    o.value=v;
+    o.textContent=v;
     select.appendChild(o);
   });
 }
 
-function initDate() {
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const dd = String(today.getDate()).padStart(2, "0");
-  $("date").value = `${yyyy}-${mm}-${dd}`;
-}
+function createChips(containerId, list, key, single=false){
+  const container=$(containerId);
+  container.innerHTML="";
 
-function formatDateFR(dateStr) {
-  if (!dateStr) return "";
-  return new Date(dateStr).toLocaleDateString("fr-FR");
-}
+  list.forEach(item=>{
+    const chip=document.createElement("div");
+    chip.className="chip";
+    chip.textContent=item;
 
-function init() {
-  initDate();
+    chip.onclick=()=>{
+      if(single){
+        state[key]=item;
+        [...container.children].forEach(c=>c.classList.remove("active"));
+        chip.classList.add("active");
+      }else{
+        const arr=state[key];
+        const idx=arr.indexOf(item);
+        if(idx>-1){
+          arr.splice(idx,1);
+          chip.classList.remove("active");
+        }else{
+          arr.push(item);
+          chip.classList.add("active");
+        }
+      }
 
-  fillSelect(anesthSelect, DATA.anesthesistes, "Choisir...");
-  fillSelect(specialiteSelect, Object.keys(DATA.specialites));
+      if(key==="va"){
+        renderVADetails();
+        updateCurare();
+      }
 
-  updateChirurgiens();
-  addGeste();
-
-  specialiteSelect.addEventListener("change", () => {
-    updateChirurgiens();
-    resetGestes();
-    addGeste();
-    renderReport();
-  });
-
-  document.addEventListener("change", renderReport);
-  document.addEventListener("input", renderReport);
-
-  renderReport();
-}
-
-function updateChirurgiens() {
-  const spec = specialiteSelect.value;
-  const list = DATA.specialites[spec]?.chirurgiens || [];
-
-  document.querySelectorAll(".chirurgien").forEach(sel => {
-    fillSelect(sel, list, "Chirurgien...");
-  });
-}
-
-function addChir() {
-  const container = $("chirContainer");
-  const row = document.createElement("div");
-  row.className = "field";
-
-  row.innerHTML = `
-    <select class="chirurgien">
-      <option value="">Chirurgien...</option>
-    </select>
-  `;
-
-  container.appendChild(row);
-  updateChirurgiens();
-}
-
-function resetGestes() {
-  $("gesteContainer").innerHTML = "";
-}
-
-function addGeste() {
-  const spec = specialiteSelect.value;
-  const list = DATA.specialites[spec]?.interventions || [];
-
-  const wrapper = document.createElement("div");
-  wrapper.className = "geste-block";
-  wrapper.style.marginBottom = "12px";
-
-  wrapper.innerHTML = `
-    <select class="geste-select"></select>
-    <div class="geste-extra" style="margin-top:6px;"></div>
-  `;
-
-  $("gesteContainer").appendChild(wrapper);
-
-  const select = wrapper.querySelector(".geste-select");
-  fillSelect(select, list, "Intervention...");
-
-  select.addEventListener("change", () => {
-    renderGesteExtra(wrapper, select.value);
-    renderReport();
-  });
-}
-
-function renderGesteExtra(wrapper, geste) {
-  const extra = wrapper.querySelector(".geste-extra");
-  extra.innerHTML = "";
-
-  if (!geste) return;
-
-  // Latéralité
-  if (DATA.lateralizedGestes.includes(geste)) {
-    const select = document.createElement("select");
-    select.className = "laterality-select";
-    fillSelect(select, DATA.laterality, "Latéralité...");
-    extra.appendChild(select);
-  }
-
-  // Champ texte contextuel
-  if (DATA.textGestes.includes(geste)) {
-    const input = document.createElement("input");
-    input.className = "precision-input";
-    input.placeholder = "Précision...";
-    input.style.marginTop = "6px";
-    extra.appendChild(input);
-  }
-
-  // Autre
-  if (geste === "Autre...") {
-    const input = document.createElement("input");
-    input.className = "custom-geste";
-    input.placeholder = "Préciser l'intervention";
-    extra.appendChild(input);
-  }
-}
-
-function buildGesteLabel(block) {
-  const geste = block.querySelector(".geste-select")?.value;
-  if (!geste) return null;
-
-  let label = geste;
-
-  if (geste === "Autre...") {
-    const custom = block.querySelector(".custom-geste")?.value || "Autre";
-    label = custom;
-  }
-
-  const lat = block.querySelector(".laterality-select")?.value;
-  if (lat) {
-    const map = {
-      "Droite": "droite",
-      "Gauche": "gauche",
-      "Bilatéral": "bilatéral"
+      renderReport();
     };
-    label += " " + map[lat];
-  }
 
-  const precision = block.querySelector(".precision-input")?.value;
-  if (precision) {
-    label += ` (${precision})`;
-  }
-
-  return label;
+    container.appendChild(chip);
+  });
 }
 
-function renderReport() {
-  const date = formatDateFR($("date").value);
-  const anesth = anesthSelect.value;
+function initDate(){
+  const d=new Date();
+  const yyyy=d.getFullYear();
+  const mm=String(d.getMonth()+1).padStart(2,"0");
+  const dd=String(d.getDate()).padStart(2,"0");
+  $("date").value=`${yyyy}-${mm}-${dd}`;
+}
 
-  const chirurgiens = [...document.querySelectorAll(".chirurgien")]
-    .map(x => x.value)
+function formatDateFR(v){
+  if(!v) return "";
+  return new Date(v).toLocaleDateString("fr-FR");
+}
+
+function updateChirurgiens(){
+  const spec=specialiteSelect.value;
+  const list=DATA.specialites[spec]?.chirurgiens || [];
+
+  document.querySelectorAll(".chirurgien").forEach(sel=>{
+    fillSelect(sel,list,"Chirurgien...");
+  });
+}
+
+function addChir(){
+  const row=document.createElement("div");
+  row.className="field";
+  row.innerHTML=`<select class="chirurgien"></select>`;
+  $("chirContainer").appendChild(row);
+  updateChirurgiens();
+}
+
+function resetGestes(){
+  $("gesteContainer").innerHTML="";
+}
+
+function addGeste(){
+  const spec=specialiteSelect.value;
+  const list=DATA.specialites[spec]?.interventions || [];
+
+  const block=document.createElement("div");
+  block.className="field geste-block";
+
+  block.innerHTML=`
+    <select class="geste-select"></select>
+    <div class="geste-extra" style="margin-top:6px"></div>
+  `;
+
+  $("gesteContainer").appendChild(block);
+
+  const sel=block.querySelector(".geste-select");
+  fillSelect(sel,list,"Intervention...");
+
+  sel.addEventListener("change",()=>{
+    renderGesteExtra(block,sel.value);
+    renderALR();
+    renderReport();
+  });
+}
+
+function renderGesteExtra(block,geste){
+  const extra=block.querySelector(".geste-extra");
+  extra.innerHTML="";
+
+  if(DATA.lateralizedGestes.includes(geste)){
+    const s=document.createElement("select");
+    s.className="laterality-select";
+    fillSelect(s,DATA.laterality,"Latéralité...");
+    extra.appendChild(s);
+  }
+
+  if(DATA.textGestes.includes(geste)){
+    const i=document.createElement("input");
+    i.className="precision-input";
+    i.placeholder="Précision...";
+    extra.appendChild(i);
+  }
+
+  if(geste==="Autre..."){
+    const i=document.createElement("input");
+    i.className="custom-geste";
+    i.placeholder="Préciser l'intervention";
+    extra.appendChild(i);
+  }
+}
+
+function buildGesteLabel(block){
+  let geste=block.querySelector(".geste-select")?.value;
+  if(!geste) return null;
+
+  if(geste==="Autre..."){
+    geste=block.querySelector(".custom-geste")?.value || "Autre";
+  }
+
+  const lat=block.querySelector(".laterality-select")?.value;
+  if(lat){
+    const map={
+      "Droite":"droite",
+      "Gauche":"gauche",
+      "Bilatéral":"bilatéral"
+    };
+    geste+=" "+map[lat];
+  }
+
+  const p=block.querySelector(".precision-input")?.value;
+  if(p) geste+=` (${p})`;
+
+  return geste;
+}
+
+function renderALR(){
+  const spec=specialiteSelect.value;
+  const gestes=[...document.querySelectorAll(".geste-select")].map(x=>x.value);
+  const alrs=new Set();
+
+  gestes.forEach(g=>{
+    (ALR_MAP[g]||[]).forEach(a=>alrs.add(a));
+  });
+
+  const card=$("alrCard");
+
+  if(!ALR_SPECIALITES.includes(spec) || alrs.size===0){
+    card.classList.add("hidden");
+    state.alr="";
+    return;
+  }
+
+  card.classList.remove("hidden");
+  createChips("alrOptions",[...alrs,"Aucune"],"alr",true);
+}
+
+function updateCurare(){
+  const sr=state.va.includes("Séquence rapide");
+  const list=sr
+    ? ["Aucun","Atracurium","Rocuronium","Célocurine"]
+    : ["Aucun","Atracurium","Rocuronium"];
+
+  state.curare=[];
+  createChips("curare",list,"curare");
+}
+
+function renderVADetails(){
+  const zone=$("vaDetails");
+  zone.innerHTML="";
+
+  if(state.va.includes("Masque laryngé")){
+    zone.innerHTML+=`<div class="mt8"><input id="mlSize" placeholder="Taille masque"></div>`;
+  }
+
+  if(state.va.includes("Intubation oro-trachéale")){
+    zone.innerHTML+=`<div class="mt8"><input id="tubeSize" placeholder="Sonde (7.5)"></div>`;
+  }
+}
+
+function renderReport(){
+  const date=formatDateFR($("date").value);
+  const anesth=anesthSelect.value;
+
+  const chirurgiens=[...document.querySelectorAll(".chirurgien")]
+    .map(x=>x.value)
     .filter(Boolean);
 
-  const gestes = [...document.querySelectorAll(".geste-block")]
+  const gestes=[...document.querySelectorAll(".geste-block")]
     .map(buildGesteLabel)
     .filter(Boolean);
 
-  let txt = "";
+  let txt="INTERVENTION\n";
+  txt+=`Date : ${date}\n`;
+  txt+=`Anesthésiste : ${anesth}\n`;
+  txt+=`Chirurgien : ${chirurgiens.join(", ")}\n`;
+  txt+=`Intervention : ${gestes.join(" associée à ")}\n\n`;
 
-  txt += "INTERVENTION\n";
-  txt += `Date : ${date}\n`;
-  txt += `Anesthésiste : ${anesth}\n`;
-  txt += `Chirurgien : ${chirurgiens.join(", ")}\n`;
-  txt += `Intervention : ${gestes.join(" associée à ")}\n\n`;
+  report.value=txt;
+}
 
-  report.value = txt;
+function init(){
+  initDate();
+
+  fillSelect(anesthSelect,DATA.anesthesistes,"Choisir...");
+  fillSelect(specialiteSelect,Object.keys(DATA.specialites));
+
+  $("chirContainer").innerHTML="";
+  addChir();
+
+  addGeste();
+
+  createChips("monitorage",DATA.monitorage,"monitorage");
+  createChips("induction",DATA.induction,"induction");
+  createChips("vaOptions",["Séquence rapide","Ventilation spontanée","Masque laryngé","Intubation oro-trachéale"],"va");
+  createChips("entretienOptions",DATA.entretien,"entretien",true);
+  createChips("antibioOptions",DATA.antibio,"antibio",true);
+
+  updateCurare();
+
+  specialiteSelect.addEventListener("change",()=>{
+    updateChirurgiens();
+    resetGestes();
+    addGeste();
+    renderALR();
+    renderReport();
+  });
+
+  $("addChirBtn").onclick=addChir;
+  $("addGesteBtn").onclick=addGeste;
+
+  document.addEventListener("change",renderReport);
+  document.addEventListener("input",renderReport);
+
+  renderReport();
 }
 
 init();

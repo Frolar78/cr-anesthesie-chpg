@@ -1,172 +1,154 @@
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:#f4f5f7;
-  color:#222;
+  background:#f3f4f6;
+  color:#1f2937;
 }
 
 .app{
-  padding:24px;
+  padding:18px;
   height:100vh;
 }
 
 .topbar{
-  height:84px;
-  background:linear-gradient(90deg,#ffffff,#fff6f6);
-  border:1px solid #f2dcdc;
-  border-radius:24px;
-  padding:0 28px;
+  height:78px;
+  background:linear-gradient(90deg,#fff,#fff7f7);
+  border:1px solid #f1d7d7;
+  border-radius:22px;
+  padding:0 24px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
-  margin-bottom:22px;
+  box-shadow:0 8px 24px rgba(0,0,0,.05);
+  margin-bottom:16px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:18px;
+  gap:14px;
 }
 
 .logo{
-  width:54px;
-  height:54px;
-  border-radius:18px;
+  width:48px;
+  height:48px;
+  border-radius:16px;
   background:#b5121b;
-  color:white;
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
   font-weight:700;
-  letter-spacing:1px;
+  font-size:13px;
 }
 
 .brand h1{
-  font-size:24px;
+  font-size:22px;
   font-weight:650;
 }
 
 .brand p{
-  font-size:13px;
-  color:#7a7a7a;
-  margin-top:4px;
+  font-size:12px;
+  color:#6b7280;
+  margin-top:2px;
 }
 
 #copyBtn{
   border:none;
   background:#b5121b;
   color:white;
-  padding:14px 22px;
-  border-radius:14px;
+  padding:12px 18px;
+  border-radius:12px;
   cursor:pointer;
-  font-size:14px;
   font-weight:600;
-  transition:.2s;
-}
-
-#copyBtn:hover{
-  transform:translateY(-1px);
-  background:#980e17;
 }
 
 .layout{
   display:grid;
-  grid-template-columns: 1.1fr 1.35fr 1.55fr;
-  gap:22px;
-  height:calc(100vh - 130px);
+  grid-template-columns:0.9fr 1.35fr 1.25fr;
+  gap:16px;
+  height:calc(100vh - 112px);
 }
 
 .panel{
   background:white;
-  border-radius:28px;
-  padding:22px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.05);
   overflow:auto;
 }
 
 .panel-title{
-  font-size:20px;
+  font-size:18px;
   font-weight:650;
-  margin-bottom:22px;
   color:#b5121b;
+  margin-bottom:16px;
 }
 
 .field{
-  margin-bottom:18px;
+  margin-bottom:12px;
 }
 
 label{
   display:block;
-  font-size:13px;
-  color:#666;
-  margin-bottom:7px;
-  font-weight:500;
+  font-size:12px;
+  color:#6b7280;
+  margin-bottom:5px;
+  font-weight:600;
 }
 
 input,select,textarea{
   width:100%;
   border:1px solid #ddd;
-  border-radius:14px;
-  padding:12px 14px;
-  font-size:14px;
-  background:white;
-}
-
-input:focus,select:focus,textarea:focus{
-  outline:none;
-  border-color:#b5121b;
-  box-shadow:0 0 0 3px rgba(181,18,27,.1);
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:13px;
+  background:#fff;
 }
 
 .inline{
   display:flex;
-  gap:10px;
+  gap:8px;
 }
 
 .plus-btn{
-  width:48px;
+  width:42px;
   border:none;
-  border-radius:14px;
+  border-radius:12px;
   background:#b5121b;
   color:white;
-  font-size:24px;
+  font-size:22px;
   cursor:pointer;
 }
 
 .card{
   background:#fafafa;
   border:1px solid #ececec;
-  border-radius:22px;
-  padding:18px;
-  margin-bottom:16px;
+  border-radius:18px;
+  padding:12px;
+  margin-bottom:10px;
 }
 
 .card h3{
-  font-size:15px;
-  margin-bottom:14px;
-  color:#222;
+  font-size:13px;
+  margin-bottom:10px;
 }
 
 .check-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:10px;
+  gap:6px;
 }
 
 .check-item{
   background:white;
-  border:1px solid #e5e5e5;
-  border-radius:12px;
-  padding:10px 12px;
-  font-size:14px;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  padding:7px 9px;
+  font-size:12px;
   display:flex;
-  gap:8px;
+  gap:6px;
   align-items:center;
 }
 
@@ -175,9 +157,9 @@ input:focus,select:focus,textarea:focus{
 }
 
 .radio-list{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
 }
 
 .hidden{
@@ -185,15 +167,14 @@ input:focus,select:focus,textarea:focus{
 }
 
 .report-panel{
-  display:flex;
-  flex-direction:column;
+  background:#fffdfb;
 }
 
 #report{
-  flex:1;
+  height:100%;
   resize:none;
-  font-family:inherit;
-  line-height:1.6;
-  font-size:14px;
-  background:#fcfcfc;
+  border:none;
+  background:transparent;
+  line-height:1.55;
+  font-size:13px;
 }

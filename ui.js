@@ -125,25 +125,26 @@ function renderVADetails(){
   }
 
   if(state.va === "Intubation oro-trachéale"){
-  const gestes = getSelectedGestesRaw();
-  const isThoracicSelective =
-gestes.includes("Lobectomie pulmonaire") ||
-gestes.includes("Segmentectomie") ||
-gestes.includes("Œsophagectomie Lewis-Santy");
+    const gestes = getSelectedGestesRaw();
+    const isThoracicSelective =
+      gestes.includes("Lobectomie pulmonaire") ||
+      gestes.includes("Segmentectomie") ||
+      gestes.includes("Œsophagectomie Lewis-Santy");
 
-  if(isThoracicSelective){
-    box.innerHTML += `
-      <select id="selectiveTubeSize">
-        <option value="">Taille sonde sélective...</option>
-        <option>35 Fr</option>
-        <option>37 Fr</option>
-        <option>39 Fr</option>
-        <option>41 Fr</option>
-      </select>
-    `;
-  }else{
-    box.innerHTML += `<input id="tubeSize" placeholder="Taille sonde (7.5)">`;
-  }
+    if(isThoracicSelective){
+      box.innerHTML += `
+        <select id="selectiveTubeSize">
+          <option value="">Taille sonde sélective...</option>
+          <option>35 Fr</option>
+          <option>37 Fr</option>
+          <option>39 Fr</option>
+          <option>41 Fr</option>
+        </select>
+      `;
+    }else{
+      box.innerHTML += `<input id="tubeSize" placeholder="Taille sonde (7.5)">`;
+    }
+
     $("srBlock").classList.remove("hidden");
     $("ventilationBlock").classList.remove("hidden");
 

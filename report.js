@@ -114,6 +114,7 @@ function renderReport(){
       }else{
         txt += `Intubation oro-trachéale atraumatique avec une sonde ${$("tubeSize")?.value || ""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre, absence de bris dentaire.\n`;
       }
+    }
 
     txt += "\n";
   }

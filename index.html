@@ -75,6 +75,13 @@
         <h3>Voies aériennes</h3>
         <div class="chip-zone" id="vaOptions"></div>
         <div id="vaDetails"></div>
+
+        <div id="srBlock" class="hidden" style="margin-top:10px;">
+          <label style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="sequenceRapide">
+            Séquence rapide
+          </label>
+        </div>
       </div>
 
       <div class="mini-card">
@@ -93,6 +100,34 @@
             <option>Ropivacaïne 0,5%</option>
           </select>
           <input type="number" id="localVolume" value="20" placeholder="mL">
+        </div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Péri-opératoire</h3>
+
+        <div class="field">
+          <label>Diurèse (mL)</label>
+          <input type="number" id="diurese" placeholder="0">
+        </div>
+
+        <div class="field">
+          <label>Saignement (mL)</label>
+          <input type="number" id="saignement" placeholder="0">
+        </div>
+
+        <div class="field">
+          <label>Remplissage</label>
+          <input type="text" id="remplissage" placeholder="ex : 1500 mL cristalloïdes">
+        </div>
+
+        <label style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+          <input type="checkbox" id="noradCheck">
+          Noradrénaline
+        </label>
+
+        <div id="noradBlock" class="hidden" style="margin-top:8px;">
+          <input type="text" id="noradText" placeholder="ex : max 0,08 µg/kg/min">
         </div>
       </div>
 

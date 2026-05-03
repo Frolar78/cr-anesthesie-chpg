@@ -306,9 +306,9 @@ function init(){
   if(!DATA.monitorage.includes("PICC Line")) DATA.monitorage.push("PICC Line");
   if(!DATA.monitorage.includes("Mid Line")) DATA.monitorage.push("Mid Line");
 
-  fillSelect(anesthSelect, DATA.anesthesistes, "Choisir...");
-  fillSelect(specialiteSelect, Object.keys(DATA.specialites));
-
+fillSelect(anesthSelect, DATA.anesthesistes, "Choisir...");
+fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
+  
   $("chirContainer").innerHTML = "";
   $("gesteContainer").innerHTML = "";
 

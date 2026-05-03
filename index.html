@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Compte-rendu d'anesthésie – CHPG Monaco</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
 
 <div class="app">
+
   <header class="topbar">
     <div class="brand">
       <div class="logo">CHPG</div>
@@ -17,10 +18,13 @@
         <p>Assistant de rédaction clinique</p>
       </div>
     </div>
+
     <button id="copyBtn" type="button">Copier le CR</button>
   </header>
 
   <main class="layout">
+
+    <!-- GAUCHE -->
     <section class="panel left-panel">
       <div class="panel-title">Intervention</div>
 
@@ -42,39 +46,69 @@
       <div id="chirContainer"></div>
       <button class="action-btn" id="addChirBtn" type="button">+ Chirurgien</button>
 
-      <div style="height:14px"></div>
+      <div style="height:12px"></div>
 
       <div id="gesteContainer"></div>
       <button class="action-btn" id="addGesteBtn" type="button">+ Intervention</button>
     </section>
 
+    <!-- MILIEU -->
     <section class="panel middle-panel">
-      <div class="mini-card"><h3>Monitorage</h3><div class="chip-zone" id="monitorage"></div></div>
-      <div class="mini-card"><h3>Induction</h3><div class="chip-zone" id="induction"></div></div>
-      <div class="mini-card"><h3>Curare</h3><div class="chip-zone" id="curare"></div></div>
-      <div class="mini-card"><h3>Voies aériennes</h3><div class="chip-zone" id="vaOptions"></div><div id="vaDetails"></div></div>
-      <div class="mini-card"><h3>Entretien</h3><div class="chip-zone" id="entretienOptions"></div></div>
+
+      <div class="mini-card">
+        <h3>Monitorage</h3>
+        <div class="chip-zone" id="monitorage"></div>
+        <div id="monitorageDetails"></div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Induction</h3>
+        <div class="chip-zone" id="induction"></div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Curare</h3>
+        <div class="chip-zone" id="curare"></div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Voies aériennes</h3>
+        <div class="chip-zone" id="vaOptions"></div>
+        <div id="vaDetails"></div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Entretien</h3>
+        <div class="chip-zone" id="entretienOptions"></div>
+      </div>
 
       <div class="mini-card hidden" id="alrCard">
         <h3>ALR</h3>
         <div class="chip-zone" id="alrOptions"></div>
+
         <div class="inline mt8">
           <select id="localAgent">
             <option>Ropivacaïne 0,2%</option>
             <option>Ropivacaïne 0,375%</option>
             <option>Ropivacaïne 0,5%</option>
           </select>
-          <input type="number" id="localVolume" value="20">
+          <input type="number" id="localVolume" value="20" placeholder="mL">
         </div>
       </div>
 
-      <div class="mini-card"><h3>Antibioprophylaxie</h3><div class="chip-zone" id="antibioOptions"></div></div>
+      <div class="mini-card">
+        <h3>Antibioprophylaxie</h3>
+        <div class="chip-zone" id="antibioOptions"></div>
+      </div>
+
     </section>
 
+    <!-- DROITE -->
     <section class="panel report-panel">
       <div class="panel-title">Compte-rendu généré</div>
       <textarea id="report"></textarea>
     </section>
+
   </main>
 </div>
 

@@ -61,9 +61,9 @@ function createChips(containerId, list, key, single=false){
 
     chip.onclick=()=>{
       if(single){
-        state[key]=item;
+        state[key]= item===state[key] ? "" : item;
         [...container.children].forEach(c=>c.classList.remove("active"));
-        chip.classList.add("active");
+        if(state[key]) chip.classList.add("active");
       }else{
         const arr=state[key];
         const idx=arr.indexOf(item);
@@ -90,15 +90,18 @@ function createChips(containerId, list, key, single=false){
 
 function initDate(){
   const d=new Date();
-  const yyyy=d.getFullYear();
-  const mm=String(d.getMonth()+1).padStart(2,"0");
-  const dd=String(d.getDate()).padStart(2,"0");
-  $("date").value=`${yyyy}-${mm}-${dd}`;
+  $("date").value = new Date(d.getTime()-d.getTimezoneOffset()*60000)
+    .toISOString()
+    .split("T")[0];
 }
 
 function formatDateFR(v){
   if(!v) return "";
-  return new Date(v).toLocaleDateString("fr-FR");
+  const d = new Date(v);
+  const dd = String(d.getDate()).padStart(2,"0");
+  const mm = String(d.getMonth()+1).padStart(2,"0");
+  const yyyy = d.getFullYear();
+  return `${dd}/${mm}/${yyyy}`;
 }
 
 function updateChirurgiens(){
@@ -106,7 +109,9 @@ function updateChirurgiens(){
   const list=DATA.specialites[spec]?.chirurgiens || [];
 
   document.querySelectorAll(".chirurgien").forEach(sel=>{
+    const current = sel.value;
     fillSelect(sel,list,"Chirurgien...");
+    sel.value = list.includes(current) ? current : "";
   });
 }
 
@@ -201,9 +206,7 @@ function renderALR(){
   const gestes=[...document.querySelectorAll(".geste-select")].map(x=>x.value);
   const alrs=new Set();
 
-  gestes.forEach(g=>{
-    (ALR_MAP[g]||[]).forEach(a=>alrs.add(a));
-  });
+  gestes.forEach(g => (ALR_MAP[g]||[]).forEach(a=>alrs.add(a)));
 
   const card=$("alrCard");
 
@@ -219,7 +222,7 @@ function renderALR(){
 
 function updateCurare(){
   const sr=state.va.includes("Séquence rapide");
-  const list=sr
+  const list = sr
     ? ["Aucun","Atracurium","Rocuronium","Célocurine"]
     : ["Aucun","Atracurium","Rocuronium"];
 
@@ -258,7 +261,82 @@ function renderReport(){
   txt+=`Chirurgien : ${chirurgiens.join(", ")}\n`;
   txt+=`Intervention : ${gestes.join(" associée à ")}\n\n`;
 
-  report.value=txt;
+  // MONITORAGE
+  const mon = [];
+  if(state.monitorage.includes("Scope")) mon.push("Scope cardiotensionnel 3 dérivations");
+  if(state.monitorage.includes("SpO2")) mon.push("SpO2");
+  if(state.monitorage.includes("VVP")) mon.push("voie veineuse périphérique");
+  if(state.monitorage.includes("BIS")) mon.push("BIS");
+  if(state.monitorage.includes("TOF")) mon.push("TOF");
+
+  if(mon.length || state.monitorage.includes("KTA") || state.monitorage.includes("KTC")){
+    txt += "INSTALLATION\n";
+    if(mon.length) txt += mon.join(", ") + ".\n";
+    if(state.monitorage.includes("KTA")) txt += "Mise en place d'un cathéter artériel après test d'Allen négatif.\n";
+    if(state.monitorage.includes("KTC")) txt += "Mise en place d'un cathéter veineux central échoguidé.\n";
+    txt += "\n";
+  }
+
+  // INDUCTION
+  const ordre = ["Sufentanil","Rémifentanil","Kétamine","Propofol"];
+  const meds = ordre.filter(x=>state.induction.includes(x));
+  const curares = state.curare.filter(x=>x!=="Aucun");
+
+  if(meds.length){
+    txt += "INDUCTION\n";
+    txt += state.va.includes("Séquence rapide")
+      ? "Induction en séquence rapide par "
+      : "Induction par ";
+
+    txt += meds.join(", ");
+
+    if(curares.length){
+      txt += " puis curarisation par " + curares.join(", ");
+    }
+
+    txt += ".\n\n";
+  }
+
+  // VA
+  if(state.va.length){
+    txt += "VOIES AÉRIENNES\n";
+
+    if(state.va.includes("Ventilation spontanée")){
+      txt += "Geste effectué en ventilation spontanée.\n";
+    }
+
+    if(state.va.includes("Masque laryngé")){
+      txt += `Mise en place d'un masque laryngé taille ${$("mlSize")?.value||""}.\n`;
+    }
+
+    if(state.va.includes("Intubation oro-trachéale")){
+      txt += `Intubation oro-trachéale avec une sonde ${$("tubeSize")?.value||""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre.\n`;
+    }
+
+    txt += "\n";
+  }
+
+  // ENTRETIEN
+  if(state.entretien){
+    txt += "ENTRETIEN\n";
+    txt += state.entretien==="Sevoflurane"
+      ? "Entretien anesthésique par sévoflurane.\n\n"
+      : "Entretien anesthésique par propofol en AIVOC.\n\n";
+  }
+
+  // ALR
+  if(state.alr && state.alr!=="Aucune"){
+    txt += "ALR\n";
+    txt += `ALR de type ${state.alr} réalisée de manière échoguidée avec ${$("localVolume").value} mL de ${$("localAgent").value}.\n\n`;
+  }
+
+  // ANTIBIO
+  txt += "ANTIBIOPROPHYLAXIE\n";
+  txt += state.antibio==="Céfazoline"
+    ? "Antibioprophylaxie par céfazoline.\n"
+    : "Pas d'antibioprophylaxie.\n";
+
+  report.value = txt;
 }
 
 function init(){
@@ -269,7 +347,6 @@ function init(){
 
   $("chirContainer").innerHTML="";
   addChir();
-
   addGeste();
 
   createChips("monitorage",DATA.monitorage,"monitorage");
@@ -291,8 +368,8 @@ function init(){
   $("addChirBtn").onclick=addChir;
   $("addGesteBtn").onclick=addGeste;
 
-  document.addEventListener("change",renderReport);
-  document.addEventListener("input",renderReport);
+  document.addEventListener("change", renderReport);
+  document.addEventListener("input", renderReport);
 
   renderReport();
 }

@@ -102,18 +102,18 @@ function renderReport(){
         }
       }
 
-const gestesThoraciques = getSelectedGestesRaw();
-const isThoracicSelective =
-  gestesThoraciques.includes("Lobectomie pulmonaire") ||
-  gestesThoraciques.includes("Segmentectomie") ||
-  gestesThoraciques.includes("Œsophagectomie Lewis-Santy");
+      const gestesThoraciques = getSelectedGestesRaw();
+      const isThoracicSelective =
+        gestesThoraciques.includes("Lobectomie pulmonaire") ||
+        gestesThoraciques.includes("Segmentectomie") ||
+        gestesThoraciques.includes("Œsophagectomie Lewis-Santy");
 
-if(isThoracicSelective){
-  const tailleSelective = $("selectiveTubeSize")?.value || "";
-  txt += `Intubation oro-trachéale avec une sonde sélective gauche ${tailleSelective} sans ergot, contrôle fibroscopique de la position.\n`;
-}else{
-  txt += `Intubation oro-trachéale atraumatique avec une sonde ${$("tubeSize")?.value || ""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre, absence de bris dentaire.\n`;
-}    }
+      if(isThoracicSelective){
+        const tailleSelective = $("selectiveTubeSize")?.value || "";
+        txt += `Intubation oro-trachéale avec une sonde sélective gauche ${tailleSelective} sans ergot, contrôle fibroscopique de la position.\n`;
+      }else{
+        txt += `Intubation oro-trachéale atraumatique avec une sonde ${$("tubeSize")?.value || ""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre, absence de bris dentaire.\n`;
+      }
 
     txt += "\n";
   }

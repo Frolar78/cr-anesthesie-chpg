@@ -102,8 +102,17 @@ function renderReport(){
         }
       }
 
-      txt += `Intubation oro-trachéale atraumatique avec une sonde ${$("tubeSize")?.value || ""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre, absence de bris dentaire.\n`;
-    }
+const gestesThoraciques = getSelectedGestesRaw();
+const isThoracicSelective =
+  gestesThoraciques.includes("Lobectomie pulmonaire") ||
+  gestesThoraciques.includes("Segmentectomie");
+
+if(isThoracicSelective){
+  const tailleSelective = $("selectiveTubeSize")?.value || "";
+  txt += `Intubation oro-trachéale avec une sonde sélective gauche ${tailleSelective} sans ergot, contrôle fibroscopique de la position.\n`;
+}else{
+  txt += `Intubation oro-trachéale atraumatique avec une sonde ${$("tubeSize")?.value || ""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre, absence de bris dentaire.\n`;
+}    }
 
     txt += "\n";
   }

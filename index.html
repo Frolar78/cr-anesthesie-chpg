@@ -10,20 +10,18 @@
 
 <div class="app">
 
-<header class="topbar">
-  <div class="brand">
-    <div class="logo-shell">
+  <header class="topbar">
+    <div class="brand">
       <img src="./logo-chpg.png" alt="CHPG" class="brand-logo">
+
+      <div class="brand-text">
+        <h1>Compte-rendu d’anesthésie</h1>
+        <p>Centre Hospitalier Princesse Grace — Monaco</p>
+      </div>
     </div>
 
-    <div class="brand-text">
-      <h1>Compte-rendu d’anesthésie</h1>
-      <p>Centre Hospitalier Princesse Grace • Monaco</p>
-    </div>
-  </div>
-
-  <button id="copyBtn" type="button">Copier le CR</button>
-</header>
+    <button id="copyBtn" type="button">Copier le CR</button>
+  </header>
 
   <main class="layout">
 
@@ -57,22 +55,22 @@
     <section class="panel middle-panel">
 
       <div class="mini-card">
-  <h3>Monitorage</h3>
-  <div class="chip-zone" id="monitorage"></div>
-  <div id="monitorageDetails"></div>
+        <h3>Monitorage</h3>
+        <div class="chip-zone" id="monitorage"></div>
+        <div id="monitorageDetails"></div>
 
-  <div style="margin-top:10px;">
-    <label>Position</label>
-    <select id="positionPatient">
-<option value="">Choisir...</option>
-<option>Décubitus dorsal</option>
-<option>Décubitus ventral</option>
-<option>Décubitus latéral droit</option>
-<option>Décubitus latéral gauche</option>
-<option>Position assise</option>
-    </select>
-  </div>
-</div>
+        <div style="margin-top:10px;">
+          <label>Position</label>
+          <select id="positionPatient">
+            <option value="">Choisir...</option>
+            <option>Décubitus dorsal</option>
+            <option>Décubitus ventral</option>
+            <option>Décubitus latéral droit</option>
+            <option>Décubitus latéral gauche</option>
+            <option>Position assise</option>
+          </select>
+        </div>
+      </div>
 
       <div class="mini-card">
         <h3>Induction</h3>

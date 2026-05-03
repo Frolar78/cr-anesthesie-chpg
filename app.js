@@ -507,11 +507,16 @@ function renderReport(){
   if(state.monitorage.includes("TOF")) mon.push("TOF");
 
   if(mon.length || state.monitorage.includes("KTA") || state.monitorage.includes("KTC")){
-    txt += "INSTALLATION\n";
+  txt += "INSTALLATION\n";
 
-    if(mon.length){
-      txt += mon.join(", ") + ".\n";
-    }
+  const position = $("positionPatient")?.value;
+  if(position){
+    txt += `Patient installé en ${position.toLowerCase()}.\n`;
+  }
+
+  if(mon.length){
+    txt += mon.join(", ") + ".\n";
+  }
 
     const kta = $("ktaSite")?.value;
 

@@ -25,7 +25,6 @@
 
   <main class="layout">
 
-    <!-- COLONNE GAUCHE -->
     <section class="panel left-panel">
       <div class="panel-title">Intervention</div>
 
@@ -53,7 +52,6 @@
       <button class="action-btn" id="addGesteBtn" type="button">+ Intervention</button>
     </section>
 
-    <!-- COLONNE MILIEU -->
     <section class="panel middle-panel">
 
       <div class="mini-card">
@@ -83,6 +81,18 @@
             <span>Séquence rapide</span>
           </label>
         </div>
+
+        <div id="ventilationBlock" class="hidden" style="margin-top:10px;">
+          <label>Ventilation au masque</label>
+          <div class="chip-zone" id="ventilationOptions"></div>
+          <input
+            type="text"
+            id="ventilationPrecision"
+            class="hidden"
+            style="margin-top:8px;"
+            placeholder="Précision ventilation..."
+          >
+        </div>
       </div>
 
       <div class="mini-card">
@@ -91,7 +101,7 @@
       </div>
 
       <div class="mini-card hidden" id="alrCard">
-        <h3>ALR</h3>
+        <h3>ALR périphérique</h3>
         <div class="chip-zone" id="alrOptions"></div>
 
         <div class="inline mt8">
@@ -110,34 +120,35 @@
         </div>
       </div>
 
+      <div class="mini-card hidden" id="neuraxialCard">
+        <h3>ALR neuraxiale</h3>
+        <div class="chip-zone" id="neuraxialOptions"></div>
+
+        <div id="periduraleDetails" class="hidden mt8">
+          <input
+            type="text"
+            id="periduraleNiveau"
+            placeholder="Niveau de ponction, ex : T7-T8"
+          >
+        </div>
+      </div>
+
       <div class="mini-card">
         <h3>Péri-opératoire</h3>
 
         <div class="field">
           <label>Diurèse (mL)</label>
-          <input
-            type="number"
-            id="diurese"
-            placeholder="Ex : 450"
-          >
+          <input type="number" id="diurese" placeholder="Ex : 450">
         </div>
 
         <div class="field">
           <label>Saignement (mL)</label>
-          <input
-            type="number"
-            id="saignement"
-            placeholder="Ex : 200"
-          >
+          <input type="number" id="saignement" placeholder="Ex : 200">
         </div>
 
         <div class="field">
           <label>Remplissage</label>
-          <input
-            type="text"
-            id="remplissage"
-            placeholder="Ex : 1500 mL cristalloïdes"
-          >
+          <input type="text" id="remplissage" placeholder="Ex : 1500 mL cristalloïdes">
         </div>
 
         <label class="checkbox-row">
@@ -146,11 +157,16 @@
         </label>
 
         <div id="noradBlock" class="hidden" style="margin-top:10px;">
-          <input
-            type="text"
-            id="noradText"
-            placeholder="Ex : maximum 0,08 µg/kg/min"
-          >
+          <input type="text" id="noradText" placeholder="Ex : maximum 0,08 µg/kg/min">
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="incidentCheck">
+          <span>Incident peropératoire</span>
+        </label>
+
+        <div id="incidentBlock" class="hidden" style="margin-top:10px;">
+          <textarea id="incidentText" placeholder="Décrire l’incident..." style="height:80px;"></textarea>
         </div>
       </div>
 
@@ -161,7 +177,6 @@
 
     </section>
 
-    <!-- COLONNE DROITE -->
     <section class="panel report-panel">
       <div class="panel-title">Compte-rendu généré</div>
       <textarea id="report"></textarea>

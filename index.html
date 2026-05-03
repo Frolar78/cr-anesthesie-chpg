@@ -25,43 +25,41 @@
   <main class="layout">
 
     <!-- GAUCHE -->
+    
     <section class="panel left-panel">
-      <div class="panel-title">Intervention</div>
+  <div class="panel-title">Intervention</div>
 
-      <div class="field">
-        <label>Date</label>
-        <input type="date" id="date">
-      </div>
+  <div class="field">
+    <label>Date</label>
+    <input type="date" id="date">
+  </div>
 
-      <div class="field">
-        <label>Anesthésiste</label>
-        <select id="anesthesiste"></select>
-      </div>
+  <div class="field">
+    <label>Anesthésiste</label>
+    <select id="anesthesiste">
+      <option value="">Choisir...</option>
+    </select>
+  </div>
 
-      <div class="field">
-        <label>Spécialité</label>
-        <select id="specialite"></select>
-      </div>
+  <div class="field">
+    <label>Spécialité</label>
+    <select id="specialite"></select>
+  </div>
 
-      <div class="field">
-        <label>Chirurgien</label>
-        <select id="chirurgien"></select>
-      </div>
+  <div id="chirContainer">
+    <div class="field inline">
+      <select class="chirurgien">
+        <option value="">Chirurgien...</option>
+      </select>
+      <button class="plus-btn" onclick="addChir()">+</button>
+    </div>
+  </div>
 
-      <div class="field">
-        <label>Intervention</label>
-        <div class="inline">
-          <select id="intervention"></select>
-          <button class="plus-btn">+</button>
-        </div>
-      </div>
+  <div id="gesteContainer"></div>
 
-      <div class="field hidden" id="autreInterventionBox">
-        <label>Préciser</label>
-        <input type="text" id="autreIntervention">
-      </div>
-    </section>
-
+  <button class="plus-btn" onclick="addGeste()">+</button>
+</section>
+        
     <!-- MILIEU -->
     <section class="panel middle-panel">
 

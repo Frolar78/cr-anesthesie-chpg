@@ -2,26 +2,26 @@
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:#f3f4f6;
+  background:#f4f5f7;
   color:#1f2937;
 }
 
 .app{
-  padding:18px;
+  padding:16px;
   height:100vh;
 }
 
 .topbar{
-  height:78px;
-  background:linear-gradient(90deg,#fff,#fff7f7);
-  border:1px solid #f1d7d7;
-  border-radius:22px;
-  padding:0 24px;
+  height:74px;
+  background:linear-gradient(90deg,#fff,#fff8f8);
+  border:1px solid #f1dddd;
+  border-radius:20px;
+  padding:0 22px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.05);
-  margin-bottom:16px;
+  margin-bottom:14px;
+  box-shadow:0 8px 22px rgba(0,0,0,.05);
 }
 
 .brand{
@@ -31,34 +31,33 @@ body{
 }
 
 .logo{
-  width:48px;
-  height:48px;
-  border-radius:16px;
+  width:46px;
+  height:46px;
+  border-radius:14px;
   background:#b5121b;
-  color:#fff;
+  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
+  font-size:12px;
   font-weight:700;
-  font-size:13px;
 }
 
 .brand h1{
-  font-size:22px;
+  font-size:21px;
   font-weight:650;
 }
 
 .brand p{
   font-size:12px;
   color:#6b7280;
-  margin-top:2px;
 }
 
 #copyBtn{
   border:none;
   background:#b5121b;
   color:white;
-  padding:12px 18px;
+  padding:10px 16px;
   border-radius:12px;
   cursor:pointer;
   font-weight:600;
@@ -66,45 +65,45 @@ body{
 
 .layout{
   display:grid;
-  grid-template-columns:0.9fr 1.35fr 1.25fr;
-  gap:16px;
-  height:calc(100vh - 112px);
+  grid-template-columns:0.75fr 1.45fr 1.25fr;
+  gap:14px;
+  height:calc(100vh - 104px);
 }
 
 .panel{
   background:white;
-  border-radius:24px;
-  padding:18px;
-  box-shadow:0 8px 24px rgba(0,0,0,.05);
+  border-radius:22px;
+  padding:16px;
+  box-shadow:0 8px 22px rgba(0,0,0,.05);
   overflow:auto;
 }
 
 .panel-title{
   font-size:18px;
-  font-weight:650;
   color:#b5121b;
-  margin-bottom:16px;
+  font-weight:650;
+  margin-bottom:14px;
 }
 
 .field{
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 label{
   display:block;
-  font-size:12px;
+  font-size:11px;
   color:#6b7280;
-  margin-bottom:5px;
+  margin-bottom:4px;
   font-weight:600;
 }
 
 input,select,textarea{
   width:100%;
   border:1px solid #ddd;
-  border-radius:12px;
-  padding:10px 12px;
-  font-size:13px;
-  background:#fff;
+  border-radius:10px;
+  padding:9px 10px;
+  font-size:12px;
+  background:white;
 }
 
 .inline{
@@ -113,57 +112,62 @@ input,select,textarea{
 }
 
 .plus-btn{
-  width:42px;
+  width:40px;
   border:none;
-  border-radius:12px;
+  border-radius:10px;
   background:#b5121b;
   color:white;
   font-size:22px;
   cursor:pointer;
 }
 
-.card{
-  background:#fafafa;
-  border:1px solid #ececec;
-  border-radius:18px;
-  padding:12px;
-  margin-bottom:10px;
-}
-
-.card h3{
-  font-size:13px;
-  margin-bottom:10px;
-}
-
-.check-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:6px;
-}
-
-.check-item{
-  background:white;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
-  padding:7px 9px;
-  font-size:12px;
-  display:flex;
-  gap:6px;
-  align-items:center;
-}
-
-.check-item input{
-  width:auto;
-}
-
-.radio-list{
+.middle-panel{
   display:grid;
   grid-template-columns:1fr 1fr;
+  gap:10px;
+  align-content:start;
+}
+
+.mini-card{
+  background:#fafafa;
+  border:1px solid #ececec;
+  border-radius:16px;
+  padding:10px;
+}
+
+.mini-card h3{
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.chip-zone{
+  display:flex;
+  flex-wrap:wrap;
   gap:6px;
+}
+
+.chip{
+  border:1px solid #ddd;
+  background:white;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:11px;
+  cursor:pointer;
+  transition:.15s;
+  user-select:none;
+}
+
+.chip.active{
+  border-color:#d7a3a6;
+  background:#fbf6f6;
 }
 
 .hidden{
   display:none;
+}
+
+.mt8{
+  margin-top:8px;
 }
 
 .report-panel{

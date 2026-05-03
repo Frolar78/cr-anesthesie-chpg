@@ -129,7 +129,7 @@ function renderVADetails(){
   const isThoracicSelective =
 gestes.includes("Lobectomie pulmonaire") ||
 gestes.includes("Segmentectomie") ||
-gestes.includes("Œsophagectomie Lewis-Santy")
+gestes.includes("Œsophagectomie Lewis-Santy");
 
   if(isThoracicSelective){
     box.innerHTML += `

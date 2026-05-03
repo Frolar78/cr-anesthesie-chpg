@@ -76,6 +76,7 @@ const DATA = {
         "Dr Anna MARMORALE",
         "Dr Anne DUBOIS-VERDIER",
         "Dr Nicoletta AMBROSIANI"
+        "Dr Tayeb BENKIRAN",
       ],
       interventions: [
         "Duodénopancréatectomie céphalique",

@@ -50,6 +50,90 @@ const ALR_NEURAXIAL_MAP = {
   "Cystectomie totale": ["Péridurale thoracique"]
 };
 
+const ANTIBIO_MAP = {
+  "PTH": "Céfazoline",
+  "PTG": "Céfazoline",
+  "Ostéosynthèse cheville": "Céfazoline",
+  "Ostéosynthèse poignet": "Céfazoline",
+  "Recalibrage": "Céfazoline",
+  "Canal carpien": "Aucune",
+  "Hallux valgus": "Céfazoline",
+  "Clou gamma": "Céfazoline",
+  "Prothèse d'épaule": "Céfazoline",
+  "Arthroscopie de genou": "Aucune",
+  "Arthroscopie d'épaule": "Aucune",
+
+  "Duodénopancréatectomie céphalique": "Céfoxitine",
+  "Œsophagectomie Lewis-Santy": "Céfazoline",
+  "Appendicectomie": "Céfoxitine",
+  "Hernie inguinale": "Céfazoline",
+  "Hernie ombilicale": "Céfazoline",
+  "Hémorroïdectomie": "Métronidazole",
+  "Colectomie": "Céfoxitine",
+  "Coelioscopie exploratrice": "Aucune",
+  "Cholécystectomie": "Aucune",
+  "Promontofixation": "Céfazoline",
+  "Mastectomie partielle": "Céfazoline",
+  "Mastectomie totale": "Céfazoline",
+  "Injection Bulkamide": "Aucune",
+  "Annexectomie": "Céfazoline",
+  "Hystérectomie": "Céfazoline",
+  "CHIP": "Céfoxitine",
+  "Kystectomie ovarienne": "Céfazoline",
+  "Segmentectomie hépatique": "Céfoxitine",
+
+  "Lobectomie pulmonaire": "Céfazoline",
+  "Segmentectomie": "Céfazoline",
+  "Talcage pleural": "Aucune",
+  "Médiastinoscopie": "Aucune",
+
+  "Gastroscopie": "Aucune",
+  "Coloscopie": "Aucune",
+  "Echo-endoscopie haute": "Aucune",
+  "RSF": "Aucune",
+  "ERCP": "Céfoxitine",
+  "Pose de prothèse biliaire": "Céfoxitine",
+  "Dissection sous-muqueuse": "Aucune",
+  "Mucosectomie": "Aucune",
+  "POEM": "Amoxicilline / Acide clavulanique",
+
+  "Ablation de FA": "Aucune",
+  "Ablation de flutter": "Aucune",
+
+  "Vertébroplastie": "Céfazoline",
+  "Embolisation": "Aucune",
+
+  "Césarienne": "Céfazoline",
+  "Conisation": "Aucune",
+  "Nymphoplastie de réduction": "Aucune",
+  "Curetage": "Aucune",
+  "Cerclage": "Aucune",
+
+  "Prostatectomie totale": "Aucune",
+  "Biopsies de prostate": "Céfazoline",
+  "REP": "Céfazoline",
+  "REV": "Céfazoline",
+  "URS + Laser": "Céfazoline",
+  "Montée de JJ": "Céfazoline",
+  "Cystectomie totale": "Céfoxitine",
+
+  "Septoplastie": "Aucune",
+  "Rhinoplastie": "Aucune",
+  "Thyroïdectomie totale": "Aucune",
+  "Thyroïdectomie partielle": "Aucune",
+  "Parathyroidectomie": "Aucune",
+  "Extraction DDS": "Amoxicilline / Acide clavulanique",
+  "Carcinome cutané": "Aucune",
+  "Cholestéatome": "Aucune",
+  "Adénoidectomie": "Aucune",
+  "DTT": "Aucune",
+  "Turbinoplastie": "Aucune",
+  "Adénoamygdalectomie": "Aucune",
+
+  "Varices": "Aucune",
+  "Cataracte": "Céfuroxime"
+};
+
 function fillSelect(select, list, placeholder=""){
   select.innerHTML = "";
 
@@ -77,13 +161,8 @@ function createChips(id, list, key, single=false){
     chip.className = "chip";
     chip.textContent = item;
 
-    if(single && state[key] === item){
-      chip.classList.add("active");
-    }
-
-    if(!single && Array.isArray(state[key]) && state[key].includes(item)){
-      chip.classList.add("active");
-    }
+    if(single && state[key] === item) chip.classList.add("active");
+    if(!single && Array.isArray(state[key]) && state[key].includes(item)) chip.classList.add("active");
 
     chip.onclick = ()=>{
       if(single){
@@ -108,22 +187,14 @@ function createChips(id, list, key, single=false){
         }
       }
 
-      if(key === "monitorage"){
-        renderMonitorageDetails();
-      }
-
+      if(key === "monitorage") renderMonitorageDetails();
       if(key === "va"){
         renderVADetails();
         updateCurare();
       }
-
-      if(key === "ventilation"){
-        renderVentilationDetails();
-      }
-
-      if(key === "neuraxial"){
-        renderNeuraxialDetails();
-      }
+      if(key === "ventilation") renderVentilationDetails();
+      if(key === "neuraxial") renderNeuraxialDetails();
+      if(key === "antibio") renderAntibioDetails();
 
       renderALR();
       renderReport();
@@ -135,7 +206,6 @@ function createChips(id, list, key, single=false){
 
 function initDate(){
   const d = new Date();
-
   $("date").value = new Date(d.getTime() - d.getTimezoneOffset() * 60000)
     .toISOString()
     .split("T")[0];
@@ -145,7 +215,6 @@ function formatDateFR(v){
   if(!v) return "";
 
   const d = new Date(v);
-
   return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}`;
 }
 
@@ -154,12 +223,8 @@ function updateChirurgiens(){
 
   document.querySelectorAll(".chirurgien").forEach(sel=>{
     const current = sel.value;
-
     fillSelect(sel, list, "Chirurgien...");
-
-    if(list.includes(current)){
-      sel.value = current;
-    }
+    if(list.includes(current)) sel.value = current;
   });
 }
 
@@ -200,6 +265,7 @@ function addGeste(removable=true){
     wrapper.querySelector(".remove-btn").onclick = ()=>{
       wrapper.remove();
       renderALR();
+      renderAntibio();
       renderReport();
     };
   }
@@ -212,6 +278,7 @@ function addGeste(removable=true){
   sel.addEventListener("change", ()=>{
     renderGesteExtra(wrapper, sel.value);
     renderALR();
+    renderAntibio();
     renderReport();
   });
 }
@@ -264,10 +331,7 @@ function buildGesteLabel(block){
   }
 
   const p = block.querySelector(".precision-input")?.value;
-
-  if(p){
-    geste += ` (${p})`;
-  }
+  if(p) geste += ` (${p})`;
 
   return geste;
 }
@@ -324,7 +388,6 @@ function updateCurare(){
     : ["Aucun","Atracurium","Rocuronium"];
 
   state.curare = state.curare.filter(x=>list.includes(x));
-
   createChips("curare", list, "curare");
 }
 
@@ -441,6 +504,41 @@ function renderNeuraxialDetails(){
   }
 }
 
+function renderAntibio(){
+  const gestes = getSelectedGestesRaw();
+  const antibios = new Set();
+
+  gestes.forEach(g=>{
+    antibios.add(ANTIBIO_MAP[g] || "Aucune");
+  });
+
+  let list = [...antibios];
+
+  if(list.length === 0){
+    list = ["Aucune"];
+  }
+
+  if(!list.includes("Autre")){
+    list.push("Autre");
+  }
+
+  if(!list.includes(state.antibio)){
+    state.antibio = list[0];
+  }
+
+  createChips("antibioOptions", list, "antibio", true);
+  renderAntibioDetails();
+}
+
+function renderAntibioDetails(){
+  if(state.antibio === "Autre"){
+    $("antibioOtherBlock").classList.remove("hidden");
+  }else{
+    $("antibioOtherBlock").classList.add("hidden");
+    $("antibioOtherText").value = "";
+  }
+}
+
 async function copyReport(){
   try{
     await navigator.clipboard.writeText(report.value);
@@ -547,23 +645,13 @@ function renderReport(){
 
     if(state.va === "Intubation oro-trachéale"){
       if(!$("sequenceRapide").checked && state.ventilation){
-        if(state.ventilation === "Facile"){
-          txt += "Ventilation au masque facile.\n";
-        }
-
-        if(state.ventilation === "Difficile"){
-          txt += "Ventilation au masque difficile.\n";
-        }
-
-        if(state.ventilation === "Impossible"){
-          txt += "Ventilation au masque impossible.\n";
-        }
+        if(state.ventilation === "Facile") txt += "Ventilation au masque facile.\n";
+        if(state.ventilation === "Difficile") txt += "Ventilation au masque difficile.\n";
+        if(state.ventilation === "Impossible") txt += "Ventilation au masque impossible.\n";
 
         if(state.ventilation === "Autre"){
           const precision = $("ventilationPrecision").value;
-          if(precision){
-            txt += `Ventilation au masque : ${precision}.\n`;
-          }
+          if(precision) txt += `Ventilation au masque : ${precision}.\n`;
         }
       }
 
@@ -593,9 +681,7 @@ function renderReport(){
       if(n === "Péridurale" || n === "Péridurale thoracique"){
         const niveau = $("periduraleNiveau").value;
         txt += `${n} réalisée`;
-        if(niveau){
-          txt += ` au niveau ${niveau}`;
-        }
+        if(niveau) txt += ` au niveau ${niveau}`;
         txt += ".\n";
       }else{
         txt += `${n} réalisée.\n`;
@@ -616,25 +702,13 @@ function renderReport(){
   if(diurese || saignement || remplissage || norad || incident){
     txt += "PÉRI-OPÉRATOIRE\n";
 
-    if(diurese){
-      txt += `Diurèse : ${diurese} mL.\n`;
-    }
-
-    if(saignement){
-      txt += `Saignement estimé : ${saignement} mL.\n`;
-    }
-
-    if(remplissage){
-      txt += `Remplissage : ${remplissage}.\n`;
-    }
+    if(diurese) txt += `Diurèse : ${diurese} mL.\n`;
+    if(saignement) txt += `Saignement estimé : ${saignement} mL.\n`;
+    if(remplissage) txt += `Remplissage : ${remplissage}.\n`;
 
     if(norad){
       txt += "Support vasopresseur peropératoire par noradrénaline 16 µg/mL";
-
-      if(noradText){
-        txt += ` (${noradText})`;
-      }
-
+      if(noradText) txt += ` (${noradText})`;
       txt += ".\n";
     }
 
@@ -647,9 +721,16 @@ function renderReport(){
 
   txt += "ANTIBIOPROPHYLAXIE\n";
 
-  txt += state.antibio === "Céfazoline"
-    ? "Antibioprophylaxie par céfazoline.\n"
-    : "Pas d'antibioprophylaxie.\n";
+  if(state.antibio === "Aucune"){
+    txt += "Pas d'antibioprophylaxie.\n";
+  }else if(state.antibio === "Autre"){
+    const autre = $("antibioOtherText").value;
+    txt += autre
+      ? `Antibioprophylaxie par ${autre}.\n`
+      : "Antibioprophylaxie par autre antibiotique à préciser.\n";
+  }else{
+    txt += `Antibioprophylaxie par ${state.antibio}.\n`;
+  }
 
   report.value = txt;
 }
@@ -681,7 +762,8 @@ function init(){
   );
 
   createChips("entretienOptions", DATA.entretien, "entretien", true);
-  createChips("antibioOptions", DATA.antibio, "antibio", true);
+
+  renderAntibio();
 
   $("addChirBtn").onclick = ()=>addChir(true);
   $("addGesteBtn").onclick = ()=>addGeste(true);
@@ -702,21 +784,28 @@ function init(){
   specialiteSelect.onchange = ()=>{
     updateChirurgiens();
 
-    document.querySelectorAll(".geste-select").forEach(sel=>{
-      fillSelect(
-        sel,
-        DATA.specialites[specialiteSelect.value]?.interventions || [],
-        "Intervention..."
-      );
+    document.querySelectorAll(".field").forEach(block=>{
+      const sel = block.querySelector(".geste-select");
+      if(sel){
+        fillSelect(
+          sel,
+          DATA.specialites[specialiteSelect.value]?.interventions || [],
+          "Intervention..."
+        );
+        renderGesteExtra(block, sel.value);
+      }
     });
 
     renderALR();
+    renderAntibio();
     renderReport();
   };
 
   document.addEventListener("change", renderReport);
   document.addEventListener("input", renderReport);
 
+  renderALR();
+  renderAntibio();
   renderReport();
 }
 

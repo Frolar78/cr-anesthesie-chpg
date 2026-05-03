@@ -105,7 +105,8 @@ function renderReport(){
 const gestesThoraciques = getSelectedGestesRaw();
 const isThoracicSelective =
   gestesThoraciques.includes("Lobectomie pulmonaire") ||
-  gestesThoraciques.includes("Segmentectomie");
+  gestesThoraciques.includes("Segmentectomie") ||
+  gestesThoraciques.includes("Œsophagectomie Lewis-Santy");
 
 if(isThoracicSelective){
   const tailleSelective = $("selectiveTubeSize")?.value || "";

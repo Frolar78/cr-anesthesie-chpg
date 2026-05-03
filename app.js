@@ -9,29 +9,45 @@ const state = {
   induction: [],
   curare: [],
   va: "",
+  ventilation: "",
   entretien: "",
   antibio: "",
-  alr: ""
+  alr: [],
+  neuraxial: []
 };
 
-const ALR_SPECIALITES = [
-  "Orthopédie",
-  "Viscéral",
-  "Thoracique",
-  "Gynécologie / Obstétrique"
-];
+const ALR_PERIPHERIQUE_MAP = {
+  "PTH": ["PENG bloc", "Bloc fémoral"],
+  "PTG": ["Bloc saphène", "Bloc obturateur", "Bloc fémoral"],
+  "Ostéosynthèse cheville": ["Bloc sciatique au creux poplité", "Bloc saphène"],
+  "Ostéosynthèse poignet": ["Bloc axillaire", "Blocs distaux"],
+  "Canal carpien": ["Bloc axillaire", "Blocs distaux"],
+  "Hallux valgus": ["Bloc sciatique", "Blocs de cheville"],
+  "Clou gamma": ["Bloc cutané latéral de cuisse", "Bloc fémoral"],
+  "Prothèse d'épaule": ["Bloc inter-scalénique"],
+  "Arthroscopie de genou": ["Bloc saphène", "Bloc fémoral"],
+  "Arthroscopie d'épaule": ["Bloc inter-scalénique"],
 
-const ALR_MAP = {
-  "PTH":["Bloc fémoral","Bloc axillaire"],
-  "PTG":["Bloc fémoral","Bloc saphène au canal des adducteurs"],
-  "Hallux valgus":["Bloc sciatique au creux poplité"],
-  "Clou gamma":["Bloc cutané latéral de cuisse"],
-  "Lobectomie pulmonaire":["Bloc paravertébral","Bloc érecteur du rachis"],
-  "Appendicectomie":["TAP-bloc"],
-  "Hernie inguinale":["Bloc ilio-inguinal"],
-  "Hémorroïdectomie":["Bloc pudendal"],
-  "Colectomie":["Bloc des grands droits","TAP-bloc"],
-  "Césarienne":["TAP-bloc"]
+  "Hernie inguinale": ["Bloc ilio-inguinal", "TAP bloc"],
+  "Hernie ombilicale": ["TAP bloc", "Bloc des grands droits"],
+  "Hémorroïdectomie": ["Bloc pudendal"],
+  "Colectomie": ["TAP bloc"],
+  "Mastectomie totale": ["Bloc paravertébral", "PECS bloc"],
+
+  "Lobectomie pulmonaire": ["Bloc paravertébral", "Bloc érecteur du rachis"],
+  "Segmentectomie": ["Bloc paravertébral", "Bloc érecteur du rachis"],
+  "Talcage pleural": ["Bloc paravertébral", "Bloc érecteur du rachis"]
+};
+
+const ALR_NEURAXIAL_MAP = {
+  "Duodénopancréatectomie céphalique": ["Péridurale thoracique"],
+  "Œsophagectomie Lewis-Santy": ["Péridurale thoracique"],
+  "CHIP": ["Péridurale thoracique"],
+  "Lobectomie pulmonaire": ["Péridurale thoracique"],
+  "Césarienne": ["Rachianesthésie", "Péridurale"],
+  "Curetage": ["Rachianesthésie"],
+  "Cerclage": ["Rachianesthésie"],
+  "Cystectomie totale": ["Péridurale thoracique"]
 };
 
 function fillSelect(select, list, placeholder=""){
@@ -101,6 +117,14 @@ function createChips(id, list, key, single=false){
         updateCurare();
       }
 
+      if(key === "ventilation"){
+        renderVentilationDetails();
+      }
+
+      if(key === "neuraxial"){
+        renderNeuraxialDetails();
+      }
+
       renderALR();
       renderReport();
     };
@@ -111,6 +135,7 @@ function createChips(id, list, key, single=false){
 
 function initDate(){
   const d = new Date();
+
   $("date").value = new Date(d.getTime() - d.getTimezoneOffset() * 60000)
     .toISOString()
     .split("T")[0];
@@ -118,6 +143,7 @@ function initDate(){
 
 function formatDateFR(v){
   if(!v) return "";
+
   const d = new Date(v);
 
   return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}`;
@@ -128,7 +154,9 @@ function updateChirurgiens(){
 
   document.querySelectorAll(".chirurgien").forEach(sel=>{
     const current = sel.value;
+
     fillSelect(sel, list, "Chirurgien...");
+
     if(list.includes(current)){
       sel.value = current;
     }
@@ -216,6 +244,7 @@ function renderGesteExtra(wrapper, geste){
 
 function buildGesteLabel(block){
   let geste = block.querySelector(".geste-select")?.value;
+
   if(!geste) return null;
 
   if(geste === "Autre..."){
@@ -223,6 +252,7 @@ function buildGesteLabel(block){
   }
 
   const lat = block.querySelector(".laterality-select")?.value;
+
   if(lat){
     const map = {
       "Droite":"droite",
@@ -234,11 +264,18 @@ function buildGesteLabel(block){
   }
 
   const p = block.querySelector(".precision-input")?.value;
+
   if(p){
     geste += ` (${p})`;
   }
 
   return geste;
+}
+
+function getSelectedGestesRaw(){
+  return [...document.querySelectorAll(".geste-select")]
+    .map(x=>x.value)
+    .filter(Boolean);
 }
 
 function renderMonitorageDetails(){
@@ -248,17 +285,20 @@ function renderMonitorageDetails(){
   if(state.monitorage.includes("KTA")){
     const s = document.createElement("select");
     s.id = "ktaSite";
+
     fillSelect(
       s,
       ["Radial droit","Radial gauche","Fémoral droit","Fémoral gauche"],
       "Localisation KTA..."
     );
+
     box.appendChild(s);
   }
 
   if(state.monitorage.includes("KTC")){
     const s = document.createElement("select");
     s.id = "ktcSite";
+
     fillSelect(
       s,
       [
@@ -271,6 +311,7 @@ function renderMonitorageDetails(){
       ],
       "Localisation KTC..."
     );
+
     box.appendChild(s);
   }
 }
@@ -283,6 +324,7 @@ function updateCurare(){
     : ["Aucun","Atracurium","Rocuronium"];
 
   state.curare = state.curare.filter(x=>list.includes(x));
+
   createChips("curare", list, "curare");
 }
 
@@ -291,7 +333,12 @@ function renderVADetails(){
   box.innerHTML = "";
 
   $("srBlock").classList.add("hidden");
+  $("ventilationBlock").classList.add("hidden");
+
   $("sequenceRapide").checked = false;
+  state.ventilation = "";
+  $("ventilationPrecision").classList.add("hidden");
+  $("ventilationPrecision").value = "";
 
   if(state.va === "Masque laryngé"){
     box.innerHTML += `<input id="mlSize" placeholder="Taille masque laryngé">`;
@@ -300,28 +347,98 @@ function renderVADetails(){
   if(state.va === "Intubation oro-trachéale"){
     box.innerHTML += `<input id="tubeSize" placeholder="Taille sonde (7.5)">`;
     $("srBlock").classList.remove("hidden");
+    $("ventilationBlock").classList.remove("hidden");
+
+    createChips(
+      "ventilationOptions",
+      ["Facile", "Difficile", "Impossible", "Autre"],
+      "ventilation",
+      true
+    );
   }
 
   updateCurare();
 }
 
-function renderALR(){
-  const spec = specialiteSelect.value;
-  const gestes = [...document.querySelectorAll(".geste-select")].map(x=>x.value);
-  const alrs = new Set();
+function renderVentilationDetails(){
+  if(state.ventilation === "Autre"){
+    $("ventilationPrecision").classList.remove("hidden");
+  }else{
+    $("ventilationPrecision").classList.add("hidden");
+    $("ventilationPrecision").value = "";
+  }
+}
 
-  gestes.forEach(g => (ALR_MAP[g] || []).forEach(a => alrs.add(a)));
+function handleSequenceRapideChange(){
+  if($("sequenceRapide").checked){
+    $("ventilationBlock").classList.add("hidden");
+    state.ventilation = "";
+    $("ventilationPrecision").value = "";
+    $("ventilationPrecision").classList.add("hidden");
+    $("ventilationOptions").innerHTML = "";
+  }else if(state.va === "Intubation oro-trachéale"){
+    $("ventilationBlock").classList.remove("hidden");
 
-  const card = $("alrCard");
-
-  if(!ALR_SPECIALITES.includes(spec) || alrs.size === 0){
-    card.classList.add("hidden");
-    state.alr = "";
-    return;
+    createChips(
+      "ventilationOptions",
+      ["Facile", "Difficile", "Impossible", "Autre"],
+      "ventilation",
+      true
+    );
   }
 
-  card.classList.remove("hidden");
-  createChips("alrOptions", [...alrs, "Aucune"], "alr", true);
+  updateCurare();
+  renderReport();
+}
+
+function renderALR(){
+  const gestes = getSelectedGestesRaw();
+
+  const alrs = new Set();
+  const neuraxials = new Set();
+
+  gestes.forEach(g=>{
+    (ALR_PERIPHERIQUE_MAP[g] || []).forEach(a=>alrs.add(a));
+    (ALR_NEURAXIAL_MAP[g] || []).forEach(a=>neuraxials.add(a));
+  });
+
+  const alrList = [...alrs];
+  const neuraxialList = [...neuraxials];
+
+  state.alr = state.alr.filter(x=>alrList.includes(x));
+  state.neuraxial = state.neuraxial.filter(x=>neuraxialList.includes(x));
+
+  if(alrList.length === 0){
+    $("alrCard").classList.add("hidden");
+    state.alr = [];
+  }else{
+    $("alrCard").classList.remove("hidden");
+    createChips("alrOptions", alrList, "alr", false);
+  }
+
+  if(neuraxialList.length === 0){
+    $("neuraxialCard").classList.add("hidden");
+    state.neuraxial = [];
+    $("periduraleDetails").classList.add("hidden");
+    $("periduraleNiveau").value = "";
+  }else{
+    $("neuraxialCard").classList.remove("hidden");
+    createChips("neuraxialOptions", neuraxialList, "neuraxial", false);
+    renderNeuraxialDetails();
+  }
+}
+
+function renderNeuraxialDetails(){
+  const hasPeridurale =
+    state.neuraxial.includes("Péridurale") ||
+    state.neuraxial.includes("Péridurale thoracique");
+
+  if(hasPeridurale){
+    $("periduraleDetails").classList.remove("hidden");
+  }else{
+    $("periduraleDetails").classList.add("hidden");
+    $("periduraleNiveau").value = "";
+  }
 }
 
 async function copyReport(){
@@ -331,9 +448,16 @@ async function copyReport(){
 
     setTimeout(()=>{
       $("copyBtn").textContent = "Copier le CR";
-    },1500);
+    }, 1500);
   }catch{
-    alert("Impossible de copier.");
+    report.select();
+    document.execCommand("copy");
+
+    $("copyBtn").textContent = "Copié ✓";
+
+    setTimeout(()=>{
+      $("copyBtn").textContent = "Copier le CR";
+    }, 1500);
   }
 }
 
@@ -374,6 +498,7 @@ function renderReport(){
     }
 
     const kta = $("ktaSite")?.value;
+
     if(kta){
       txt += kta.includes("Radial")
         ? `Mise en place d'un cathéter artériel en ${kta.toLowerCase()} après test d'Allen négatif.\n`
@@ -381,6 +506,7 @@ function renderReport(){
     }
 
     const ktc = $("ktcSite")?.value;
+
     if(ktc){
       txt += `Mise en place d'un cathéter veineux central échoguidé en ${ktc.toLowerCase()}.\n`;
     }
@@ -420,7 +546,28 @@ function renderReport(){
     }
 
     if(state.va === "Intubation oro-trachéale"){
-      txt += `Intubation oro-trachéale avec une sonde ${$("tubeSize")?.value || ""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre.\n`;
+      if(!$("sequenceRapide").checked && state.ventilation){
+        if(state.ventilation === "Facile"){
+          txt += "Ventilation au masque facile.\n";
+        }
+
+        if(state.ventilation === "Difficile"){
+          txt += "Ventilation au masque difficile.\n";
+        }
+
+        if(state.ventilation === "Impossible"){
+          txt += "Ventilation au masque impossible.\n";
+        }
+
+        if(state.ventilation === "Autre"){
+          const precision = $("ventilationPrecision").value;
+          if(precision){
+            txt += `Ventilation au masque : ${precision}.\n`;
+          }
+        }
+      }
+
+      txt += `Intubation oro-trachéale atraumatique avec une sonde ${$("tubeSize")?.value || ""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre, absence de bris dentaire.\n`;
     }
 
     txt += "\n";
@@ -428,14 +575,34 @@ function renderReport(){
 
   if(state.entretien){
     txt += "ENTRETIEN\n";
+
     txt += state.entretien === "Sevoflurane"
       ? "Entretien anesthésique par sévoflurane.\n\n"
       : "Entretien anesthésique par propofol en AIVOC.\n\n";
   }
 
-  if(state.alr && state.alr !== "Aucune"){
-    txt += "ALR\n";
-    txt += `ALR de type ${state.alr} réalisée de manière échoguidée avec ${$("localVolume").value} mL de ${$("localAgent").value}.\n\n`;
+  if(state.alr.length){
+    txt += "ALR PÉRIPHÉRIQUE\n";
+    txt += `ALR de type ${state.alr.join(", ")} réalisée de manière échoguidée avec ${$("localVolume").value} mL de ${$("localAgent").value}.\n\n`;
+  }
+
+  if(state.neuraxial.length){
+    txt += "ALR NEURAXIALE\n";
+
+    state.neuraxial.forEach(n=>{
+      if(n === "Péridurale" || n === "Péridurale thoracique"){
+        const niveau = $("periduraleNiveau").value;
+        txt += `${n} réalisée`;
+        if(niveau){
+          txt += ` au niveau ${niveau}`;
+        }
+        txt += ".\n";
+      }else{
+        txt += `${n} réalisée.\n`;
+      }
+    });
+
+    txt += "\n";
   }
 
   const diurese = $("diurese").value;
@@ -443,24 +610,43 @@ function renderReport(){
   const remplissage = $("remplissage").value;
   const norad = $("noradCheck").checked;
   const noradText = $("noradText").value;
+  const incident = $("incidentCheck").checked;
+  const incidentText = $("incidentText").value;
 
-  if(diurese || saignement || remplissage || norad){
+  if(diurese || saignement || remplissage || norad || incident){
     txt += "PÉRI-OPÉRATOIRE\n";
 
-    if(diurese) txt += `Diurèse : ${diurese} mL.\n`;
-    if(saignement) txt += `Saignement estimé : ${saignement} mL.\n`;
-    if(remplissage) txt += `Remplissage : ${remplissage}.\n`;
+    if(diurese){
+      txt += `Diurèse : ${diurese} mL.\n`;
+    }
+
+    if(saignement){
+      txt += `Saignement estimé : ${saignement} mL.\n`;
+    }
+
+    if(remplissage){
+      txt += `Remplissage : ${remplissage}.\n`;
+    }
 
     if(norad){
       txt += "Support vasopresseur peropératoire par noradrénaline 16 µg/mL";
-      if(noradText) txt += ` (${noradText})`;
+
+      if(noradText){
+        txt += ` (${noradText})`;
+      }
+
       txt += ".\n";
+    }
+
+    if(incident && incidentText){
+      txt += `Incident peropératoire : ${incidentText}\n`;
     }
 
     txt += "\n";
   }
 
   txt += "ANTIBIOPROPHYLAXIE\n";
+
   txt += state.antibio === "Céfazoline"
     ? "Antibioprophylaxie par céfazoline.\n"
     : "Pas d'antibioprophylaxie.\n";
@@ -486,12 +672,14 @@ function init(){
   createChips("monitorage", DATA.monitorage, "monitorage");
   createChips("induction", DATA.induction, "induction");
   createChips("curare", ["Aucun","Atracurium","Rocuronium"], "curare");
+
   createChips(
     "vaOptions",
     ["Ventilation spontanée","Masque laryngé","Intubation oro-trachéale"],
     "va",
     true
   );
+
   createChips("entretienOptions", DATA.entretien, "entretien", true);
   createChips("antibioOptions", DATA.antibio, "antibio", true);
 
@@ -499,13 +687,15 @@ function init(){
   $("addGesteBtn").onclick = ()=>addGeste(true);
   $("copyBtn").onclick = copyReport;
 
-  $("sequenceRapide").addEventListener("change", ()=>{
-    updateCurare();
-    renderReport();
-  });
+  $("sequenceRapide").addEventListener("change", handleSequenceRapideChange);
 
   $("noradCheck").addEventListener("change", ()=>{
     $("noradBlock").classList.toggle("hidden", !$("noradCheck").checked);
+    renderReport();
+  });
+
+  $("incidentCheck").addEventListener("change", ()=>{
+    $("incidentBlock").classList.toggle("hidden", !$("incidentCheck").checked);
     renderReport();
   });
 

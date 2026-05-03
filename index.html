@@ -24,43 +24,35 @@
 
   <main class="layout">
 
-    <!-- GAUCHE -->
-    
+    <!-- COLONNE GAUCHE -->
     <section class="panel left-panel">
-  <div class="panel-title">Intervention</div>
+      <div class="panel-title">Intervention</div>
 
-  <div class="field">
-    <label>Date</label>
-    <input type="date" id="date">
-  </div>
+      <div class="field">
+        <label>Date</label>
+        <input type="date" id="date">
+      </div>
 
-  <div class="field">
-    <label>Anesthésiste</label>
-    <select id="anesthesiste">
-      <option value="">Choisir...</option>
-    </select>
-  </div>
+      <div class="field">
+        <label>Anesthésiste</label>
+        <select id="anesthesiste"></select>
+      </div>
 
-  <div class="field">
-    <label>Spécialité</label>
-    <select id="specialite"></select>
-  </div>
+      <div class="field">
+        <label>Spécialité</label>
+        <select id="specialite"></select>
+      </div>
 
-  <div id="chirContainer">
-    <div class="field inline">
-      <select class="chirurgien">
-        <option value="">Chirurgien...</option>
-      </select>
-      <button class="plus-btn" onclick="addChir()">+</button>
-    </div>
-  </div>
+      <div id="chirContainer"></div>
+      <button class="plus-btn" id="addChirBtn" type="button">+</button>
 
-  <div id="gesteContainer"></div>
+      <div style="height:14px"></div>
 
-  <button class="plus-btn" onclick="addGeste()">+</button>
-</section>
-        
-    <!-- MILIEU -->
+      <div id="gesteContainer"></div>
+      <button class="plus-btn" id="addGesteBtn" type="button">+</button>
+    </section>
+
+    <!-- COLONNE MILIEU -->
     <section class="panel middle-panel">
 
       <div class="mini-card">
@@ -110,7 +102,7 @@
 
     </section>
 
-    <!-- DROITE -->
+    <!-- COLONNE DROITE -->
     <section class="panel report-panel">
       <div class="panel-title">Compte-rendu généré</div>
       <textarea id="report"></textarea>

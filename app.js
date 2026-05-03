@@ -52,7 +52,7 @@ function fillSelect(select, list, placeholder=""){
   });
 }
 
-function createChips(id,list,key,single=false){
+function createChips(id, list, key, single=false){
   const box = $(id);
   box.innerHTML = "";
 
@@ -61,12 +61,17 @@ function createChips(id,list,key,single=false){
     chip.className = "chip";
     chip.textContent = item;
 
-    if(single && state[key]===item) chip.classList.add("active");
-    if(!single && Array.isArray(state[key]) && state[key].includes(item)) chip.classList.add("active");
+    if(single && state[key] === item){
+      chip.classList.add("active");
+    }
+
+    if(!single && Array.isArray(state[key]) && state[key].includes(item)){
+      chip.classList.add("active");
+    }
 
     chip.onclick = ()=>{
       if(single){
-        if(state[key]===item){
+        if(state[key] === item){
           state[key] = "";
           chip.classList.remove("active");
         }else{
@@ -78,8 +83,8 @@ function createChips(id,list,key,single=false){
         const arr = state[key];
         const idx = arr.indexOf(item);
 
-        if(idx>-1){
-          arr.splice(idx,1);
+        if(idx > -1){
+          arr.splice(idx, 1);
           chip.classList.remove("active");
         }else{
           arr.push(item);
@@ -87,9 +92,11 @@ function createChips(id,list,key,single=false){
         }
       }
 
-      if(key==="monitorage") renderMonitorageDetails();
+      if(key === "monitorage"){
+        renderMonitorageDetails();
+      }
 
-      if(key==="va"){
+      if(key === "va"){
         renderVADetails();
         updateCurare();
       }
@@ -104,7 +111,7 @@ function createChips(id,list,key,single=false){
 
 function initDate(){
   const d = new Date();
-  $("date").value = new Date(d.getTime()-d.getTimezoneOffset()*60000)
+  $("date").value = new Date(d.getTime() - d.getTimezoneOffset() * 60000)
     .toISOString()
     .split("T")[0];
 }
@@ -121,8 +128,10 @@ function updateChirurgiens(){
 
   document.querySelectorAll(".chirurgien").forEach(sel=>{
     const current = sel.value;
-    fillSelect(sel,list,"Chirurgien...");
-    if(list.includes(current)) sel.value = current;
+    fillSelect(sel, list, "Chirurgien...");
+    if(list.includes(current)){
+      sel.value = current;
+    }
   });
 }
 
@@ -170,23 +179,23 @@ function addGeste(removable=true){
   $("gesteContainer").appendChild(wrapper);
 
   const sel = wrapper.querySelector(".geste-select");
-  fillSelect(sel,list,"Intervention...");
+  fillSelect(sel, list, "Intervention...");
 
-  sel.addEventListener("change",()=>{
-    renderGesteExtra(wrapper,sel.value);
+  sel.addEventListener("change", ()=>{
+    renderGesteExtra(wrapper, sel.value);
     renderALR();
     renderReport();
   });
 }
 
-function renderGesteExtra(wrapper,geste){
+function renderGesteExtra(wrapper, geste){
   const extra = wrapper.querySelector(".geste-extra");
   extra.innerHTML = "";
 
   if(DATA.lateralizedGestes.includes(geste)){
     const s = document.createElement("select");
     s.className = "laterality-select";
-    fillSelect(s,DATA.laterality,"Latéralité...");
+    fillSelect(s, DATA.laterality, "Latéralité...");
     extra.appendChild(s);
   }
 
@@ -197,7 +206,7 @@ function renderGesteExtra(wrapper,geste){
     extra.appendChild(i);
   }
 
-  if(geste==="Autre..."){
+  if(geste === "Autre..."){
     const i = document.createElement("input");
     i.className = "custom-geste";
     i.placeholder = "Préciser l'intervention";
@@ -209,7 +218,7 @@ function buildGesteLabel(block){
   let geste = block.querySelector(".geste-select")?.value;
   if(!geste) return null;
 
-  if(geste==="Autre..."){
+  if(geste === "Autre..."){
     geste = block.querySelector(".custom-geste")?.value || "Autre";
   }
 
@@ -225,7 +234,9 @@ function buildGesteLabel(block){
   }
 
   const p = block.querySelector(".precision-input")?.value;
-  if(p) geste += ` (${p})`;
+  if(p){
+    geste += ` (${p})`;
+  }
 
   return geste;
 }
@@ -272,8 +283,7 @@ function updateCurare(){
     : ["Aucun","Atracurium","Rocuronium"];
 
   state.curare = state.curare.filter(x=>list.includes(x));
-
-  createChips("curare",list,"curare");
+  createChips("curare", list, "curare");
 }
 
 function renderVADetails(){
@@ -283,11 +293,11 @@ function renderVADetails(){
   $("srBlock").classList.add("hidden");
   $("sequenceRapide").checked = false;
 
-  if(state.va==="Masque laryngé"){
+  if(state.va === "Masque laryngé"){
     box.innerHTML += `<input id="mlSize" placeholder="Taille masque laryngé">`;
   }
 
-  if(state.va==="Intubation oro-trachéale"){
+  if(state.va === "Intubation oro-trachéale"){
     box.innerHTML += `<input id="tubeSize" placeholder="Taille sonde (7.5)">`;
     $("srBlock").classList.remove("hidden");
   }
@@ -300,18 +310,18 @@ function renderALR(){
   const gestes = [...document.querySelectorAll(".geste-select")].map(x=>x.value);
   const alrs = new Set();
 
-  gestes.forEach(g=>(ALR_MAP[g]||[]).forEach(a=>alrs.add(a)));
+  gestes.forEach(g => (ALR_MAP[g] || []).forEach(a => alrs.add(a)));
 
   const card = $("alrCard");
 
-  if(!ALR_SPECIALITES.includes(spec) || alrs.size===0){
+  if(!ALR_SPECIALITES.includes(spec) || alrs.size === 0){
     card.classList.add("hidden");
     state.alr = "";
     return;
   }
 
   card.classList.remove("hidden");
-  createChips("alrOptions",[...alrs,"Aucune"],"alr",true);
+  createChips("alrOptions", [...alrs, "Aucune"], "alr", true);
 }
 
 async function copyReport(){
@@ -359,7 +369,9 @@ function renderReport(){
   if(mon.length || state.monitorage.includes("KTA") || state.monitorage.includes("KTC")){
     txt += "INSTALLATION\n";
 
-    if(mon.length) txt += mon.join(", ") + ".\n";
+    if(mon.length){
+      txt += mon.join(", ") + ".\n";
+    }
 
     const kta = $("ktaSite")?.value;
     if(kta){
@@ -378,10 +390,11 @@ function renderReport(){
 
   const ordre = ["Sufentanil","Rémifentanil","Kétamine","Propofol"];
   const meds = ordre.filter(x=>state.induction.includes(x));
-  const curares = state.curare.filter(x=>x!=="Aucun");
+  const curares = state.curare.filter(x=>x !== "Aucun");
 
   if(meds.length){
     txt += "INDUCTION\n";
+
     txt += $("sequenceRapide").checked
       ? "Induction en séquence rapide par "
       : "Induction par ";
@@ -398,15 +411,15 @@ function renderReport(){
   if(state.va){
     txt += "VOIES AÉRIENNES\n";
 
-    if(state.va==="Ventilation spontanée"){
+    if(state.va === "Ventilation spontanée"){
       txt += "Geste effectué en ventilation spontanée.\n";
     }
 
-    if(state.va==="Masque laryngé"){
+    if(state.va === "Masque laryngé"){
       txt += `Mise en place d'un masque laryngé taille ${$("mlSize")?.value || ""}.\n`;
     }
 
-    if(state.va==="Intubation oro-trachéale"){
+    if(state.va === "Intubation oro-trachéale"){
       txt += `Intubation oro-trachéale avec une sonde ${$("tubeSize")?.value || ""}, auscultation symétrique, pression du ballonnet vérifiée au manomètre.\n`;
     }
 
@@ -415,12 +428,12 @@ function renderReport(){
 
   if(state.entretien){
     txt += "ENTRETIEN\n";
-    txt += state.entretien==="Sevoflurane"
+    txt += state.entretien === "Sevoflurane"
       ? "Entretien anesthésique par sévoflurane.\n\n"
       : "Entretien anesthésique par propofol en AIVOC.\n\n";
   }
 
-  if(state.alr && state.alr!=="Aucune"){
+  if(state.alr && state.alr !== "Aucune"){
     txt += "ALR\n";
     txt += `ALR de type ${state.alr} réalisée de manière échoguidée avec ${$("localVolume").value} mL de ${$("localAgent").value}.\n\n`;
   }
@@ -448,7 +461,7 @@ function renderReport(){
   }
 
   txt += "ANTIBIOPROPHYLAXIE\n";
-  txt += state.antibio==="Céfazoline"
+  txt += state.antibio === "Céfazoline"
     ? "Antibioprophylaxie par céfazoline.\n"
     : "Pas d'antibioprophylaxie.\n";
 
@@ -461,8 +474,8 @@ function init(){
   if(!DATA.monitorage.includes("PICC Line")) DATA.monitorage.push("PICC Line");
   if(!DATA.monitorage.includes("Mid Line")) DATA.monitorage.push("Mid Line");
 
-  fillSelect(anesthSelect,DATA.anesthesistes,"Choisir...");
-  fillSelect(specialiteSelect,Object.keys(DATA.specialites));
+  fillSelect(anesthSelect, DATA.anesthesistes, "Choisir...");
+  fillSelect(specialiteSelect, Object.keys(DATA.specialites));
 
   $("chirContainer").innerHTML = "";
   $("gesteContainer").innerHTML = "";
@@ -470,28 +483,28 @@ function init(){
   addChir(false);
   addGeste(false);
 
-  createChips("monitorage",DATA.monitorage,"monitorage");
-  createChips("induction",DATA.induction,"induction");
-  createChips("curare",["Aucun","Atracurium","Rocuronium"],"curare");
+  createChips("monitorage", DATA.monitorage, "monitorage");
+  createChips("induction", DATA.induction, "induction");
+  createChips("curare", ["Aucun","Atracurium","Rocuronium"], "curare");
   createChips(
     "vaOptions",
     ["Ventilation spontanée","Masque laryngé","Intubation oro-trachéale"],
     "va",
     true
   );
-  createChips("entretienOptions",DATA.entretien,"entretien",true);
-  createChips("antibioOptions",DATA.antibio,"antibio",true);
+  createChips("entretienOptions", DATA.entretien, "entretien", true);
+  createChips("antibioOptions", DATA.antibio, "antibio", true);
 
   $("addChirBtn").onclick = ()=>addChir(true);
   $("addGesteBtn").onclick = ()=>addGeste(true);
   $("copyBtn").onclick = copyReport;
 
-  $("sequenceRapide").addEventListener("change",()=>{
+  $("sequenceRapide").addEventListener("change", ()=>{
     updateCurare();
     renderReport();
   });
 
-  $("noradCheck").addEventListener("change",()=>{
+  $("noradCheck").addEventListener("change", ()=>{
     $("noradBlock").classList.toggle("hidden", !$("noradCheck").checked);
     renderReport();
   });
@@ -511,8 +524,8 @@ function init(){
     renderReport();
   };
 
-  document.addEventListener("change",renderReport);
-  document.addEventListener("input",renderReport);
+  document.addEventListener("change", renderReport);
+  document.addEventListener("input", renderReport);
 
   renderReport();
 }

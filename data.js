@@ -31,8 +31,6 @@ const DATA = {
 
   entretien: ["Sevoflurane","Propofol AIVOC"],
 
-  antibio: ["Céfazoline","Non"],
-
   laterality: ["Droite","Gauche","Bilatéral"],
 
   lateralizedGestes: [

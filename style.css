@@ -4,42 +4,36 @@
   padding:0;
 }
 
-html,body{
-  height:100%;
-}
-
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   background:
-    radial-gradient(circle at top right, rgba(181,18,27,.06), transparent 28%),
-    radial-gradient(circle at bottom left, rgba(181,18,27,.035), transparent 30%),
-    linear-gradient(135deg,#f6f7f9 0%,#eef2f6 100%);
-  color:#17212f;
+    radial-gradient(circle at top right, rgba(181,18,27,.07), transparent 30%),
+    linear-gradient(135deg,#f7f8fa 0%,#edf1f5 100%);
+  color:#1f2937;
 }
 
 .app{
-  padding:18px;
+  padding:16px;
   height:100vh;
 }
 
 /* HEADER */
 .topbar{
   position:relative;
-  height:120px;
+  height:104px;
   background:
-    linear-gradient(135deg,#ffffff 0%,#fffdfd 55%,#fff6f7 100%);
-  border:1px solid rgba(181,18,27,.12);
-  border-radius:30px;
-  padding:0 34px;
+    linear-gradient(135deg,#ffffff 0%,#fffdfd 55%,#fff4f5 100%);
+  border:1px solid #ead7da;
+  border-radius:28px;
+  padding:0 28px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:18px;
+  margin-bottom:14px;
   overflow:hidden;
   box-shadow:
-    0 20px 40px rgba(17,24,39,.08),
-    0 6px 14px rgba(17,24,39,.05),
-    inset 0 1px 0 rgba(255,255,255,.95);
+    0 14px 32px rgba(17,24,39,.08),
+    inset 0 1px 0 rgba(255,255,255,.9);
 }
 
 .topbar::before{
@@ -55,21 +49,22 @@ body{
 .topbar::after{
   content:"";
   position:absolute;
-  right:-90px;
-  top:-110px;
-  width:280px;
-  height:280px;
+  right:-85px;
+  top:-95px;
+  width:260px;
+  height:260px;
   border-radius:50%;
   background:
-    radial-gradient(circle, rgba(181,18,27,.12), rgba(181,18,27,.04) 45%, transparent 72%);
+    radial-gradient(circle, rgba(181,18,27,.12), rgba(181,18,27,.04) 48%, transparent 72%);
 }
 
+/* BRAND */
 .brand{
   position:relative;
   z-index:2;
   display:flex;
   align-items:center;
-  gap:28px;
+  gap:26px;
 }
 
 .brand-logo{
@@ -77,9 +72,9 @@ body{
   width:auto;
   object-fit:contain;
   filter:
-    drop-shadow(0 12px 20px rgba(0,0,0,.10))
+    drop-shadow(0 10px 18px rgba(0,0,0,.12))
     drop-shadow(0 3px 6px rgba(181,18,27,.12));
-  transition:.2s ease;
+  transition:.18s ease;
 }
 
 .brand-logo:hover{
@@ -90,49 +85,50 @@ body{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding-left:26px;
-  border-left:1px solid rgba(181,18,27,.14);
+  padding-left:24px;
+  border-left:1px solid rgba(181,18,27,.18);
 }
 
 .brand h1{
-  font-size:32px;
+  font-size:30px;
   line-height:1;
-  font-weight:780;
+  font-weight:760;
   color:#111827;
-  letter-spacing:-0.04em;
+  letter-spacing:-0.035em;
 }
 
 .brand p{
-  margin-top:10px;
+  margin-top:8px;
   font-size:12px;
-  color:#98141c;
-  font-weight:800;
-  letter-spacing:.11em;
+  color:#8f1118;
+  font-weight:700;
+  letter-spacing:.09em;
   text-transform:uppercase;
 }
 
+/* BUTTON */
 #copyBtn{
   position:relative;
   z-index:2;
   border:none;
   background:linear-gradient(135deg,#b5121b 0%,#8f1118 100%);
   color:#fff;
-  padding:14px 24px;
-  border-radius:16px;
+  padding:12px 22px;
+  border-radius:15px;
   cursor:pointer;
   font-weight:700;
   font-size:13px;
   box-shadow:
-    0 16px 28px rgba(181,18,27,.22),
+    0 12px 24px rgba(181,18,27,.24),
     inset 0 1px 0 rgba(255,255,255,.18);
-  transition:.18s ease;
+  transition:.15s ease;
 }
 
 #copyBtn:hover{
-  transform:translateY(-2px);
+  transform:translateY(-1px);
   box-shadow:
-    0 22px 34px rgba(181,18,27,.28),
-    inset 0 1px 0 rgba(255,255,255,.22);
+    0 16px 30px rgba(181,18,27,.30),
+    inset 0 1px 0 rgba(255,255,255,.2);
 }
 
 #copyBtn:active{
@@ -142,52 +138,40 @@ body{
 /* LAYOUT */
 .layout{
   display:grid;
-  grid-template-columns:.82fr 1.2fr 1.28fr;
-  gap:18px;
-  height:calc(100vh - 156px);
+  grid-template-columns:.82fr 1.2fr 1.25fr;
+  gap:16px;
+  height:calc(100vh - 134px);
 }
 
 /* PANELS */
 .panel{
-  background:rgba(255,255,255,.82);
-  backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,.75);
-  border-radius:26px;
-  padding:18px;
+  background:#fff;
+  border-radius:22px;
+  padding:16px;
   box-shadow:
-    0 18px 38px rgba(17,24,39,.07),
-    0 4px 10px rgba(17,24,39,.04);
+    0 10px 24px rgba(0,0,0,.05),
+    0 2px 4px rgba(0,0,0,.04);
   overflow:auto;
 }
 
-.panel::-webkit-scrollbar{
-  width:8px;
-}
-
-.panel::-webkit-scrollbar-thumb{
-  background:#d7dce3;
-  border-radius:999px;
-}
-
 .panel-title{
-  font-size:18px;
+  font-size:17px;
   color:#b5121b;
-  font-weight:800;
-  margin-bottom:16px;
-  letter-spacing:-.02em;
+  font-weight:700;
+  margin-bottom:14px;
 }
 
 /* FIELDS */
 .field{
-  margin-bottom:13px;
+  margin-bottom:11px;
 }
 
 label{
   display:block;
   font-size:11px;
-  color:#667085;
-  margin-bottom:6px;
-  font-weight:700;
+  color:#6b7280;
+  margin-bottom:5px;
+  font-weight:650;
   letter-spacing:.02em;
 }
 
@@ -195,26 +179,20 @@ input,
 select,
 textarea{
   width:100%;
-  border:1px solid #dbe3ec;
-  border-radius:14px;
-  padding:11px 13px;
+  border:1px solid #dde3ea;
+  border-radius:12px;
+  padding:10px 12px;
   font-size:12px;
   background:#fff;
   outline:none;
-  transition:.18s ease;
-}
-
-input:hover,
-select:hover,
-textarea:hover{
-  border-color:#cdd6e0;
+  transition:.15s ease;
 }
 
 input:focus,
 select:focus,
 textarea:focus{
   border-color:#b5121b;
-  box-shadow:0 0 0 4px rgba(181,18,27,.08);
+  box-shadow:0 0 0 3px rgba(181,18,27,.08);
 }
 
 .inline{
@@ -233,60 +211,54 @@ textarea:focus{
   width:100%;
   border:none;
   border-radius:999px;
-  padding:10px 12px;
-  background:linear-gradient(180deg,#fff2f3,#f9e6e8);
+  padding:9px 12px;
+  background:#f8e8ea;
   color:#8f1118;
-  font-weight:700;
+  font-weight:650;
   cursor:pointer;
   transition:.15s;
-  border:1px solid rgba(181,18,27,.08);
 }
 
 .action-btn:hover{
-  transform:translateY(-1px);
-  background:linear-gradient(180deg,#ffecee,#f5dadd);
+  background:#efd1d5;
 }
 
 .remove-btn{
   border:none;
   border-radius:999px;
-  padding:8px 12px;
+  padding:7px 11px;
   background:#b5121b;
   color:#fff;
   cursor:pointer;
   font-size:12px;
-  box-shadow:0 8px 14px rgba(181,18,27,.18);
 }
 
 /* MIDDLE */
 .middle-panel{
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:10px;
 }
 
 .mini-card{
-  background:linear-gradient(180deg,#ffffff 0%,#fcfcfd 100%);
-  border:1px solid #eceff4;
-  border-radius:20px;
-  padding:14px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.95),
-    0 8px 16px rgba(17,24,39,.03);
+  background:linear-gradient(180deg,#ffffff 0%,#fbfbfc 100%);
+  border:1px solid #eceef2;
+  border-radius:17px;
+  padding:12px;
 }
 
 .mini-card h3{
   font-size:12px;
-  margin-bottom:10px;
+  margin-bottom:9px;
   color:#111827;
-  font-weight:800;
+  font-weight:700;
 }
 
 .checkbox-row{
   display:flex;
   align-items:center;
   gap:9px;
-  margin-top:8px;
+  margin-top:6px;
   cursor:pointer;
 }
 
@@ -298,32 +270,29 @@ textarea:focus{
 .chip-zone{
   display:flex;
   flex-wrap:wrap;
-  gap:8px;
+  gap:7px;
 }
 
 .chip{
-  border:1px solid #d8e0ea;
+  border:1px solid #d8dee6;
   background:#fff;
   border-radius:999px;
-  padding:8px 12px;
+  padding:7px 11px;
   font-size:11px;
   cursor:pointer;
   user-select:none;
-  transition:.16s ease;
-  font-weight:600;
+  transition:.15s ease;
 }
 
 .chip:hover{
-  transform:translateY(-1px);
-  border-color:#c7d0db;
-  box-shadow:0 6px 12px rgba(0,0,0,.04);
+  border-color:#c9cfd8;
 }
 
 .chip.active{
   border-color:#b5121b;
-  background:linear-gradient(180deg,#fff1f2,#fde7e9);
+  background:#f8e8ea;
   color:#8f1118;
-  box-shadow:0 6px 14px rgba(181,18,27,.10);
+  font-weight:600;
 }
 
 .hidden{
@@ -336,8 +305,6 @@ textarea:focus{
 
 /* REPORT */
 .report-panel{
-  position:sticky;
-  top:0;
   background:linear-gradient(180deg,#ffffff 0%,#fffdfb 100%);
 }
 
@@ -346,10 +313,9 @@ textarea:focus{
   resize:none;
   border:none;
   background:transparent;
-  line-height:1.7;
+  line-height:1.6;
   font-size:13px;
   color:#111827;
-  font-family:"SF Mono","Menlo","Consolas",monospace;
 }
 
 #report:focus{
@@ -363,4 +329,4 @@ textarea:focus{
   display:flex;
   flex-direction:column;
   gap:6px;
-} 
+}

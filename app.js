@@ -334,6 +334,11 @@ fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
     ["Paracétamol", "Kétoprofène", "Néfopam", "Tramadol", "Morphine"],
     "analgesie"
   );
+    createChips(
+    "reveilOptions",
+    ["Réveil calme", "Extubation sur table", "Patient laissé intubé", "Ventilation spontanée"],
+    "reveil"
+  );
 
   renderAntibio();
 

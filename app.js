@@ -15,6 +15,7 @@ const state = {
   antibio: "",
   alr: [],
   neuraxial: [],
+  reveil: [],
   peropForced: false
 };
 

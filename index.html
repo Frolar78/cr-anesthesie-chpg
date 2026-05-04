@@ -198,7 +198,32 @@
           >
         </div>
       </div>
+      <div class="mini-card" id="suitesCard">
+        <h3>Suites immédiates</h3>
 
+        <div class="chip-zone" id="reveilOptions"></div>
+
+        <div class="field" style="margin-top:10px;">
+          <label>Destination post-opératoire</label>
+          <select id="destinationPostop">
+            <option value="">Choisir...</option>
+            <option>SSPI</option>
+            <option>Réanimation</option>
+            <option>USCC</option>
+            <option>Retour en secteur d’hospitalisation</option>
+          </select>
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="stableHemodynamique" checked>
+          <span>Stable sur le plan hémodynamique</span>
+        </label>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="stableRespiratoire" checked>
+          <span>Stable sur le plan respiratoire</span>
+        </label>
+      </div>
     </section>
 
     <section class="panel report-panel">

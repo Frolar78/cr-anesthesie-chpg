@@ -197,6 +197,42 @@ function renderReport(){
       ? `Antibioprophylaxie par ${state.antibio} ${dose}.\n`
       : `Antibioprophylaxie par ${state.antibio}.\n`;
   }
+  const reveil = state.reveil || [];
+  const destination = $("destinationPostop")?.value;
+  const stableHemo = $("stableHemodynamique")?.checked;
+  const stableRespi = $("stableRespiratoire")?.checked;
 
+  if(reveil.length || destination){
+    txt += "SUITES IMMÉDIATES\n";
+
+    if(reveil.length){
+      txt += reveil.join(". ") + ".\n";
+    }
+
+    if(destination){
+      if(destination === "SSPI"){
+        txt += "Patient transféré en SSPI";
+      }else if(destination === "Réanimation"){
+        txt += "Patient transféré en réanimation";
+      }else if(destination === "USCC"){
+        txt += "Patient transféré en USCC";
+      }else{
+        txt += "Patient transféré en secteur d’hospitalisation";
+      }
+
+      const stabilites = [];
+
+      if(stableHemo) stabilites.push("stable sur le plan hémodynamique");
+      if(stableRespi) stabilites.push("stable sur le plan respiratoire");
+
+      if(stabilites.length){
+        txt += ", " + stabilites.join(" et ");
+      }
+
+      txt += ".\n";
+    }
+
+    txt += "\n";
+  }
   report.value = txt;
 }

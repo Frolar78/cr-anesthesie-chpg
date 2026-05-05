@@ -33,10 +33,9 @@
         <input type="date" id="date">
       </div>
 
-      <div class="field">
-        <label>Anesthésiste</label>
-        <select id="anesthesiste"></select>
-      </div>
+     <label>Anesthésiste</label>
+<div id="anesthContainer"></div>
+<button class="action-btn" id="addAnesthBtn" type="button">+ Anesthésiste</button>
 
       <div class="field">
         <label>Spécialité</label>
@@ -150,21 +149,24 @@
       </button>
 
       <div class="mini-card" id="peropCard">
-        <h3>Per-opératoire</h3>
+        <div class="row-inline">
+  <h3>Per-opératoire</h3>
+  <button class="remove-btn" id="removePeropBtn" type="button">–</button>
+</div>
 
         <div class="field">
           <label>Diurèse (mL)</label>
-          <input type="number" id="diurese" placeholder="Ex : 450">
+          <input type="number" id="diurese">
         </div>
 
         <div class="field">
           <label>Saignement (mL)</label>
-          <input type="number" id="saignement" placeholder="Ex : 200">
+         <input type="number" id="saignement" placeholder="Ex : 200">
         </div>
 
         <div class="field">
           <label>Remplissage</label>
-          <input type="text" id="remplissage" placeholder="Ex : 1500 mL cristalloïdes">
+          <input type="text" id="remplissage">
         </div>
 
         <label class="checkbox-row">
@@ -173,7 +175,7 @@
         </label>
 
         <div id="noradBlock" class="hidden" style="margin-top:10px;">
-          <input type="text" id="noradText" placeholder="Ex : maximum 0,08 µg/kg/min">
+          <input type="text" id="noradText">
         </div>
 
         <label class="checkbox-row">

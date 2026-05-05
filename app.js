@@ -16,6 +16,7 @@ const state = {
   alr: [],
   neuraxial: [],
   reveil: [],
+  transfusion: [],
   peropForced: false,
   peropHidden: false
 };

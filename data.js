@@ -37,6 +37,7 @@ const DATA = {
   "PTH",
   "PTG",
   "Hallux valgus",
+  "Clou gamma",
   "Varices",
   "Canal carpien",
   "Ostéosynthèse poignet",

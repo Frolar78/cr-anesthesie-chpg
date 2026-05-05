@@ -167,14 +167,53 @@ function buildGesteLabel(block){
     geste = block.querySelector(".custom-geste")?.value || "Autre";
   }
 
-  const lat = block.querySelector(".laterality-select")?.value;
+    const lat = block.querySelector(".laterality-select")?.value;
 
   if(lat){
-    const map = {
-      "Droite":"droite",
+    const feminin = [
+      "PTH",
+      "PTG",
+      "Ostéosynthèse cheville",
+      "Ostéosynthèse poignet",
+      "Hernie inguinale",
+      "Colectomie",
+      "Annexectomie",
+      "Kystectomie ovarienne",
+      "Cataracte",
+      "Prothèse d'épaule",
+      "Arthroscopie de genou",
+      "Arthroscopie d'épaule",
+      "Mastectomie partielle",
+      "Mastectomie totale"
+    ];
+
+    const pluriel = ["Varices"];
+
+    let map = {
+      "Droite":"droit",
       "Gauche":"gauche",
       "Bilatéral":"bilatéral"
     };
+
+    if(feminin.includes(geste)){
+      map = {
+        "Droite":"droite",
+        "Gauche":"gauche",
+        "Bilatéral":"bilatérale"
+      };
+    }
+
+    if(pluriel.includes(geste)){
+      map = {
+        "Droite":"droites",
+        "Gauche":"gauches",
+        "Bilatéral":"bilatérales"
+      };
+    }
+
+    if(geste === "Varices"){
+      geste = "Stripping de varices";
+    }
 
     geste += " " + map[lat];
   }

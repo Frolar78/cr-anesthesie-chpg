@@ -206,6 +206,13 @@ function renderTransfusionDetails(){
   const isOther = state.transfusion.includes("Autre");
 
   $("transfusionOtherText").classList.toggle("hidden", !isOther);
+  $("transfusionQuantities").classList.toggle("hidden", state.transfusion.length === 0);
+
+  if(!state.transfusion.includes("CGR")) $("qteCGR").value = "";
+  if(!state.transfusion.includes("PFC")) $("qtePFC").value = "";
+  if(!state.transfusion.includes("Plaquettes")) $("qtePlaquettes").value = "";
+  if(!state.transfusion.includes("Fibrinogène")) $("qteFibrinogene").value = "";
+  if(!state.transfusion.includes("Calcium")) $("qteCalcium").value = "";
 
   if(!isOther){
     $("transfusionOtherText").value = "";

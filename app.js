@@ -410,6 +410,7 @@ $("removePeropBtn").onclick = ()=>{
 
   specialiteSelect.onchange = ()=>{
     state.peropForced = false;
+    state.peropHidden = false;
     updateChirurgiens();
 
     document.querySelectorAll(".field").forEach(block=>{

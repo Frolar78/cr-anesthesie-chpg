@@ -431,6 +431,22 @@ fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
   ["CGR", "PFC", "Plaquettes", "Fibrinogène", "PCC", "Calcium"],
   "transfusion"
 );
+$("transfusionToggle").onclick = ()=>{
+  state.transfusionActive = !state.transfusionActive;
+  $("transfusionToggle").classList.toggle("active", state.transfusionActive);
+  $("transfusionBlock").classList.toggle("hidden", !state.transfusionActive);
+
+  if(!state.transfusionActive){
+    state.transfusion = [];
+    createChips(
+      "transfusionOptions",
+      ["CGR", "PFC", "Plaquettes", "Fibrinogène", "PCC", "Calcium"],
+      "transfusion"
+    );
+  }
+
+  renderReport();
+};
 
   renderAntibio();
 

@@ -189,14 +189,14 @@ if(peropVisible && (diurese || saignement || remplissage || norad || incident ||
   }
 
   if(state.transfusion.includes("Fibrinogène")){
-    const q = $("qteFibrinogene").value.trim();
-    transf.push(q ? `Fibrinogène ${q}` : "Fibrinogène");
-  }
+  const q = $("qteFibrinogene").value;
+  transf.push(q ? `Fibrinogène ${q} g` : "Fibrinogène");
+}
 
-  if(state.transfusion.includes("Calcium")){
-    const q = $("qteCalcium").value.trim();
-    transf.push(q ? `Calcium ${q}` : "Calcium");
-  }
+if(state.transfusion.includes("Calcium")){
+  const q = $("qteCalcium").value;
+  transf.push(q ? `Calcium ${q} g` : "Calcium");
+}
 
   if(state.transfusion.includes("Autre")){
     const autre = $("transfusionOtherText").value.trim();

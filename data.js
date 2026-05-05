@@ -34,12 +34,24 @@ const DATA = {
   laterality: ["Droite","Gauche","Bilatéral"],
 
   lateralizedGestes: [
-    "PTH","PTG","Hallux valgus","Varices",
-    "Canal carpien","Ostéosynthèse poignet","Ostéosynthèse cheville",
-    "Hernie inguinale","Colectomie","Annexectomie",
-    "Kystectomie ovarienne","Cataracte",
-    "Prothèse d'épaule","Arthroscopie de genou","Arthroscopie d'épaule"
-  ],
+  "PTH",
+  "PTG",
+  "Hallux valgus",
+  "Varices",
+  "Canal carpien",
+  "Ostéosynthèse poignet",
+  "Ostéosynthèse cheville",
+  "Hernie inguinale",
+  "Colectomie",
+  "Annexectomie",
+  "Kystectomie ovarienne",
+  "Cataracte",
+  "Prothèse d'épaule",
+  "Arthroscopie de genou",
+  "Arthroscopie d'épaule",
+  "Mastectomie partielle",
+  "Mastectomie totale"
+],
 
   textGestes: [
     "Lobectomie pulmonaire",

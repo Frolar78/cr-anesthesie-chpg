@@ -242,5 +242,6 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
 }
 
 function buildDPIReport(){
-  return report.value;
+  return report.value.replace("INTERVENTION\n", "");
+}
 }

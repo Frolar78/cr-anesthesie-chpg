@@ -204,9 +204,16 @@ function renderPeropVisibility(){
 }
 function renderTransfusionDetails(){
   const isOther = state.transfusion.includes("Autre");
+  const hasProduct = state.transfusion.some(x => x !== "Autre");
 
   $("transfusionOtherText").classList.toggle("hidden", !isOther);
-  $("transfusionQuantities").classList.toggle("hidden", state.transfusion.length === 0);
+  $("transfusionQuantities").classList.toggle("hidden", !hasProduct);
+
+  $("qteCGR").classList.toggle("hidden", !state.transfusion.includes("CGR"));
+  $("qtePFC").classList.toggle("hidden", !state.transfusion.includes("PFC"));
+  $("qtePlaquettes").classList.toggle("hidden", !state.transfusion.includes("Plaquettes"));
+  $("qteFibrinogene").classList.toggle("hidden", !state.transfusion.includes("Fibrinogène"));
+  $("qteCalcium").classList.toggle("hidden", !state.transfusion.includes("Calcium"));
 
   if(!state.transfusion.includes("CGR")) $("qteCGR").value = "";
   if(!state.transfusion.includes("PFC")) $("qtePFC").value = "";

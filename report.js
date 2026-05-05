@@ -164,7 +164,7 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
   const incident = $("incidentCheck").checked;
   const incidentText = $("incidentText").value;
 
-  if(peropVisible && (diurese || saignement || remplissage || norad || incident)){
+if(peropVisible && (diurese || saignement || remplissage || norad || incident || (state.transfusionActive && state.transfusion.length))){
     txt += "PER-OPÉRATOIRE\n";
 
     if(diurese) txt += `Diurèse : ${diurese} mL.\n`;

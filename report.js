@@ -171,15 +171,36 @@ if(peropVisible && (diurese || saignement || remplissage || norad || incident ||
     if(saignement) txt += `Saignement estimé : ${saignement} mL.\n`;
     if(remplissage) txt += `Remplissage : ${remplissage}.\n`;
     if(state.transfusionActive && state.transfusion.length){
-  let transf = [...state.transfusion];
+  const transf = [];
 
-  if(transf.includes("Autre")){
-    transf = transf.filter(x => x !== "Autre");
+  if(state.transfusion.includes("CGR")){
+    const q = $("qteCGR").value;
+    transf.push(q ? `${q} CGR` : "CGR");
+  }
 
+  if(state.transfusion.includes("PFC")){
+    const q = $("qtePFC").value;
+    transf.push(q ? `${q} PFC` : "PFC");
+  }
+
+  if(state.transfusion.includes("Plaquettes")){
+    const q = $("qtePlaquettes").value;
+    transf.push(q ? `${q} Plaquettes` : "Plaquettes");
+  }
+
+  if(state.transfusion.includes("Fibrinogène")){
+    const q = $("qteFibrinogene").value.trim();
+    transf.push(q ? `Fibrinogène ${q}` : "Fibrinogène");
+  }
+
+  if(state.transfusion.includes("Calcium")){
+    const q = $("qteCalcium").value.trim();
+    transf.push(q ? `Calcium ${q}` : "Calcium");
+  }
+
+  if(state.transfusion.includes("Autre")){
     const autre = $("transfusionOtherText").value.trim();
-    if(autre){
-      transf.push(autre);
-    }
+    if(autre) transf.push(autre);
   }
 
   if(transf.length){

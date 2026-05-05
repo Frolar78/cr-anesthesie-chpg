@@ -317,7 +317,7 @@ function renderPeropVisibility(){
 
 async function copyReport(){
   try{
-    await navigator.clipboard.writeText(report.value);
+   await navigator.clipboard.writeText(buildDPIReport());
   }catch{
     report.select();
     document.execCommand("copy");

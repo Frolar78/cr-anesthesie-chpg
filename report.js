@@ -170,6 +170,9 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
     if(diurese) txt += `Diurèse : ${diurese} mL.\n`;
     if(saignement) txt += `Saignement estimé : ${saignement} mL.\n`;
     if(remplissage) txt += `Remplissage : ${remplissage}.\n`;
+    if(state.transfusionActive && state.transfusion.length){
+  txt += `Transfusion peropératoire : ${state.transfusion.join(", ")}.\n`;
+}
 
     if(norad){
       txt += "Support vasopresseur peropératoire par noradrénaline 16 µg/mL";

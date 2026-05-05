@@ -44,7 +44,7 @@ function createChips(id, list, key, single=false){
       if(key === "ventilation") renderVentilationDetails();
       if(key === "neuraxial") renderNeuraxialDetails();
       if(key === "antibio") renderAntibioDetails();
-
+if(key === "transfusion") renderTransfusionDetails();
       renderALR();
       renderPeropVisibility();
       renderReport();
@@ -200,5 +200,14 @@ function renderPeropVisibility(){
   }else{
     $("peropCard").classList.remove("hidden");
     $("showPeropBtn").classList.add("hidden");
+  }
+}
+function renderTransfusionDetails(){
+  const isOther = state.transfusion.includes("Autre");
+
+  $("transfusionOtherText").classList.toggle("hidden", !isOther);
+
+  if(!isOther){
+    $("transfusionOtherText").value = "";
   }
 }

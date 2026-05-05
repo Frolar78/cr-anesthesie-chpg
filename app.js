@@ -428,7 +428,7 @@ fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
   );
   createChips(
   "transfusionOptions",
-  ["CGR", "PFC", "Plaquettes", "Fibrinogène", "PCC", "Calcium"],
+  ["CGR", "PFC", "Plaquettes", "Fibrinogène", "Calcium", "Autre"],
   "transfusion"
 );
 $("transfusionToggle").onclick = ()=>{
@@ -439,10 +439,10 @@ $("transfusionToggle").onclick = ()=>{
   if(!state.transfusionActive){
     state.transfusion = [];
     createChips(
-      "transfusionOptions",
-      ["CGR", "PFC", "Plaquettes", "Fibrinogène", "PCC", "Calcium"],
-      "transfusion"
-    );
+  "transfusionOptions",
+  ["CGR", "PFC", "Plaquettes", "Fibrinogène", "Calcium", "Autre"],
+  "transfusion"
+);
   }
 
   renderReport();

@@ -204,11 +204,12 @@ function buildGesteLabel(block){
 };
 
     if(feminin.includes(geste)){
-      map = {
-        "Droite":"droite",
-        "Gauche":"gauche",
-        "Bilatéral":"bilatérale"
-      };
+     map = {
+  "Droite":"droite",
+  "Gauche":"gauche",
+  "Bilatéral":"bilatérale",
+  "Totale":"totale"
+};
     }
 
     if(pluriel.includes(geste)){

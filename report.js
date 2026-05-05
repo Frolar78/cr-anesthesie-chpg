@@ -171,7 +171,20 @@ if(peropVisible && (diurese || saignement || remplissage || norad || incident ||
     if(saignement) txt += `Saignement estimé : ${saignement} mL.\n`;
     if(remplissage) txt += `Remplissage : ${remplissage}.\n`;
     if(state.transfusionActive && state.transfusion.length){
-  txt += `Transfusion peropératoire : ${state.transfusion.join(", ")}.\n`;
+  let transf = [...state.transfusion];
+
+  if(transf.includes("Autre")){
+    transf = transf.filter(x => x !== "Autre");
+
+    const autre = $("transfusionOtherText").value.trim();
+    if(autre){
+      transf.push(autre);
+    }
+  }
+
+  if(transf.length){
+    txt += `Transfusion peropératoire : ${transf.join(", ")}.\n`;
+  }
 }
 
     if(norad){

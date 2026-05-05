@@ -107,7 +107,7 @@ body{
 }
 
 /* BUTTON */
-#copyBtn{
+#copyBtn, #resetBtn{
   position:relative;
   z-index:2;
   border:none;

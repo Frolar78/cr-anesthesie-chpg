@@ -136,10 +136,17 @@ function renderGesteExtra(wrapper, geste){
   const extra = wrapper.querySelector(".geste-extra");
   extra.innerHTML = "";
 
-  if(DATA.lateralizedGestes.includes(geste)){
+    if(DATA.lateralizedGestes.includes(geste)){
     const s = document.createElement("select");
     s.className = "laterality-select";
-    fillSelect(s, DATA.laterality, "Latéralité...");
+
+    let options = DATA.laterality;
+
+    if(geste === "Colectomie"){
+      options = ["Droite", "Gauche", "Totale"];
+    }
+
+    fillSelect(s, options, "Latéralité...");
     extra.appendChild(s);
   }
 

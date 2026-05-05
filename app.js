@@ -197,10 +197,11 @@ function buildGesteLabel(block){
     const pluriel = ["Varices"];
 
     let map = {
-      "Droite":"droit",
-      "Gauche":"gauche",
-      "Bilatéral":"bilatéral"
-    };
+  "Droite":"droit",
+  "Gauche":"gauche",
+  "Bilatéral":"bilatéral",
+  "Totale":"total"
+};
 
     if(feminin.includes(geste)){
       map = {

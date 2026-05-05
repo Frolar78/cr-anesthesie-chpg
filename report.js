@@ -1,6 +1,8 @@
 function renderReport(){
   const date = formatDateFR($("date").value);
-  const anesth = anesthSelect.value;
+const anesths = [...document.querySelectorAll(".anesthesiste")]
+  .map(x=>x.value)
+  .filter(Boolean);
 
   const chirs = [...document.querySelectorAll(".chirurgien")]
     .map(x=>x.value)
@@ -13,7 +15,7 @@ function renderReport(){
 
   let txt = "INTERVENTION\n";
   txt += `Date : ${date}\n`;
-  txt += `Anesthésiste : ${anesth}\n`;
+  txt += `Anesthésiste : ${anesths.join(", ")}\n`;
   txt += `Chirurgien : ${chirs.join(", ")}\n`;
   txt += `Intervention : ${gestes.join(" associée à ")}\n\n`;
 
@@ -86,9 +88,9 @@ function renderReport(){
       txt += "Geste effectué en ventilation spontanée.\n";
     }
 
-    if(state.va === "Masque laryngé"){
-      txt += `Mise en place d'un masque laryngé taille ${$("mlSize")?.value || ""}.\n`;
-    }
+   if(state.va === "Masque laryngé"){
+  txt += `Mise en place atraumatique d'un masque laryngé taille ${$("mlSize")?.value || ""}, absence de bris dentaire.\n`;
+}
 
     if(state.va === "Intubation oro-trachéale"){
       if(!$("sequenceRapide").checked && state.ventilation){

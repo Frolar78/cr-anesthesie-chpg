@@ -256,7 +256,7 @@ function buildDPIReport(){
   ];
 
   titres.forEach(t=>{
-    txt = txt.replaceAll(t + "\n", "");
+    txt = txt.split(t + "\n").join("");
   });
 
   txt = txt

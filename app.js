@@ -425,6 +425,11 @@ fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
     ["Réveil calme", "Extubation sur table", "Patient laissé intubé", "Ventilation spontanée"],
     "reveil"
   );
+  createChips(
+  "transfusionOptions",
+  ["CGR", "PFC", "Plaquettes", "Fibrinogène", "PCC", "Calcium"],
+  "transfusion"
+);
 
   renderAntibio();
 

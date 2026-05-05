@@ -330,3 +330,8 @@ textarea:focus{
   flex-direction:column;
   gap:6px;
 }
+.topbar-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}

@@ -108,6 +108,7 @@ function addGeste(removable=true){
     wrapper.querySelector(".remove-btn").onclick = ()=>{
       wrapper.remove();
       state.peropForced = false;
+      state.peropHidden = false;
       renderALR();
       renderAntibio();
       renderPeropVisibility();
@@ -122,6 +123,7 @@ function addGeste(removable=true){
 
   sel.addEventListener("change", ()=>{
     state.peropForced = false;
+    state.peropHidden = false;
     renderGesteExtra(wrapper, sel.value);
     renderALR();
     renderAntibio();

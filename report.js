@@ -238,3 +238,32 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
   }
   report.value = txt;
 }
+function buildDPIReport(){
+  let txt = report.value;
+
+  const titres = [
+    "INTERVENTION",
+    "INSTALLATION",
+    "INDUCTION",
+    "VOIES AÉRIENNES",
+    "ENTRETIEN",
+    "ANALGÉSIE",
+    "ALR PÉRIPHÉRIQUE",
+    "ALR NEURAXIALE",
+    "PER-OPÉRATOIRE",
+    "ANTIBIOPROPHYLAXIE",
+    "SUITES IMMÉDIATES"
+  ];
+
+  titres.forEach(t=>{
+    txt = txt.replaceAll(t + "\n", "");
+  });
+
+  txt = txt
+    .split("\n")
+    .map(l=>l.trim())
+    .filter(Boolean)
+    .join("\n");
+
+  return txt;
+}

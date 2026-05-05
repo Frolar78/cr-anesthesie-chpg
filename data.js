@@ -11,7 +11,7 @@ const DATA = {
     "Dr Jean-Philippe GUERIN",
     "Dr Lucile LEVASSEUR",
     "Dr Léa LEY-GHIGLIONE",
-    "Dr Riyad MENADE",
+    "Dr Ruyade MENADE",
     "Dr Nicolas OPPRECHT",
     "Dr Nicolas PARTOUCHE",
     "Pr Bertrand PRUNET",

@@ -236,12 +236,9 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
 
     txt += "\n";
   }
-  report.value = txt;
-}
-  report.value = txt;
+    report.value = txt;
 }
 
 function buildDPIReport(){
-  return report.value.replace("INTERVENTION\n", "");
-}
+  return report.value;
 }

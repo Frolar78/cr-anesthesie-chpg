@@ -240,5 +240,19 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
 }
 
 function buildDPIReport(){
-  return report.value;
+  let txt = report.value;
+
+  txt = txt.split("INTERVENTION\n").join("");
+  txt = txt.split("INSTALLATION\n").join("");
+  txt = txt.split("INDUCTION\n").join("");
+  txt = txt.split("VOIES AÉRIENNES\n").join("");
+  txt = txt.split("ENTRETIEN\n").join("");
+  txt = txt.split("ANALGÉSIE\n").join("");
+  txt = txt.split("ALR PÉRIPHÉRIQUE\n").join("");
+  txt = txt.split("ALR NEURAXIALE\n").join("");
+  txt = txt.split("PER-OPÉRATOIRE\n").join("");
+  txt = txt.split("ANTIBIOPROPHYLAXIE\n").join("");
+  txt = txt.split("SUITES IMMÉDIATES\n").join("");
+
+  return txt;
 }

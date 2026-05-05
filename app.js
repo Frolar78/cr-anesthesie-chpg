@@ -1,7 +1,7 @@
 const $ = id => document.getElementById(id);
 
 const report = $("report");
-const anesthSelect = $("anesthesiste");
+const anesthSelect = null;
 const specialiteSelect = $("specialite");
 
 const state = {
@@ -16,7 +16,8 @@ const state = {
   alr: [],
   neuraxial: [],
   reveil: [],
-  peropForced: false
+  peropForced: false,
+  peropHidden: false
 };
 
 function initDate(){
@@ -32,6 +33,32 @@ function formatDateFR(v){
 
   const parts = v.split("-");
   return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
+function updateAnesthesistes(){
+  document.querySelectorAll(".anesthesiste").forEach(sel=>{
+    const current = sel.value;
+    fillSelect(sel, DATA.anesthesistes, "Choisir...");
+    if(DATA.anesthesistes.includes(current)) sel.value = current;
+  });
+}
+
+function addAnesth(removable=true){
+  const row = document.createElement("div");
+  row.className = "field row-inline";
+
+  row.innerHTML = removable
+    ? `<select class="anesthesiste"></select><button class="remove-btn" type="button">–</button>`
+    : `<select class="anesthesiste"></select>`;
+
+  if(removable){
+    row.querySelector(".remove-btn").onclick = ()=>{
+      row.remove();
+      renderReport();
+    };
+  }
+
+  $("anesthContainer").appendChild(row);
+  updateAnesthesistes();
 }
 
 function updateChirurgiens(){
@@ -277,7 +304,7 @@ function shouldHidePeropByDefault(){
 function renderPeropVisibility(){
   const hideByDefault = shouldHidePeropByDefault();
 
-  if(hideByDefault && !state.peropForced){
+  if(state.peropHidden || (hideByDefault && !state.peropForced)){
     $("peropCard").classList.add("hidden");
     $("showPeropBtn").classList.remove("hidden");
   }else{
@@ -307,7 +334,8 @@ function init(){
   if(!DATA.monitorage.includes("PICC Line")) DATA.monitorage.push("PICC Line");
   if(!DATA.monitorage.includes("Mid Line")) DATA.monitorage.push("Mid Line");
 
-fillSelect(anesthSelect, DATA.anesthesistes, "Choisir...");
+$("anesthContainer").innerHTML = "";
+addAnesth(false);
 fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
   
   $("chirContainer").innerHTML = "";
@@ -342,15 +370,24 @@ fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
 
   renderAntibio();
 
-  $("addChirBtn").onclick = ()=>addChir(true);
-  $("addGesteBtn").onclick = ()=>addGeste(true);
-  $("copyBtn").onclick = copyReport;
+$("addAnesthBtn").onclick = ()=>addAnesth(true);
+$("addChirBtn").onclick = ()=>addChir(true);
+$("addGesteBtn").onclick = ()=>addGeste(true);
+$("copyBtn").onclick = copyReport;
 
-  $("showPeropBtn").onclick = ()=>{
-    state.peropForced = true;
-    renderPeropVisibility();
-    renderReport();
-  };
+$("showPeropBtn").onclick = ()=>{
+  state.peropForced = true;
+  state.peropHidden = false;
+  renderPeropVisibility();
+  renderReport();
+};
+
+$("removePeropBtn").onclick = ()=>{
+  state.peropHidden = true;
+  state.peropForced = false;
+  renderPeropVisibility();
+  renderReport();
+};
 
   $("sequenceRapide").addEventListener("change", handleSequenceRapideChange);
 

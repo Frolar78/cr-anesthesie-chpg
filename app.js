@@ -317,12 +317,10 @@ function renderPeropVisibility(){
 
 async function copyReport(){
   try{
-   await navigator.clipboard.writeText(buildDPIReport());
+    await navigator.clipboard.writeText(report.value);
   }catch{
-report.value = buildDPIReport();
-report.select();
-document.execCommand("copy");
-renderReport();
+    report.select();
+    document.execCommand("copy");
   }
 
   $("copyBtn").textContent = "Copié ✓";

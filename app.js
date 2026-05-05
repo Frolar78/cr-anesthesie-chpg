@@ -327,7 +327,9 @@ async function copyReport(){
     $("copyBtn").textContent = "Copier le CR";
   }, 1500);
 }
-
+function resetForm(){
+  location.reload();
+}
 function init(){
   initDate();
 
@@ -373,6 +375,7 @@ fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
 $("addAnesthBtn").onclick = ()=>addAnesth(true);
 $("addChirBtn").onclick = ()=>addChir(true);
 $("addGesteBtn").onclick = ()=>addGeste(true);
+$("resetBtn").onclick = resetForm;
 $("copyBtn").onclick = copyReport;
 
 $("showPeropBtn").onclick = ()=>{

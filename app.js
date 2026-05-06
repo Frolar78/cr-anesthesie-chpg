@@ -18,6 +18,8 @@ const state = {
   reveil: [],
   transfusionActive: false,
   transfusion: [],
+  drainsActive: false,
+drains: [],
   peropForced: false,
   peropHidden: false
 };
@@ -449,7 +451,28 @@ $("transfusionToggle").onclick = ()=>{
 };
 
   renderAntibio();
+createChips(
+  "drainsOptions",
+  ["Drain thoracique", "Redon", "Lame", "Sonde vésicale", "SNG", "Autre"],
+  "drains"
+);
 
+$("drainsToggle").onclick = ()=>{
+  state.drainsActive = !state.drainsActive;
+  $("drainsToggle").classList.toggle("active", state.drainsActive);
+  $("drainsBlock").classList.toggle("hidden", !state.drainsActive);
+
+  if(!state.drainsActive){
+    state.drains = [];
+    createChips(
+      "drainsOptions",
+      ["Drain thoracique", "Redon", "Lame", "Sonde vésicale", "SNG", "Autre"],
+      "drains"
+    );
+  }
+
+  renderReport();
+};
 $("addAnesthBtn").onclick = ()=>addAnesth(true);
 $("addChirBtn").onclick = ()=>addChir(true);
 $("addGesteBtn").onclick = ()=>addGeste(true);

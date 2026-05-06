@@ -227,11 +227,21 @@ function renderTransfusionDetails(){
   }
 }
 function renderDrainsDetails(){
+  const hasDrainThoracique = state.drains.includes("Drain thoracique");
+  const hasRedon = state.drains.includes("Redon");
+  const hasLame = state.drains.includes("Lame");
+  const hasSV = state.drains.includes("Sonde vésicale");
   const isOther = state.drains.includes("Autre");
 
+  $("drainThoraciqueText").classList.toggle("hidden", !hasDrainThoracique);
+  $("redonText").classList.toggle("hidden", !hasRedon);
+  $("lameText").classList.toggle("hidden", !hasLame);
+  $("svText").classList.toggle("hidden", !hasSV);
   $("drainsOtherText").classList.toggle("hidden", !isOther);
 
-  if(!isOther){
-    $("drainsOtherText").value = "";
-  }
+  if(!hasDrainThoracique) $("drainThoraciqueText").value = "";
+  if(!hasRedon) $("redonText").value = "";
+  if(!hasLame) $("lameText").value = "";
+  if(!hasSV) $("svText").value = "";
+  if(!isOther) $("drainsOtherText").value = "";
 }

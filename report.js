@@ -161,7 +161,7 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
   const remplissage = $("remplissage").value;
 const norad = $("noradToggle").classList.contains("active");
   const noradText = $("noradText").value;
-  const incident = $("incidentCheck").checked;
+const incident = $("incidentToggle").classList.contains("active");
   const incidentText = $("incidentText").value;
 
 if(peropVisible && (diurese || saignement || remplissage || norad || incident || (state.transfusionActive && state.transfusion.length) || (state.drainsActive && state.drains.length))){

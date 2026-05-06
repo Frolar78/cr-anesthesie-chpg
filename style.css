@@ -295,6 +295,12 @@ textarea:focus{
   font-weight:600;
 }
 
+.sub-chip.active{
+  background:#f6dbe6;
+  border-color:#e9b8cb;
+  color:#b03060;
+}
+
 .hidden{
   display:none;
 }

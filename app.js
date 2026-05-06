@@ -507,10 +507,17 @@ $("removePeropBtn").onclick = ()=>{
   renderReport();
 };
 
-  $("incidentCheck").addEventListener("change", ()=>{
-    $("incidentBlock").classList.toggle("hidden", !$("incidentCheck").checked);
-    renderReport();
-  });
+ $("incidentToggle").onclick = ()=>{
+  const active = $("incidentToggle").classList.toggle("active");
+
+  $("incidentBlock").classList.toggle("hidden", !active);
+
+  if(!active){
+    $("incidentText").value = "";
+  }
+
+  renderReport();
+};
 
   specialiteSelect.onchange = ()=>{
     state.peropForced = false;

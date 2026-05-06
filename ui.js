@@ -238,7 +238,10 @@ function renderDrainsDetails(){
   $("lameText").classList.toggle("hidden", !hasLame);
   $("svText").classList.toggle("hidden", !hasSV);
   $("drainsOtherText").classList.toggle("hidden", !isOther);
-
+  $("drainsDetailsBox").classList.toggle(
+  "hidden",
+  !(hasDrainThoracique || hasRedon || hasLame || hasSV || isOther)
+);
   if(!hasDrainThoracique) $("drainThoraciqueText").value = "";
   if(!hasRedon) $("redonText").value = "";
   if(!hasLame) $("lameText").value = "";

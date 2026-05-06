@@ -45,6 +45,7 @@ function createChips(id, list, key, single=false){
       if(key === "neuraxial") renderNeuraxialDetails();
       if(key === "antibio") renderAntibioDetails();
 if(key === "transfusion") renderTransfusionDetails();
+if(key === "drains") renderDrainsDetails();
       renderALR();
       renderPeropVisibility();
       renderReport();
@@ -223,5 +224,14 @@ function renderTransfusionDetails(){
 
   if(!isOther){
     $("transfusionOtherText").value = "";
+  }
+}
+function renderDrainsDetails(){
+  const isOther = state.drains.includes("Autre");
+
+  $("drainsOtherText").classList.toggle("hidden", !isOther);
+
+  if(!isOther){
+    $("drainsOtherText").value = "";
   }
 }

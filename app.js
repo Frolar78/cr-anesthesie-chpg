@@ -472,10 +472,17 @@ $("removePeropBtn").onclick = ()=>{
 
   $("sequenceRapide").addEventListener("change", handleSequenceRapideChange);
 
-  $("noradCheck").addEventListener("change", ()=>{
-    $("noradBlock").classList.toggle("hidden", !$("noradCheck").checked);
-    renderReport();
-  });
+ $("noradToggle").onclick = ()=>{
+  const active = $("noradToggle").classList.toggle("active");
+
+  $("noradBlock").classList.toggle("hidden", !active);
+
+  if(!active){
+    $("noradText").value = "";
+  }
+
+  renderReport();
+};
 
   $("incidentCheck").addEventListener("change", ()=>{
     $("incidentBlock").classList.toggle("hidden", !$("incidentCheck").checked);

@@ -207,7 +207,42 @@ if(state.transfusion.includes("Calcium")){
     txt += `Transfusion peropératoire : ${transf.join(", ")}.\n`;
   }
 }
+if(state.drainsActive && state.drains.length){
+  const drains = [];
 
+  if(state.drains.includes("Drain thoracique")){
+    const txt = $("drainThoraciqueText").value.trim();
+    drains.push(txt ? `Drain thoracique ${txt}` : "Drain thoracique");
+  }
+
+  if(state.drains.includes("Redon")){
+    const txt = $("redonText").value.trim();
+    drains.push(txt ? `Redon ${txt}` : "Redon");
+  }
+
+  if(state.drains.includes("Lame")){
+    const txt = $("lameText").value.trim();
+    drains.push(txt ? `Lame ${txt}` : "Lame");
+  }
+
+  if(state.drains.includes("Sonde vésicale")){
+    const txt = $("svText").value.trim();
+    drains.push(txt ? `Sonde vésicale ${txt} Fr` : "Sonde vésicale");
+  }
+
+  if(state.drains.includes("SNG")){
+    drains.push("SNG");
+  }
+
+  if(state.drains.includes("Autre")){
+    const txt = $("drainsOtherText").value.trim();
+    if(txt) drains.push(txt);
+  }
+
+  if(drains.length){
+    txt += `Dispositifs : ${drains.join(", ")}.\n`;
+  }
+}
     if(norad){
       txt += "Support vasopresseur peropératoire par noradrénaline 16 µg/mL";
       if(noradText) txt += ` (${noradText})`;

@@ -33,10 +33,11 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
   if(state.monitorage.includes("BIS")) mon.push("BIS");
   if(state.monitorage.includes("TOF")) mon.push("TOF");
 
-  if(mon.length || state.monitorage.includes("KTA") || state.monitorage.includes("KTC")){
+const position = $("positionPatient")?.value;
+
+if(position || mon.length || state.monitorage.includes("KTA") || state.monitorage.includes("KTC")){
     txt += "INSTALLATION\n";
 
-    const position = $("positionPatient")?.value;
     if(position){
       txt += `Patient installé en ${position.toLowerCase()}.\n`;
     }

@@ -164,7 +164,7 @@ const norad = $("noradToggle").classList.contains("active");
   const incident = $("incidentCheck").checked;
   const incidentText = $("incidentText").value;
 
-if(peropVisible && (diurese || saignement || remplissage || norad || incident || (state.transfusionActive && state.transfusion.length))){
+if(peropVisible && (diurese || saignement || remplissage || norad || incident || (state.transfusionActive && state.transfusion.length) || (state.drainsActive && state.drains.length))){
     txt += "PER-OPÉRATOIRE\n";
 
     if(diurese) txt += `Diurèse : ${diurese} mL.\n`;

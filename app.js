@@ -160,6 +160,12 @@ function renderGesteExtra(wrapper, geste){
     i.placeholder = "Précision...";
     extra.appendChild(i);
   }
+  if(geste === "Colectomie"){
+  const s = document.createElement("select");
+  s.className = "approach-select";
+  fillSelect(s, ["Cœlioscopie", "Laparotomie", "Robot-assistée"], "Voie d'abord...");
+  extra.appendChild(s);
+}
   
 if(DATA.approachOptions && DATA.approachOptions[geste]){
   const s = document.createElement("select");

@@ -271,7 +271,18 @@ function updateCurare(){
     : ["Aucun","Atracurium","Rocuronium"];
 
   state.curare = state.curare.filter(x=>list.includes(x));
-  createChips("curare", list, "curare");
+createChips("curare", list, "curare");
+
+const hasNonDepol =
+  state.curare.includes("Atracurium") ||
+  state.curare.includes("Rocuronium");
+
+$("antagonisationBlock").classList.toggle("hidden", !hasNonDepol);
+
+if(!hasNonDepol){
+  state.antagonisation = false;
+  $("antagonisationChip").classList.remove("active");
+}
 }
 
 function handleSequenceRapideChange(){

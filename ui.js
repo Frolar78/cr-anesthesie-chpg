@@ -77,7 +77,35 @@ chip.className =
       renderReport();
     };
 
-    box.appendChild(chip);
+if(key === "monitorage" && item === "VVP" && state.monitorage.includes("VVP")){
+  const wrapper = document.createElement("div");
+  wrapper.className = "chip-with-options";
+
+  const mini = document.createElement("div");
+  mini.className = "chip-mini-options";
+
+  [1, 2].forEach(n=>{
+    const opt = document.createElement("span");
+    opt.className = "chip-mini-option";
+    if(state.vvpCount === n) opt.classList.add("active");
+    opt.textContent = n;
+
+    opt.onclick = (e)=>{
+      e.stopPropagation();
+      state.vvpCount = n;
+      createChips(id, list, key, single);
+      renderReport();
+    };
+
+    mini.appendChild(opt);
+  });
+
+  wrapper.appendChild(mini);
+  wrapper.appendChild(chip);
+  box.appendChild(wrapper);
+}else{
+  box.appendChild(chip);
+}
   });
 }
 

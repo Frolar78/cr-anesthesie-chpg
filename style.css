@@ -282,6 +282,8 @@ textarea:focus{
   cursor:pointer;
   user-select:none;
   transition:.15s ease;
+  align-self:flex-start;
+}
 }
 
 .chip:hover{

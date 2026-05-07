@@ -160,7 +160,14 @@ function renderGesteExtra(wrapper, geste){
     i.placeholder = "Précision...";
     extra.appendChild(i);
   }
-
+  
+if(DATA.approachOptions && DATA.approachOptions[geste]){
+  const s = document.createElement("select");
+  s.className = "approach-select";
+  fillSelect(s, DATA.approachOptions[geste], "Voie d'abord...");
+  extra.appendChild(s);
+}
+  
   if(geste === "Autre..."){
     const i = document.createElement("input");
     i.className = "custom-geste";

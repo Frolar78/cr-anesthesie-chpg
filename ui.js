@@ -36,7 +36,23 @@ function createChips(id, list, key, single=false){
         const idx = arr.indexOf(item);
         idx > -1 ? arr.splice(idx, 1) : arr.push(item);
       }
+      if(key === "reveil"){
+        if(item === "Patient transféré intubé ventilé" && state.reveil.includes(item)){
+          state.reveil = ["Patient transféré intubé ventilé"];
+        }
 
+        if(item === "Extubation" && state.reveil.includes(item)){
+          state.reveil = state.reveil.filter(x => x !== "Patient transféré intubé ventilé");
+        }
+
+        if(item === "Complication extubation" && state.reveil.includes(item)){
+          state.reveil = state.reveil.filter(x => x !== "Patient transféré intubé ventilé");
+
+          if(!state.reveil.includes("Extubation")){
+            state.reveil.push("Extubation");
+          }
+        }
+      }
       createChips(id, list, key, single);
 
       if(key === "monitorage") renderMonitorageDetails();

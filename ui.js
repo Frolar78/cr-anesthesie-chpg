@@ -22,8 +22,10 @@ function createChips(id, list, key, single=false){
 
   list.forEach(item=>{
     const chip = document.createElement("div");
-    chip.className = (key === "transfusion" || key === "drains") ? "chip sub-chip" : "chip";
-    chip.textContent = item;
+chip.className =
+  (key === "transfusion" || key === "drains" || (key === "reveil" && item === "Complication extubation"))
+    ? "chip sub-chip"
+    : "chip";    chip.textContent = item;
 
     if(single && state[key] === item) chip.classList.add("active");
     if(!single && Array.isArray(state[key]) && state[key].includes(item)) chip.classList.add("active");

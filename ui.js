@@ -59,6 +59,9 @@ chip.className =
           }
         }
       }
+      if(key === "monitorage" && item === "VVP" && !state.monitorage.includes("VVP")){
+  state.vvpCount = 1;
+}
       createChips(id, list, key, single);
 
       if(key === "monitorage") renderMonitorageDetails();

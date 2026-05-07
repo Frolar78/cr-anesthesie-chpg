@@ -53,7 +53,17 @@ const DATA = {
   "Mastectomie partielle",
   "Mastectomie totale"
 ],
-
+approachOptions: {
+  "Colectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Appendicectomie": ["Cœlioscopie", "Laparotomie"],
+  "Cholécystectomie": ["Cœlioscopie", "Laparotomie"],
+  "Annexectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Hystérectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Kystectomie ovarienne": ["Cœlioscopie", "Laparotomie"],
+  "Prostatectomie totale": ["Robot-assistée", "Laparotomie"],
+  "Lobectomie pulmonaire": ["Thoracoscopie", "Thoracotomie", "Robot-assistée"],
+  "Segmentectomie": ["Thoracoscopie", "Thoracotomie", "Robot-assistée"]
+},
   textGestes: [
     "Lobectomie pulmonaire",
     "Segmentectomie",

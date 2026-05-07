@@ -294,7 +294,7 @@ textarea:focus{
   border-color:#b5121b;
   background:#f8e8ea;
   color:#8f1118;
-  box-shadow: 0 2px 8px rgba(176,48,96,.18);
+box-shadow: 0 4px 12px rgba(176,48,96,.28);
   font-weight:600;
 }
 

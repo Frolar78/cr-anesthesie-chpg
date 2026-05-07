@@ -252,6 +252,9 @@ textarea:focus{
   margin-bottom:9px;
   color:#111827;
   font-weight:700;
+
+  border-left:4px solid #c6284a;
+  padding-left:8px;
 }
 
 .checkbox-row{

@@ -272,43 +272,44 @@ if(state.drainsActive && state.drains.length){
       ? `Antibioprophylaxie par ${state.antibio} ${dose}.\n`
       : `Antibioprophylaxie par ${state.antibio}.\n`;
   }
-  const reveil = state.reveil || [];
-  const destination = $("destinationPostop")?.value;
-  const stableHemo = $("stableHemodynamique")?.checked;
-  const stableRespi = $("stableRespiratoire")?.checked;
+const reveil = state.reveil || [];
+const destination = $("destinationPostop")?.value;
+const complicationExtubation = $("complicationExtubationText")?.value?.trim();
+const intubeVentileReason = $("intubeVentileReason")?.value?.trim();
 
-  if(reveil.length || destination){
-    txt += "SUITES IMMÉDIATES\n";
+if(reveil.length || destination){
+  txt += "SUITES IMMÉDIATES\n";
 
-    if(reveil.length){
-      txt += reveil.join(". ") + ".\n";
+  const intube = reveil.includes("Patient transféré intubé ventilé");
+  const complication = reveil.includes("Complication extubation");
+  const extubation = reveil.includes("Extubation");
+
+  if(intube){
+    let phrase = "Patient transféré intubé ventilé";
+
+    if(destination){
+      phrase += " en " + destination.toLowerCase();
+    }
+
+    if(intubeVentileReason){
+      phrase += " en raison de " + intubeVentileReason;
+    }
+
+    txt += phrase + ".\n";
+  }else{
+    if(complication && complicationExtubation){
+      txt += `Complication à l’extubation : ${complicationExtubation}.\n`;
+    }else if(extubation){
+      txt += "Patient extubé en SSPI sans complication.\n";
     }
 
     if(destination){
-      if(destination === "SSPI"){
-        txt += "Patient transféré en SSPI";
-      }else if(destination === "Réanimation"){
-        txt += "Patient transféré en réanimation";
-      }else if(destination === "USCC"){
-        txt += "Patient transféré en USCC";
-      }else{
-        txt += "Patient transféré en secteur d’hospitalisation";
-      }
-
-      const stabilites = [];
-
-      if(stableHemo) stabilites.push("stable sur le plan hémodynamique");
-      if(stableRespi) stabilites.push("stable sur le plan respiratoire");
-
-      if(stabilites.length){
-        txt += ", " + stabilites.join(" et ");
-      }
-
-      txt += ".\n";
+      txt += `Transfert en ${destination.toLowerCase()} pour suite de la prise en charge.\n`;
     }
-
-    txt += "\n";
   }
+
+  txt += "\n";
+}
     report.value = txt;
 }
 

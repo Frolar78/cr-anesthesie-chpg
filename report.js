@@ -8,10 +8,9 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
     .map(x=>x.value)
     .filter(Boolean);
 
-  const gestes = [...document.querySelectorAll(".field")]
-    .filter(x=>x.querySelector(".geste-select"))
-    .map(buildGesteLabel)
-    .filter(Boolean);
+  const gestes = [...document.querySelectorAll("#gesteContainer > .field")]
+  .map(buildGesteLabel)
+  .filter(Boolean);
 
   let txt = "INTERVENTION\n";
   txt += `Date : ${date}\n`;

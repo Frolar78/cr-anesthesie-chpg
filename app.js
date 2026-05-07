@@ -6,6 +6,7 @@ const specialiteSelect = $("specialite");
 
 const state = {
   monitorage: [],
+  vvpCount: 1,
   induction: [],
   curare: [],
   va: "",

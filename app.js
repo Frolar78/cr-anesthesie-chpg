@@ -9,6 +9,7 @@ const state = {
   vvpCount: 1,
   induction: [],
   curare: [],
+  antagonisation: false,
   va: "",
   ventilation: "",
   entretien: "",

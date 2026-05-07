@@ -72,7 +72,7 @@ function updateChirurgiens(){
 
   document.querySelectorAll(".chirurgien").forEach(sel=>{
     const current = sel.value;
-    fillSelect(sel, list, "Chirurgien...");
+fillSelect(sel, list, "Choisir...");
     if(list.includes(current)) sel.value = current;
   });
 }
@@ -125,7 +125,7 @@ function addGeste(removable=true){
   $("gesteContainer").appendChild(wrapper);
 
   const sel = wrapper.querySelector(".geste-select");
-  fillSelect(sel, list, "Intervention...");
+fillSelect(sel, list, "Choisir...");
 
   sel.addEventListener("change", ()=>{
     state.peropForced = false;

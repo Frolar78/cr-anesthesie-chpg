@@ -87,7 +87,13 @@ if(position || mon.length || state.monitorage.includes("KTA") || state.monitorag
 
     txt += ".\n\n";
   }
-
+if(state.antagonisation){
+  if(state.curare.includes("Rocuronium")){
+    txt += "Antagonisation de la curarisation par sugammadex.\n\n";
+  }else if(state.curare.includes("Atracurium")){
+    txt += "Antagonisation de la curarisation par néostigmine.\n\n";
+  }
+}
   if(state.va){
     txt += "VOIES AÉRIENNES\n";
 

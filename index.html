@@ -250,22 +250,29 @@
           >
         </div>
       </div>
-      <div class="mini-card" id="suitesCard">
-        <h3>Suites immédiates</h3>
+     <div class="mini-card" id="suitesCard">
+  <h3>Suites immédiates</h3>
 
-        <div class="chip-zone" id="reveilOptions"></div>
+  <div class="chip-zone" id="reveilOptions"></div>
 
-        <div class="field" style="margin-top:10px;">
-          <label>Destination post-opératoire</label>
-          <select id="destinationPostop">
-            <option value="">Choisir...</option>
-            <option>SSPI</option>
-            <option>Réanimation</option>
-            <option>USCC</option>
-            <option>Retour en secteur d’hospitalisation</option>
-          </select>
-        </div>
-      </div>
+  <div id="complicationExtubationBlock" class="hidden" style="margin-top:10px;">
+    <textarea id="complicationExtubationText" placeholder="Décrire la complication à l’extubation..." style="height:70px;"></textarea>
+  </div>
+
+  <div id="intubeVentileBlock" class="hidden" style="margin-top:10px;">
+    <input type="text" id="intubeVentileReason" placeholder="Raison du transfert intubé ventilé...">
+  </div>
+
+  <div class="field" style="margin-top:10px;">
+    <label>Destination post-opératoire</label>
+    <select id="destinationPostop">
+      <option value="">Choisir...</option>
+      <option>Réanimation</option>
+      <option>USCC</option>
+      <option>Service</option>
+    </select>
+  </div>
+</div>
     </section>
 
     <section class="panel report-panel">

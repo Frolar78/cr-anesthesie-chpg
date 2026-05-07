@@ -310,7 +310,7 @@ box-shadow: 0 4px 12px rgba(176,48,96,.28);
   border:1px solid #f1d6df;
   background:#fff8fb;
   border-radius:12px;
-  animation: fadeInSoft 160ms ease-out;
+  animation: fadeInSoft 280ms ease-out;
 }
 .chip-with-options{
   display:flex;
@@ -342,7 +342,7 @@ box-shadow: 0 4px 12px rgba(176,48,96,.28);
 @keyframes fadeInSoft{
   from{
     opacity:0;
-    transform:translateY(-3px);
+    transform:translateY(-10px);
   }
   to{
     opacity:1;

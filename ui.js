@@ -44,8 +44,9 @@ function createChips(id, list, key, single=false){
       if(key === "ventilation") renderVentilationDetails();
       if(key === "neuraxial") renderNeuraxialDetails();
       if(key === "antibio") renderAntibioDetails();
-if(key === "transfusion") renderTransfusionDetails();
-if(key === "drains") renderDrainsDetails();
+      if(key === "transfusion") renderTransfusionDetails();
+      if(key === "drains") renderDrainsDetails();
+      if(key === "reveil") renderReveilDetails();
       renderALR();
       renderPeropVisibility();
       renderReport();
@@ -247,4 +248,19 @@ function renderDrainsDetails(){
   if(!hasLame) $("lameText").value = "";
   if(!hasSV) $("svText").value = "";
   if(!isOther) $("drainsOtherText").value = "";
+}
+function renderReveilDetails(){
+  const complication = state.reveil.includes("Complication extubation");
+  const intube = state.reveil.includes("Patient transféré intubé ventilé");
+
+  $("complicationExtubationBlock").classList.toggle("hidden", !complication);
+  $("intubeVentileBlock").classList.toggle("hidden", !intube);
+
+  if(!complication){
+    $("complicationExtubationText").value = "";
+  }
+
+  if(!intube){
+    $("intubeVentileReason").value = "";
+  }
 }

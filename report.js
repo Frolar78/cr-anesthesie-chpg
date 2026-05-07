@@ -27,7 +27,13 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
   }
 
   if(state.monitorage.includes("SpO2")) mon.push("SpO2");
-  if(state.monitorage.includes("VVP")) mon.push("Voie veineuse périphérique");
+if(state.monitorage.includes("VVP")){
+  if(state.vvpCount === 2){
+    mon.push("2 voies veineuses périphériques");
+  }else{
+    mon.push("Voie veineuse périphérique");
+  }
+}
   if(state.monitorage.includes("PICC Line")) mon.push("Présence d'un PICC Line");
   if(state.monitorage.includes("Mid Line")) mon.push("Présence d'un Mid Line");
   if(state.monitorage.includes("BIS")) mon.push("BIS");

@@ -508,7 +508,11 @@ $("addChirBtn").onclick = ()=>addChir(true);
 $("addGesteBtn").onclick = ()=>addGeste(true);
 $("resetBtn").onclick = resetForm;
 $("copyBtn").onclick = copyReport;
-
+$("antagonisationChip").onclick = ()=>{
+  state.antagonisation = !state.antagonisation;
+  $("antagonisationChip").classList.toggle("active", state.antagonisation);
+  renderReport();
+};
 $("showPeropBtn").onclick = ()=>{
   state.peropForced = true;
   state.peropHidden = false;

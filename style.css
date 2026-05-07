@@ -392,3 +392,8 @@ box-shadow: 0 4px 12px rgba(176,48,96,.28);
   gap:10px;
   align-items:center;
 }
+#copyBtn.copied{
+  background:#22c55e;
+  box-shadow:0 4px 14px rgba(34,197,94,.35);
+  transform:scale(1.03);
+}

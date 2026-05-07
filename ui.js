@@ -43,9 +43,13 @@ chip.className =
           state.reveil = ["Patient transféré intubé ventilé"];
         }
 
-        if(item === "Extubation" && state.reveil.includes(item)){
-          state.reveil = state.reveil.filter(x => x !== "Patient transféré intubé ventilé");
-        }
+      if(item === "Extubation"){
+          if(state.reveil.includes("Extubation")){
+    state.reveil = state.reveil.filter(x => x !== "Patient transféré intubé ventilé");
+  }else{
+    state.reveil = state.reveil.filter(x => x !== "Complication extubation");
+  }
+}
 
         if(item === "Complication extubation" && state.reveil.includes(item)){
           state.reveil = state.reveil.filter(x => x !== "Patient transféré intubé ventilé");

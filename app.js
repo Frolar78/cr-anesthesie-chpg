@@ -411,9 +411,11 @@ async function copyReport(){
   }
 
   $("copyBtn").textContent = "Copié ✓";
+  $("copyBtn").classList.add("copied");
 
   setTimeout(()=>{
     $("copyBtn").textContent = "Copier le CR";
+    $("copyBtn").classList.remove("copied");
   }, 1500);
 }
 function resetForm(){

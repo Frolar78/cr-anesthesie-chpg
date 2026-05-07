@@ -59,6 +59,24 @@ chip.className =
           }
         }
       }
+      if(key === "curare"){
+  if(item === "Aucun" && state.curare.includes("Aucun")){
+    state.curare = ["Aucun"];
+    state.antagonisation = false;
+  }
+
+  if((item === "Atracurium" || item === "Rocuronium") && state.curare.includes(item)){
+    state.curare = state.curare.filter(x =>
+      x !== "Aucun" &&
+      x !== (item === "Atracurium" ? "Rocuronium" : "Atracurium")
+    );
+    state.antagonisation = false;
+  }
+
+  if(item === "Célocurine" && state.curare.includes("Célocurine")){
+    state.curare = state.curare.filter(x => x !== "Aucun");
+  }
+}
       if(key === "monitorage" && item === "VVP" && !state.monitorage.includes("VVP")){
   state.vvpCount = 1;
 }

@@ -528,7 +528,11 @@ $("removePeropBtn").onclick = ()=>{
 };
 
   $("sequenceRapide").addEventListener("change", handleSequenceRapideChange);
-
+$("sequenceRapideToggle").onclick = ()=>{
+  $("sequenceRapide").checked = !$("sequenceRapide").checked;
+  $("sequenceRapideToggle").classList.toggle("active", $("sequenceRapide").checked);
+  handleSequenceRapideChange();
+};
  $("noradToggle").onclick = ()=>{
   const active = $("noradToggle").classList.toggle("active");
 

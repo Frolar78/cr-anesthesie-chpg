@@ -79,11 +79,11 @@ function updateChirurgiens(){
 
 function addChir(removable=true){
   const row = document.createElement("div");
-  row.className = "field row-inline";
+row.className = "field";
 
   row.innerHTML = removable
   ? `<label>Chirurgien</label><div class="row-inline"><select class="chirurgien"></select><button class="remove-btn" type="button">–</button></div>`
-  : `<label>Chirurgien</label><select class="chirurgien"></select>`;
+  : `<label>Chirurgien</label><div class="row-inline"><select class="chirurgien"></select></div>`;
   
   if(removable){
     row.querySelector(".remove-btn").onclick = ()=>{
@@ -103,12 +103,13 @@ function addGeste(removable=true){
   wrapper.className = "field";
 
   wrapper.innerHTML = `
-    <div class="row-inline">
-      <select class="geste-select"></select>
-      ${removable ? `<button class="remove-btn" type="button">–</button>` : ``}
-    </div>
-    <div class="geste-extra" style="margin-top:6px"></div>
-  `;
+  <label>Intervention</label>
+  <div class="row-inline">
+    <select class="geste-select"></select>
+    ${removable ? `<button class="remove-btn" type="button">–</button>` : ``}
+  </div>
+  <div class="geste-extra" style="margin-top:6px"></div>
+`;
 
   if(removable){
     wrapper.querySelector(".remove-btn").onclick = ()=>{

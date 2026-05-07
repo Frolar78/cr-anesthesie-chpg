@@ -82,9 +82,9 @@ function addChir(removable=true){
   row.className = "field row-inline";
 
   row.innerHTML = removable
-    ? `<select class="chirurgien"></select><button class="remove-btn" type="button">–</button>`
-    : `<select class="chirurgien"></select>`;
-
+  ? `<label>Chirurgien</label><div class="row-inline"><select class="chirurgien"></select><button class="remove-btn" type="button">–</button></div>`
+  : `<label>Chirurgien</label><select class="chirurgien"></select>`;
+  
   if(removable){
     row.querySelector(".remove-btn").onclick = ()=>{
       row.remove();

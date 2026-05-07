@@ -308,7 +308,33 @@ textarea:focus{
   background:#fff8fb;
   border-radius:12px;
 }
+.chip-with-options{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
 
+.chip-mini-options{
+  display:flex;
+  gap:6px;
+  font-size:11px;
+  line-height:1;
+}
+
+.chip-mini-option{
+  cursor:pointer;
+  padding:2px 5px;
+  border-radius:999px;
+  color:#b03060;
+  background:#fff8fb;
+  border:1px solid #f1d6df;
+}
+
+.chip-mini-option.active{
+  background:#e9b8cb;
+  color:white;
+}
 .hidden{
   display:none;
 }

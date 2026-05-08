@@ -120,7 +120,6 @@ approachOptions: {
         "CHIP",
         "Kystectomie ovarienne",
         "Segmentectomie hépatique",
-        "Résection antérieure du rectum",
 "Amputation abdomino-périnéale",
 "Sigmoïdectomie",
 "Résection grêlique",

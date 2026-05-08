@@ -69,6 +69,11 @@ approachOptions: {
   "Colostomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
   "Cure d’éventration": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
   "Cure de hernie hiatale": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Sleeve gastrectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Bypass gastrique": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Splénectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Surrénalectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Rétablissement de continuité": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
 },
   textGestes: [
     "Lobectomie pulmonaire",

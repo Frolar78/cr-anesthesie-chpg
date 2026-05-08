@@ -126,6 +126,7 @@ approachOptions: {
 "Résection grêlique",
 "Iléostomie",
 "Colostomie",
+"Rétablissement de continuité",
 "Cure d’éventration",
 "Cure de hernie hiatale",
 "Sleeve gastrectomie",

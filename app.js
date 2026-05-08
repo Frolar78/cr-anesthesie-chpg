@@ -166,6 +166,7 @@ function renderGesteExtra(wrapper, geste){
 if(DATA.approachOptions && DATA.approachOptions[geste]){
   const s = document.createElement("select");
   s.className = "approach-select";
+  s.style.marginTop = "8px";
   fillSelect(s, DATA.approachOptions[geste], "Voie d'abord...");
   extra.appendChild(s);
 }

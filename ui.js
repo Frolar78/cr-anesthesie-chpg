@@ -136,6 +136,16 @@ function renderMonitorageDetails(){
   const previousKta = $("ktaSite")?.value || "";
   const previousKtc = $("ktcSite")?.value || "";
 
+const hasDetails =
+  state.monitorage.includes("Scope") ||
+  state.monitorage.includes("KTA") ||
+  state.monitorage.includes("KTC");
+
+if(!hasDetails){
+  box.innerHTML = "";
+  return;
+}
+
 box.innerHTML = `<div class="detail-box" id="monitorageDetailBox"></div>`;
 const detailBox = $("monitorageDetailBox");
 

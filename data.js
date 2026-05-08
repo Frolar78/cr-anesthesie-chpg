@@ -63,6 +63,7 @@ approachOptions: {
   "Prostatectomie totale": ["Robot-assistée", "Laparotomie"],
   "Lobectomie pulmonaire": ["Thoracoscopie", "Thoracotomie", "Robot-assistée"],
   "Segmentectomie": ["Thoracoscopie", "Thoracotomie", "Robot-assistée"],
+  "Sigmoïdectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
 },
   textGestes: [
     "Lobectomie pulmonaire",

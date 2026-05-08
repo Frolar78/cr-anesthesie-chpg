@@ -17,9 +17,10 @@ txt += `Date : ${date}\n`;
 txt += `Anesthésiste : ${anesths.join(", ")}\n`;
 txt += `Chirurgien : ${chirs.join(", ")}\n`;
 
-if(state.urgence){
-  txt += `Contexte : prise en charge en urgence\n`;
-}
+const labelIntervention =
+  gestes.join(" associée à ") + (state.urgence ? " en urgence" : "");
+
+txt += `Intervention : ${labelIntervention}\n\n`;
 
 txt += `Intervention : ${gestes.join(" associée à ")}\n\n`;
 

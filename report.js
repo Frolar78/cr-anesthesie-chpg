@@ -146,9 +146,15 @@ if(state.antagonisation){
   }
 
   if(state.alr.length){
+  const alrList = state.alr
+    .map(x => x === "Autre" ? $("alrOtherText")?.value?.trim() : x)
+    .filter(Boolean);
+
+  if(alrList.length){
     txt += "ALR PÉRIPHÉRIQUE\n";
-    txt += `ALR de type ${state.alr.join(", ")} réalisée de manière échoguidée avec ${$("localVolume").value} mL de ${$("localAgent").value}.\n\n`;
+    txt += `ALR de type ${alrList.join(", ")} réalisée de manière échoguidée avec ${$("localVolume").value} mL de ${$("localAgent").value}.\n\n`;
   }
+}
 
   if(state.neuraxial.length){
     txt += "ALR NEURAXIALE\n";

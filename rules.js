@@ -112,7 +112,7 @@ const ANTIBIO_MAP = {
   "Adénoamygdalectomie": "Aucune",
 
   "Varices": "Aucune",
-  "Cataracte": "Céfuroxime"
+  "Cataracte": "Céfuroxime",
   "Amputation abdomino-périnéale": "Céfoxitine",
 "Sigmoïdectomie": "Céfoxitine",
 "Résection grêlique": "Céfoxitine",

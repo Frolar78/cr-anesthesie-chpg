@@ -136,7 +136,8 @@ function renderMonitorageDetails(){
   const previousKta = $("ktaSite")?.value || "";
   const previousKtc = $("ktcSite")?.value || "";
 
-  box.innerHTML = "";
+box.innerHTML = `<div class="detail-box" id="monitorageDetailBox"></div>`;
+const detailBox = $("monitorageDetailBox");
 
   if(state.monitorage.includes("Scope")){
     const s = document.createElement("select");
@@ -147,7 +148,7 @@ function renderMonitorageDetails(){
 
     if(list.includes(previousScope)) s.value = previousScope;
 
-    box.appendChild(s);
+detailBox.appendChild(s);
   }
 
   if(state.monitorage.includes("KTA")){
@@ -159,7 +160,7 @@ function renderMonitorageDetails(){
 
     if(list.includes(previousKta)) s.value = previousKta;
 
-    box.appendChild(s);
+detailBox.appendChild(s);
   }
 
   if(state.monitorage.includes("KTC")){
@@ -179,7 +180,7 @@ function renderMonitorageDetails(){
 
     if(list.includes(previousKtc)) s.value = previousKtc;
 
-    box.appendChild(s);
+detailBox.appendChild(s);
   }
 }
 

@@ -318,8 +318,13 @@ function renderALR(){
     (ALR_NEURAXIAL_MAP[g] || []).forEach(a=>neuraxials.add(a));
   });
 
-  const alrList = [...alrs];
-  const neuraxialList = [...neuraxials];
+  let alrList = [...alrs];
+
+if(alrList.length > 0 && !alrList.includes("Autre")){
+  alrList.push("Autre");
+}
+
+const neuraxialList = [...neuraxials];
 
   state.alr = state.alr.filter(x=>alrList.includes(x));
   state.neuraxial = state.neuraxial.filter(x=>neuraxialList.includes(x));

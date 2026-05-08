@@ -23,7 +23,9 @@ const state = {
   drainsActive: false,
 drains: [],
   peropForced: false,
-  peropHidden: false
+peropHidden: false,
+urgence: false
+};
 };
 
 function initDate(){

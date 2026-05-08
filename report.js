@@ -13,10 +13,15 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
   .filter(Boolean);
 
   let txt = "INTERVENTION\n";
-  txt += `Date : ${date}\n`;
-  txt += `Anesthésiste : ${anesths.join(", ")}\n`;
-  txt += `Chirurgien : ${chirs.join(", ")}\n`;
-  txt += `Intervention : ${gestes.join(" associée à ")}\n\n`;
+txt += `Date : ${date}\n`;
+txt += `Anesthésiste : ${anesths.join(", ")}\n`;
+txt += `Chirurgien : ${chirs.join(", ")}\n`;
+
+if(state.urgence){
+  txt += `Contexte : prise en charge en urgence\n`;
+}
+
+txt += `Intervention : ${gestes.join(" associée à ")}\n\n`;
 
   const mon = [];
 

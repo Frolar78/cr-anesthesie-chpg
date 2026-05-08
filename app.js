@@ -26,7 +26,6 @@ drains: [],
 peropHidden: false,
 urgence: false
 };
-};
 
 function initDate(){
   const d = new Date();

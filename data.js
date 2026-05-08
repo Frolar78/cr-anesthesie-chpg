@@ -63,6 +63,17 @@ approachOptions: {
   "Prostatectomie totale": ["Robot-assistée", "Laparotomie"],
   "Lobectomie pulmonaire": ["Thoracoscopie", "Thoracotomie", "Robot-assistée"],
   "Segmentectomie": ["Thoracoscopie", "Thoracotomie", "Robot-assistée"]
+  "Sigmoïdectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Résection grêlique": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Iléostomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Colostomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Cure d’éventration": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Cure de hernie hiatale": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Sleeve gastrectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Bypass gastrique": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Splénectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Surrénalectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+"Rétablissement de continuité": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
 },
   textGestes: [
     "Lobectomie pulmonaire",

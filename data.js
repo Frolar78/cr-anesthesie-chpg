@@ -66,6 +66,9 @@ approachOptions: {
   "Sigmoïdectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
   "Résection grêlique": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
   "Iléostomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Colostomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Cure d’éventration": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Cure de hernie hiatale": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
 },
   textGestes: [
     "Lobectomie pulmonaire",

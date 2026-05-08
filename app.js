@@ -520,6 +520,13 @@ $("addChirBtn").onclick = ()=>addChir(true);
 $("addGesteBtn").onclick = ()=>addGeste(true);
 $("resetBtn").onclick = resetForm;
 $("copyBtn").onclick = copyReport;
+if($("urgenceChip")){
+  $("urgenceChip").onclick = ()=>{
+    state.urgence = !state.urgence;
+    $("urgenceChip").classList.toggle("active", state.urgence);
+    renderReport();
+  };
+}
 $("antagonisationChip").onclick = ()=>{
   state.antagonisation = !state.antagonisation;
   $("antagonisationChip").classList.toggle("active", state.antagonisation);

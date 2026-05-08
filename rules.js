@@ -114,6 +114,17 @@ const ANTIBIO_MAP = {
 
   "Varices": "Aucune",
   "Cataracte": "Céfuroxime"
+  "Amputation abdomino-périnéale": "Céfoxitine",
+"Sigmoïdectomie": "Céfoxitine",
+"Résection grêlique": "Céfoxitine",
+"Rétablissement de continuité": "Céfoxitine",
+"Cure d’éventration": "Céfazoline",
+"Cure de hernie hiatale": "Céfazoline",
+"Sleeve gastrectomie": "Céfoxitine",
+"Bypass gastrique": "Céfoxitine",
+"Splénectomie": "Céfazoline",
+"Surrénalectomie": "Aucune",
+"Parathyroïdectomie": "Aucune",
 };
 
 const ANTIBIO_DOSES = {

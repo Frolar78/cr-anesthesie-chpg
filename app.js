@@ -353,7 +353,9 @@ const neuraxialList = [...neuraxials];
 
 function renderAntibio(){
   const gestes = getSelectedGestesRaw();
+if($("urgenceBlock")){
   $("urgenceBlock").classList.toggle("hidden", gestes.length === 0);
+}
   const antibios = new Set();
 
   gestes.forEach(g=>{

@@ -64,6 +64,8 @@ approachOptions: {
   "Lobectomie pulmonaire": ["Thoracoscopie", "Thoracotomie", "Robot-assistée"],
   "Segmentectomie": ["Thoracoscopie", "Thoracotomie", "Robot-assistée"],
   "Sigmoïdectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Résection grêlique": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
+  "Iléostomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],
 },
   textGestes: [
     "Lobectomie pulmonaire",

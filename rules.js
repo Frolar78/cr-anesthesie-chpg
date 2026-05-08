@@ -103,7 +103,6 @@ const ANTIBIO_MAP = {
   "Rhinoplastie": "Aucune",
   "Thyroïdectomie totale": "Aucune",
   "Thyroïdectomie partielle": "Aucune",
-  "Parathyroidectomie": "Aucune",
   "Extraction DDS": "Amoxicilline / Acide clavulanique",
   "Carcinome cutané": "Aucune",
   "Cholestéatome": "Aucune",

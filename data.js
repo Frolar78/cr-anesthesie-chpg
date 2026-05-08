@@ -51,7 +51,8 @@ const DATA = {
   "Arthroscopie de genou",
   "Arthroscopie d'épaule",
   "Mastectomie partielle",
-  "Mastectomie totale"
+  "Mastectomie totale",
+  "Surrénalectomie",
 ],
 approachOptions: {
   "Colectomie": ["Cœlioscopie", "Laparotomie", "Robot-assistée"],

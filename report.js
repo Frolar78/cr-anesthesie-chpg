@@ -22,8 +22,6 @@ const labelIntervention =
 
 txt += `Intervention : ${labelIntervention}\n\n`;
 
-txt += `Intervention : ${gestes.join(" associée à ")}\n\n`;
-
   const mon = [];
 
   if(state.monitorage.includes("Scope")){

@@ -223,7 +223,7 @@ approachOptions: {
       ],
       interventions: [
         "Septoplastie","Rhinoplastie","Thyroïdectomie totale",
-        "Thyroïdectomie partielle","Parathyroidectomie",
+        "Thyroïdectomie partielle","Parathyroïdectomie",
         "Extraction DDS","Carcinome cutané","Cholestéatome",
         "Adénoidectomie","DTT","Turbinoplastie",
         "Adénoamygdalectomie","Autre..."

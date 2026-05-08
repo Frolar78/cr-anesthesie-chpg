@@ -87,6 +87,7 @@ chip.className =
       if(key === "ventilation") renderVentilationDetails();
       if(key === "neuraxial") renderNeuraxialDetails();
       if(key === "antibio") renderAntibioDetails();
+      if(key === "alr") renderALRDetails();
       if(key === "curare") updateCurare();
       if(key === "transfusion") renderTransfusionDetails();
       if(key === "drains") renderDrainsDetails();
@@ -334,5 +335,13 @@ function renderReveilDetails(){
 
   if(!intube){
     $("intubeVentileReason").value = "";
+  }
+}
+function renderALRDetails(){
+  const other = state.alr.includes("Autre");
+  $("alrOtherText").classList.toggle("hidden", !other);
+
+  if(!other){
+    $("alrOtherText").value = "";
   }
 }

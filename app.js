@@ -353,7 +353,8 @@ const sedation = !ect && isSedationMode();
   $("vaCard").classList.toggle("hidden", sedation || ect);
   $("entretienCard").classList.toggle("hidden", sedation || ect);
   $("antibioCard").classList.toggle("hidden", ect);
-
+  $("analgesieCard").classList.toggle("hidden", ect);
+  
 if(ect){
 
     state.curare = [];
@@ -388,17 +389,17 @@ if(ect){
       "induction"
     );
 
-  state.reveil = state.reveil.filter(x =>
-  ["Simples", "Autre"].includes(x)
-);
+    state.reveil = state.reveil.filter(x =>
+    ["Simples", "Autre"].includes(x)
+    );
 
-createChips(
-  "reveilOptions",
-  ["Simples", "Autre"],
-  "reveil"
-);
+    createChips(
+      "reveilOptions",
+      ["Simples", "Autre"],
+      "reveil"
+    );
 
-renderSedationSuitesDetails();
+    renderSedationSuitesDetails();
   
 }else if(sedation){
   

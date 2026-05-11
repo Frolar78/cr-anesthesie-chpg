@@ -298,7 +298,6 @@ textarea:focus{
   transition:.15s ease;
   align-self:flex-start;
 }
-}
 
 .chip:hover{
   border-color:#c9cfd8;

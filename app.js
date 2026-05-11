@@ -646,7 +646,7 @@ function shouldHidePeropByDefault(){
 }
 
 function renderPeropVisibility(){
-  if(isSedationMode()){
+  if(isSedationMode() || isECTMode()){
     $("peropCard").classList.add("hidden");
     $("showPeropBtn").classList.add("hidden");
     return;

@@ -33,11 +33,22 @@ chip.className =
     chip.onclick = ()=>{
       if(single){
         state[key] = state[key] === item ? "" : item;
-      }else{
-        const arr = state[key];
-        const idx = arr.indexOf(item);
-        idx > -1 ? arr.splice(idx, 1) : arr.push(item);
-      }
+     }else{
+  const arr = state[key];
+  const idx = arr.indexOf(item);
+
+  idx > -1 ? arr.splice(idx, 1) : arr.push(item);
+
+  if(key === "reveil" && isSedationMode()){
+    if(arr.includes("Simples")){
+      state.reveil = ["Simples"];
+    }
+
+    if(arr.includes("Autre")){
+      state.reveil = ["Autre"];
+    }
+  }
+}
       if(key === "reveil"){
         if(item === "Patient transféré intubé ventilé" && state.reveil.includes(item)){
           state.reveil = ["Patient transféré intubé ventilé"];
@@ -92,15 +103,6 @@ chip.className =
       if(key === "curare") updateCurare();
       if(key === "transfusion") renderTransfusionDetails();
       if(key === "drains") renderDrainsDetails();
-      if(key === "reveil" && isSedationMode()){
-     if(item === "Simples" && state.reveil.includes("Simples")){
-    state.reveil = ["Simples"];
-  }
-
-  if(item === "Autre" && state.reveil.includes("Autre")){
-    state.reveil = ["Autre"];
-  }
-}
       if(key === "reveil"){
   if(isSedationMode()){
     renderSedationSuitesDetails();

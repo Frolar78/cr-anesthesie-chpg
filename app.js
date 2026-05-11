@@ -194,7 +194,14 @@ if(DATA.robotGestes && DATA.robotGestes.includes(geste)){
       Robot-assistée
     </div>
   `;
+  
+const robotChip = chipZone.querySelector(".robot-chip");
 
+robotChip.onclick = ()=>{
+  robotChip.classList.toggle("active");
+  renderReport();
+};
+  
   extra.appendChild(chipZone);
 }
   

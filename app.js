@@ -166,28 +166,24 @@ function renderGesteExtra(wrapper, geste){
   
 if(DATA.approachOptions && DATA.approachOptions[geste]){
   const s = document.createElement("select");
-  const approachRow = document.createElement("div");
-  approachRow.className = "row-inline";
-  approachRow.style.marginTop = "8px";
   s.className = "approach-select";
   s.style.marginTop = "8px";
   fillSelect(s, DATA.approachOptions[geste], "Voie d'abord...");
-  
+
   s.addEventListener("change", ()=>{
-  const robotZone = extra.querySelector(".robot-zone");
+    const robotZone = extra.querySelector(".robot-zone");
+    if(!robotZone) return;
 
-  if(!robotZone) return;
+    const robotAllowed =
+      s.value === "Cœlioscopie" ||
+      s.value === "Thoracoscopie";
 
-  const robotAllowed =
-    s.value === "Cœlioscopie" ||
-    s.value === "Thoracoscopie";
+    robotZone.classList.toggle("hidden", !robotAllowed);
+  });
 
-  robotZone.classList.toggle("hidden", !robotAllowed);
-});
-  
-  approachRow.appendChild(s);
+  extra.appendChild(s);
 }
-  
+
 if(DATA.robotGestes && DATA.robotGestes.includes(geste)){
   const chipZone = document.createElement("div");
   chipZone.className = "chip-zone robot-zone hidden";
@@ -199,8 +195,7 @@ if(DATA.robotGestes && DATA.robotGestes.includes(geste)){
     </div>
   `;
 
-  approachRow.appendChild(chipZone);
-  extra.appendChild(approachRow);
+  extra.appendChild(chipZone);
 }
   
 if(geste === "Autre..."){

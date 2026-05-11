@@ -833,6 +833,11 @@ $("sequenceRapideToggle").onclick = ()=>{
     state.peropHidden = false;
     updateChirurgiens();
 
+    $("chirLabel").textContent =
+      specialiteSelect.value === "Psychiatrie"
+        ? "Intervenant"
+        : "Chirurgien";
+    
     document.querySelectorAll(".field").forEach(block=>{
       const sel = block.querySelector(".geste-select");
 

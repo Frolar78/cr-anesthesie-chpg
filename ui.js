@@ -40,12 +40,8 @@ chip.className =
   idx > -1 ? arr.splice(idx, 1) : arr.push(item);
 
   if(key === "reveil" && (isSedationMode() || isECTMode())){
-    if(arr.includes("Simples")){
-      state.reveil = ["Simples"];
-    }
-
-    if(arr.includes("Autre")){
-      state.reveil = ["Autre"];
+    if(idx === -1){
+      state.reveil = [item];
     }
   }
 }

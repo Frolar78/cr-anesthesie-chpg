@@ -206,7 +206,34 @@ if(state.analgesie.length){
 
   if(alrList.length){
     txt += "ALR PÉRIPHÉRIQUE\n";
-    txt += `ALR de type ${alrList.join(", ")} réalisée de manière échoguidée avec ${$("localVolume").value} mL de ${$("localAgent").value}.\n\n`;
+    let alrSentence =
+  `ALR de type ${alrList.join(", ")} réalisée de manière échoguidée avec ${$("localVolume").value} mL de ${$("localAgent").value}`;
+
+const ktList = [];
+
+alrList.forEach(alr=>{
+
+  if(state.continuousALR?.[alr]){
+
+    let ktTxt =
+      `${alr} avec cathéter périnerveux continu`;
+
+    const precision =
+      state.continuousALRText?.[alr];
+
+    if(precision){
+      ktTxt += ` (${precision})`;
+    }
+
+    ktList.push(ktTxt);
+  }
+});
+
+if(ktList.length){
+  alrSentence += `. ${ktList.join(", ")}`;
+}
+
+txt += alrSentence + ".\n\n";
   }
 }
 

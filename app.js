@@ -718,8 +718,12 @@ $("sequenceRapideToggle").onclick = ()=>{
     renderReport();
   };
 
-  document.addEventListener("change", renderReport);
-  document.addEventListener("input", renderReport);
+document.addEventListener("change", ()=>{
+  applyAnesthesiaMode();
+  renderReport();
+});
+
+document.addEventListener("input", renderReport);
 
   renderALR();
   renderAntibio();

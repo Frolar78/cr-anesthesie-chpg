@@ -271,9 +271,26 @@ approachOptions: {
     },
     
 "Psychiatrie": {
-  chirurgiens: ["Intervenant à préciser"],
-  interventions: ["Electroconvulsivothérapie"]
-},
+   chirurgiens: [
+    "Dr Corentin ANELLI",
+    "Dr Mariasole ARTIOLI NGUYEN",
+    "Dr Eva BERARD",
+    "Dr Nathalie BEAU",
+    "Dr Eva-Maria BEETZ LOBONO",
+    "Dr Anamaria BOGDAN",
+    "Dr Iréna CUSSAC",
+    "Dr Michela GIUGIARIO GORLA",
+    "Dr Khaled KAMMOUN",
+    "Dr Paula MARTINEZ NUNEZ-CACHO",
+    "Dr Ségolène MOULIERAC",
+    "Dr Céline PLASSERAUD",
+    "Dr Alessandro SCURICINI",
+    "Dr Etienne SEIGNEUR",
+    "Dr Sofia STOIAN",
+    "Dr David SZEKELY"
+  ],
+    interventions: ["Electroconvulsivothérapie"]
+  },
   
     "Ophtalmologie": {
       chirurgiens: [

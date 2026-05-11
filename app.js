@@ -354,8 +354,42 @@ const sedation = !ect && isSedationMode();
   $("entretienCard").classList.toggle("hidden", sedation || ect);
   $("antibioCard").classList.toggle("hidden", ect);
 
-  if(sedation){
+if(ect){
 
+    state.curare = [];
+    state.antagonisation = false;
+    state.va = "";
+    state.ventilation = "";
+    state.entretien = "";
+
+    $("destinationPostopBlock").classList.add("hidden");
+    $("destinationPostop").value = "";
+
+    $("peropCard").classList.add("hidden");
+    $("showPeropBtn").classList.add("hidden");
+
+    createChips(
+      "monitorage",
+      ["Scope", "SpO2", "VVP"],
+      "monitorage"
+    );
+
+    state.monitorage = state.monitorage.filter(x =>
+      ["Scope", "SpO2", "VVP"].includes(x)
+    );
+
+    state.induction = state.induction.filter(x =>
+      DATA.ectMedications.includes(x)
+    );
+
+    createChips(
+      "induction",
+      DATA.ectMedications,
+      "induction"
+    );
+
+}else if(sedation){
+  
     state.curare = [];
     state.antagonisation = false;
     state.va = "";

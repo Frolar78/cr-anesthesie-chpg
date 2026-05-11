@@ -417,6 +417,8 @@ createChips(
 
 renderAnalgesieDetails();
     
+    renderAntibio();
+    
     updateCurare();
   }
 

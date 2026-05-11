@@ -15,8 +15,15 @@ const anesths = [...document.querySelectorAll(".anesthesiste")]
   let txt = "INTERVENTION\n";
 txt += `Date : ${date}\n`;
 txt += `Anesthésiste : ${anesths.join(", ")}\n`;
-txt += `Chirurgien : ${chirs.join(", ")}\n`;
+  
+const intervenantLabel =
+  ["Psychiatrie", "Endoscopie digestive"]
+    .includes(specialiteSelect.value)
+      ? "Intervenant"
+      : "Chirurgien";
 
+txt += `${intervenantLabel} : ${chirs.join(", ")}\n`;
+  
 const labelIntervention =
   gestes.join(" associée à ") +
   (isSedationMode() ? " sous sédation" : "") +

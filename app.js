@@ -326,6 +326,64 @@ function isSedationMode(){
   );
 }
 
+function applyAnesthesiaMode(){
+  const sedation = isSedationMode();
+
+  $("inductionTitle").textContent =
+    sedation ? "Sédation" : "Induction";
+
+  $("curareCard").classList.toggle("hidden", sedation);
+  $("vaCard").classList.toggle("hidden", sedation);
+  $("entretienCard").classList.toggle("hidden", sedation);
+
+  if(sedation){
+
+    state.curare = [];
+    state.antagonisation = false;
+    state.va = "";
+    state.ventilation = "";
+    state.entretien = "";
+
+    createChips(
+      "monitorage",
+      ["Scope", "SpO2", "VVP"],
+      "monitorage"
+    );
+
+    state.monitorage = state.monitorage.filter(x =>
+      ["Scope", "SpO2", "VVP"].includes(x)
+    );
+
+    state.induction = state.induction.filter(x =>
+      DATA.sedationMedications.includes(x)
+    );
+
+    createChips(
+      "induction",
+      DATA.sedationMedications,
+      "induction"
+    );
+
+  }else{
+
+    createChips(
+      "monitorage",
+      DATA.monitorage,
+      "monitorage"
+    );
+
+    createChips(
+      "induction",
+      DATA.induction,
+      "induction"
+    );
+
+    updateCurare();
+  }
+
+  renderMonitorageDetails();
+}
+
 function updateCurare(){
   const sr = $("sequenceRapide").checked;
 

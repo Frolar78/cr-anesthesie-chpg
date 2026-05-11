@@ -403,7 +403,6 @@ function renderALRDetails(){
     ktBox = document.createElement("div");
     ktBox.id = "continuousALRBox";
     ktBox.style.marginTop = "10px";
-
     $("alrCard").appendChild(ktBox);
   }
 
@@ -414,17 +413,16 @@ function renderALRDetails(){
     if(!CONTINUOUS_ALR.includes(alr)) return;
 
     const row = document.createElement("div");
-    row.className = "detail-box";
+    row.style.marginTop = "8px";
 
     const chip = document.createElement("div");
     chip.className =
       "chip sub-chip" +
       (state.continuousALR[alr] ? " active" : "");
 
-    chip.textContent = `${alr} — KT continu`;
+    chip.textContent = "KT continu";
 
     chip.onclick = ()=>{
-
       state.continuousALR[alr] =
         !state.continuousALR[alr];
 
@@ -437,21 +435,13 @@ function renderALRDetails(){
     if(state.continuousALR[alr]){
 
       const input = document.createElement("input");
-
-      input.type = "text";
-
-      input.placeholder =
-        "Ex : Ropivacaïne 0,2% 5 mL/h";
-
-      input.value =
-        state.continuousALRText[alr] || "";
-
+      input.type = "number";
+      input.placeholder = "Débit mL/h";
+      input.value = state.continuousALRText[alr] || "";
       input.style.marginTop = "8px";
 
       input.oninput = ()=>{
-        state.continuousALRText[alr] =
-          input.value;
-
+        state.continuousALRText[alr] = input.value;
         renderReport();
       };
 

@@ -130,7 +130,8 @@ approachOptions: {
       interventions: [
         "PTH","PTG","Ostéosynthèse cheville","Ostéosynthèse poignet",
         "Recalibrage","Canal carpien","Hallux valgus","Clou gamma",
-        "Prothèse d'épaule","Arthroscopie de genou","Arthroscopie d'épaule",
+        "Prothèse d'épaule","Arthroscopie de genou","Arthroscopie d'épaule","Ostéosynthèse plateau tibial",
+        "Arthroscopie cheville",
         "Autre..."
       ]
     },
@@ -245,7 +246,8 @@ approachOptions: {
       ],
       interventions: [
         "Prostatectomie totale","Biopsies de prostate",
-        "REP","REV","URS + Laser","Montée de JJ",
+        "REP HOLEP","REV","URS + Laser","Montée de JJ",
+        "Néphrectomie","Posthectomie","UPR",
         "Cystectomie totale",
         "Autre..."
       ]
@@ -260,7 +262,7 @@ approachOptions: {
         "Septoplastie","Rhinoplastie","Thyroïdectomie totale",
         "Thyroïdectomie partielle","Parathyroïdectomie",
         "Extraction DDS","Carcinome cutané","Cholestéatome",
-        "Adénoidectomie","DTT","Turbinoplastie",
+        "Adénoidectomie","DTT","Turbinoplastie","Ethmoïdectomie",
         "Adénoamygdalectomie","Autre..."
       ]
     },
@@ -300,7 +302,7 @@ approachOptions: {
         "Dr Valérie ELMALEH","Dr Cécilia LEAL",
         "Dr Thierry FERRETE"
       ],
-      interventions: ["Cataracte","Autre..."]
+      interventions: ["Cataracte","Blépharoplastie","Autre..."]
     }
   }
 };

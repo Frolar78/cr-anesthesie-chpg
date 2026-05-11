@@ -164,7 +164,12 @@ body{
 .title-with-chip{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
+}
+
+#urgenceChip{
+  padding:8px 14px;
+  font-size:13px;
 }
 
 /* FIELDS */

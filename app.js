@@ -833,8 +833,8 @@ $("sequenceRapideToggle").onclick = ()=>{
     state.peropHidden = false;
     updateChirurgiens();
 
-    $("chirLabel").textContent =
-      specialiteSelect.value === "Psychiatrie"
+   $("chirLabel").textContent =
+      ["Psychiatrie", "Endoscopie digestive"].includes(specialiteSelect.value)
         ? "Intervenant"
         : "Chirurgien";
     

@@ -338,8 +338,9 @@ function isECTMode(){
 }
 
 function applyAnesthesiaMode(){
-  const sedation = isSedationMode();
-
+const ect = isECTMode();
+const sedation = !ect && isSedationMode();
+  
   $("inductionTitle").textContent =
     sedation ? "Sédation" : "Induction";
 

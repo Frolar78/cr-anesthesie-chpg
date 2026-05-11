@@ -165,13 +165,44 @@ function renderGesteExtra(wrapper, geste){
   }
   
 if(DATA.approachOptions && DATA.approachOptions[geste]){
+  const approachRow = document.createElement("div");
+  approachRow.className = "row-inline";
+  approachRow.style.marginTop = "8px";
+
   const s = document.createElement("select");
   s.className = "approach-select";
-  s.style.marginTop = "8px";
+  s.style.flex = "1";
+  s.style.minWidth = "0";
+
   fillSelect(s, DATA.approachOptions[geste], "Voie d'abord...");
+  approachRow.appendChild(s);
+
+  let robotChip = null;
+  let robotZone = null;
+
+  if(DATA.robotGestes && DATA.robotGestes.includes(geste)){
+    robotZone = document.createElement("div");
+    robotZone.className = "chip-zone robot-zone hidden";
+    robotZone.style.marginTop = "0";
+    robotZone.style.flexShrink = "0";
+
+    robotZone.innerHTML = `
+      <div class="chip sub-chip robot-chip">
+        Robot-assistée
+      </div>
+    `;
+
+    robotChip = robotZone.querySelector(".robot-chip");
+
+    robotChip.onclick = ()=>{
+      robotChip.classList.toggle("active");
+      renderReport();
+    };
+
+    approachRow.appendChild(robotZone);
+  }
 
   s.addEventListener("change", ()=>{
-    const robotZone = extra.querySelector(".robot-zone");
     if(!robotZone) return;
 
     const robotAllowed =
@@ -179,30 +210,15 @@ if(DATA.approachOptions && DATA.approachOptions[geste]){
       s.value === "Thoracoscopie";
 
     robotZone.classList.toggle("hidden", !robotAllowed);
+
+    if(!robotAllowed && robotChip){
+      robotChip.classList.remove("active");
+    }
+
+    renderReport();
   });
 
-  extra.appendChild(s);
-}
-
-if(DATA.robotGestes && DATA.robotGestes.includes(geste)){
-  const chipZone = document.createElement("div");
-  chipZone.className = "chip-zone robot-zone hidden";
-  chipZone.style.marginTop = "8px";
-
-  chipZone.innerHTML = `
-    <div class="chip sub-chip robot-chip">
-      Robot-assistée
-    </div>
-  `;
-  
-const robotChip = chipZone.querySelector(".robot-chip");
-
-robotChip.onclick = ()=>{
-  robotChip.classList.toggle("active");
-  renderReport();
-};
-  
-  extra.appendChild(chipZone);
+  extra.appendChild(approachRow);
 }
   
 if(geste === "Autre..."){

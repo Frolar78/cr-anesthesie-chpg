@@ -295,7 +295,27 @@ function buildGesteLabel(block){
  const approach = block.querySelector(".approach-select")?.value;
 
 if(approach){
-  geste += " par " + approach.toLowerCase();
+
+  if(geste.startsWith("Néphrectomie")){
+
+    geste = geste.replace(
+      "Néphrectomie",
+      `Néphrectomie ${approach.toLowerCase()}`
+    );
+
+  }else{
+
+    geste += " par " + approach.toLowerCase();
+
+  }
+
+  const robotActive =
+    block.querySelector(".robot-chip")?.classList.contains("active");
+
+  if(robotActive){
+    geste += " robot-assistée";
+  }
+}
 
   const robotActive =
     block.querySelector(".robot-chip")?.classList.contains("active");

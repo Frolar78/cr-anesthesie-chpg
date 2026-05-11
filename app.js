@@ -327,6 +327,16 @@ function isSedationMode(){
   );
 }
 
+function isECTMode(){
+  const gestes = getSelectedGestesRaw();
+
+  if(!gestes.length) return false;
+
+  return gestes.every(g =>
+    DATA.ectGestes && DATA.ectGestes.includes(g)
+  );
+}
+
 function applyAnesthesiaMode(){
   const sedation = isSedationMode();
 

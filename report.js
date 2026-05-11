@@ -74,7 +74,9 @@ if(position || mon.length || state.monitorage.includes("KTA") || state.monitorag
     txt += "\n";
   }
 
-  const ordre = ["Sufentanil","Rémifentanil","Kétamine","Etomidate","Propofol"];
+  const ordre = isSedationMode()
+  ? ["Midazolam","Propofol","Sufentanil","Kétamine"]
+  : ["Sufentanil","Rémifentanil","Kétamine","Etomidate","Propofol"];  
   const meds = ordre.filter(x=>state.induction.includes(x));
   const curares = state.curare.filter(x=>x !== "Aucun");
 

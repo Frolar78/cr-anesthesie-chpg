@@ -342,8 +342,7 @@ if(reveil.length){
 
   txt += "SUITES IMMÉDIATES\n";
 
-  if(isSedationMode()){
-
+if(isSedationMode() || isECTMode()){
     if(reveil.includes("Simples")){
       txt += "Suites simples.\n";
     }

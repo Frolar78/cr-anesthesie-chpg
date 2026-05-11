@@ -16,22 +16,19 @@ const ALR_PERIPHERIQUE_MAP = {
   "Colectomie": ["TAP bloc"],
   "Mastectomie totale": ["Bloc paravertébral", "PECS bloc"],
 
- "Lobectomie pulmonaire": [
+"Lobectomie pulmonaire": [
   "Bloc paravertébral",
-  "Bloc érecteur du rachis",
-  "Péridurale"
+  "Bloc érecteur du rachis"
 ],
 
 "Segmentectomie": [
   "Bloc paravertébral",
-  "Bloc érecteur du rachis",
-  "Péridurale"
+  "Bloc érecteur du rachis"
 ],
 
 "Talcage pleural": [
   "Bloc paravertébral",
-  "Bloc érecteur du rachis",
-  "Péridurale"
+  "Bloc érecteur du rachis"
 ]
 };
 
@@ -40,6 +37,8 @@ const ALR_NEURAXIAL_MAP = {
   "Œsophagectomie Lewis-Santy": ["Péridurale thoracique"],
   "CHIP": ["Péridurale thoracique"],
   "Lobectomie pulmonaire": ["Péridurale thoracique"],
+  "Segmentectomie": ["Péridurale thoracique"],
+  "Talcage pleural": ["Péridurale thoracique"],
   "Césarienne": ["Rachianesthésie", "Péridurale"],
   "Curetage": ["Rachianesthésie"],
   "Cerclage": ["Rachianesthésie"],

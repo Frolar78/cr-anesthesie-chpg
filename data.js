@@ -34,7 +34,17 @@ const DATA = {
   sedationGestes: [
   "Cataracte"
 ],
+  
+ectGestes: [
+  "Electroconvulsivothérapie"
+],
 
+ectMedications: [
+  "Propofol",
+  "Célocurine",
+  "Kétamine"
+],
+  
   sedationMedications: [
   "Midazolam",
   "Propofol",

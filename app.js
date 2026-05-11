@@ -538,6 +538,12 @@ function shouldHidePeropByDefault(){
 }
 
 function renderPeropVisibility(){
+  if(isSedationMode()){
+    $("peropCard").classList.add("hidden");
+    $("showPeropBtn").classList.add("hidden");
+    return;
+  }
+
   const hideByDefault = shouldHidePeropByDefault();
 
   if(state.peropHidden || (hideByDefault && !state.peropForced)){

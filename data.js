@@ -38,7 +38,8 @@ const DATA = {
   sedationMedications: [
   "Midazolam",
   "Propofol",
-  "Sufentanil"
+  "Sufentanil",
+  "Kétamine"
 ],
   
   laterality: ["Droite","Gauche","Bilatéral"],

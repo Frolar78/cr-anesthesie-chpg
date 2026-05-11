@@ -80,11 +80,21 @@ if(position || mon.length || state.monitorage.includes("KTA") || state.monitorag
   const meds = ordre.filter(x=>state.induction.includes(x));
   const curares = state.curare.filter(x=>x !== "Aucun");
 
-  if(meds.length){
+if(meds.length){
+
+  if(isSedationMode()){
+
+    txt += "SÉDATION\n";
+    txt += "Sédation par ";
+
+  }else{
+
     txt += "INDUCTION\n";
     txt += $("sequenceRapide").checked
       ? "Induction en séquence rapide par "
       : "Induction par ";
+
+  }
 
     txt += meds.join(", ");
 

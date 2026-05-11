@@ -345,6 +345,9 @@ function applyAnesthesiaMode(){
     state.ventilation = "";
     state.entretien = "";
     
+    $("destinationPostopBlock").classList.add("hidden");
+    $("destinationPostop").value = "";
+    
     $("peropCard").classList.add("hidden");
     $("showPeropBtn").classList.add("hidden");
     
@@ -406,6 +409,8 @@ createChips(
 renderSedationSuitesDetails();
     
   }else{
+    
+    $("destinationPostopBlock").classList.remove("hidden");
     
 renderPeropVisibility();
     

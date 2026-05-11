@@ -216,7 +216,7 @@ alrList.forEach(alr=>{
   if(state.continuousALR?.[alr]){
 
     let ktTxt =
-  `puis mise en place d’un cathéter périnerveux continu sur le ${alr.toLowerCase()}`;
+  `puis mise en place d’un cathéter périnerveux continu`;
 
 const precision =
   state.continuousALRText?.[alr];

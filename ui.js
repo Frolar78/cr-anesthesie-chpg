@@ -394,3 +394,59 @@ function renderALRDetails(){
     $("alrOtherText").value = "";
   }
 }
+
+function renderECTMedications(){
+  const box = $("induction");
+  box.innerHTML = "";
+  box.className = "ect-med-list";
+
+  DATA.ectMedications.forEach(med=>{
+    const row = document.createElement("div");
+    row.className = "ect-med-row";
+
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.textContent = med;
+
+    if(state.induction.includes(med)){
+      chip.classList.add("active");
+    }
+
+    chip.onclick = ()=>{
+      const idx = state.induction.indexOf(med);
+
+      if(idx > -1){
+        state.induction.splice(idx, 1);
+      }else{
+        state.induction.push(med);
+      }
+
+      renderECTMedications();
+      renderReport();
+    };
+
+    row.appendChild(chip);
+
+    if(state.induction.includes(med)){
+      const input = document.createElement("input");
+      input.className = "ect-dose";
+      input.type = "number";
+      input.id = "doseECT_" + med;
+      input.placeholder = "mg";
+      input.value = state.ectDoses?.[med] || "";
+
+      input.oninput = ()=>{
+        if(!state.ectDoses){
+          state.ectDoses = {};
+        }
+
+        state.ectDoses[med] = input.value;
+        renderReport();
+      };
+
+      row.appendChild(input);
+    }
+
+    box.appendChild(row);
+  });
+}

@@ -383,11 +383,7 @@ if(ect){
       DATA.ectMedications.includes(x)
     );
 
-    createChips(
-      "induction",
-      DATA.ectMedications,
-      "induction"
-    );
+    renderECTMedications();
 
     state.reveil = state.reveil.filter(x =>
     ["Simples", "Autre"].includes(x)

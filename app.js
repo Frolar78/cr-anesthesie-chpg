@@ -344,7 +344,10 @@ function applyAnesthesiaMode(){
     state.va = "";
     state.ventilation = "";
     state.entretien = "";
-
+    
+    $("peropCard").classList.add("hidden");
+    $("showPeropBtn").classList.add("hidden");
+    
     createChips(
       "monitorage",
       ["Scope", "SpO2", "VVP"],
@@ -378,7 +381,9 @@ state.analgesie = state.analgesie.filter(x =>
 renderAnalgesieDetails();
     
   }else{
-
+    
+renderPeropVisibility();
+    
     createChips(
       "monitorage",
       DATA.monitorage,

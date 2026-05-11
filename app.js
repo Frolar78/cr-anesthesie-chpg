@@ -341,8 +341,13 @@ function applyAnesthesiaMode(){
 const ect = isECTMode();
 const sedation = !ect && isSedationMode();
   
-  $("inductionTitle").textContent =
-    sedation ? "Sédation" : "Induction";
+  if(ect){
+  $("inductionTitle").textContent = "Anesthésie";
+}else if(sedation){
+  $("inductionTitle").textContent = "Sédation";
+}else{
+  $("inductionTitle").textContent = "Induction";
+}
 
   $("curareCard").classList.toggle("hidden", sedation);
   $("vaCard").classList.toggle("hidden", sedation);

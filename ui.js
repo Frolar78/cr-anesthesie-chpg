@@ -92,7 +92,13 @@ chip.className =
       if(key === "curare") updateCurare();
       if(key === "transfusion") renderTransfusionDetails();
       if(key === "drains") renderDrainsDetails();
-      if(key === "reveil") renderReveilDetails();
+      if(key === "reveil"){
+  if(isSedationMode()){
+    renderSedationSuitesDetails();
+  }else{
+    renderReveilDetails();
+  }
+}
       renderALR();
       renderPeropVisibility();
       renderReport();
@@ -334,6 +340,18 @@ function renderDrainsDetails(){
   if(!hasSV) $("svText").value = "";
   if(!isOther) $("drainsOtherText").value = "";
 }
+
+function renderSedationSuitesDetails(){
+  const other = state.reveil.includes("Autre");
+
+  $("sedationSuitesOtherBlock")
+    .classList.toggle("hidden", !other);
+
+  if(!other){
+    $("sedationSuitesOtherText").value = "";
+  }
+}
+
 function renderReveilDetails(){
   const complication = state.reveil.includes("Complication extubation");
   const intube = state.reveil.includes("Patient transféré intubé ventilé");

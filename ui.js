@@ -19,6 +19,7 @@ function fillSelect(select, list, placeholder=""){
 function createChips(id, list, key, single=false){
   const box = $(id);
   box.innerHTML = "";
+  box.className = "chip-zone";
 
   list.forEach(item=>{
     const chip = document.createElement("div");

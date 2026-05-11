@@ -16,6 +16,8 @@ const state = {
   analgesie: [],
   antibio: "",
   alr: [],
+  continuousALR: {},
+  continuousALRText: {},
   neuraxial: [],
   reveil: [],
   transfusionActive: false,

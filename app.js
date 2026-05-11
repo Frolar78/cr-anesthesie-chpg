@@ -116,10 +116,11 @@ function addGeste(removable=true){
       wrapper.remove();
       state.peropForced = false;
       state.peropHidden = false;
-      renderALR();
-      renderAntibio();
-      renderPeropVisibility();
-      renderReport();
+renderALR();
+renderAntibio();
+renderPeropVisibility();
+applyAnesthesiaMode();
+renderReport();
     };
   }
 

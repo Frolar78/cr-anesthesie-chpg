@@ -175,7 +175,14 @@ if(DATA.approachOptions && DATA.approachOptions[geste]){
   s.style.flex = "1";
   s.style.minWidth = "0";
 
-  fillSelect(s, DATA.approachOptions[geste], "Voie d'abord...");
+  fillSelect(
+    s,
+    DATA.approachOptions[geste],
+    geste === "Néphrectomie"
+      ? "Type..."
+      : "Voie d'abord..."
+  );
+  
   approachRow.appendChild(s);
 
   let robotChip = null;

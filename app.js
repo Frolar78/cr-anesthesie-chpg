@@ -380,6 +380,19 @@ state.analgesie = state.analgesie.filter(x =>
 
 renderAnalgesieDetails();
     
+    createChips(
+  "antibioOptions",
+  ["Aucune", "Autre"],
+  "antibio",
+  true
+);
+
+if(!["Aucune", "Autre"].includes(state.antibio)){
+  state.antibio = "Aucune";
+}
+
+renderAntibioDetails();
+    
   }else{
     
 renderPeropVisibility();

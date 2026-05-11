@@ -82,6 +82,20 @@ approachOptions: {
     "Segmentectomie hépatique",
     "Embolisation"
   ],
+  
+  robotGestes: [
+  "Colectomie",
+  "Sigmoïdectomie",
+  "Résection grêlique",
+  "Cure d’éventration",
+  "Sleeve gastrectomie",
+  "Bypass gastrique",
+  "Surrénalectomie",
+  "Hystérectomie",
+  "Annexectomie",
+  "Lobectomie pulmonaire",
+  "Segmentectomie"
+],
 
   specialites: {
     "Orthopédie": {

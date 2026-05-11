@@ -349,9 +349,10 @@ const sedation = !ect && isSedationMode();
   $("inductionTitle").textContent = "Induction";
 }
 
-  $("curareCard").classList.toggle("hidden", sedation);
-  $("vaCard").classList.toggle("hidden", sedation);
-  $("entretienCard").classList.toggle("hidden", sedation);
+  $("curareCard").classList.toggle("hidden", sedation || ect);
+  $("vaCard").classList.toggle("hidden", sedation || ect);
+  $("entretienCard").classList.toggle("hidden", sedation || ect);
+  $("antibioCard").classList.toggle("hidden", ect);
 
   if(sedation){
 

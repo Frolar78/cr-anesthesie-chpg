@@ -252,6 +252,7 @@ function buildGesteLabel(block){
       "Annexectomie",
       "Kystectomie ovarienne",
       "Cataracte",
+      "Néphrectomie",
       "Prothèse d'épaule",
       "Arthroscopie de genou",
       "Arthroscopie d'épaule",

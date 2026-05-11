@@ -316,6 +316,15 @@ function getSelectedGestesRaw(){
     .filter(Boolean);
 }
 
+function isSedationMode(){
+  const gestes = getSelectedGestesRaw();
+
+  if(!gestes.length) return false;
+
+  return gestes.every(g =>
+    DATA.sedationGestes && DATA.sedationGestes.includes(g)
+  );
+}
 
 function updateCurare(){
   const sr = $("sequenceRapide").checked;

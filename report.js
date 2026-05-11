@@ -18,7 +18,9 @@ txt += `Anesthésiste : ${anesths.join(", ")}\n`;
 txt += `Chirurgien : ${chirs.join(", ")}\n`;
 
 const labelIntervention =
-  gestes.join(" associée à ") + (state.urgence ? " en urgence" : "");
+  gestes.join(" associée à ") +
+  (isSedationMode() ? " sous sédation" : "") +
+  (state.urgence ? " en urgence" : "");
 
 txt += `Intervention : ${labelIntervention}\n\n`;
 

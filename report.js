@@ -158,10 +158,21 @@ if(state.antagonisation){
       : "Entretien anesthésique par propofol en AIVOC.\n\n";
   }
 
-  if(state.analgesie.length){
+if(state.analgesie.length){
+  const analgesies = state.analgesie
+    .map(x => x === "Autre" ? $("analgesieOtherText")?.value?.trim() : x)
+    .filter(Boolean);
+
+  if(analgesies.length){
     txt += "ANALGÉSIE\n";
-    txt += `Analgésie multimodale par ${state.analgesie.join(", ")}.\n\n`;
+
+    if(isSedationMode()){
+      txt += `Analgésie par ${analgesies.join(", ")}.\n\n`;
+    }else{
+      txt += `Analgésie multimodale par ${analgesies.join(", ")}.\n\n`;
+    }
   }
+}
 
   if(state.alr.length){
   const alrList = state.alr

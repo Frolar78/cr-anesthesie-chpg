@@ -259,7 +259,12 @@ approachOptions: {
       chirurgiens: ["Dr Gianvittorio TOMMASI"],
       interventions: ["Varices","Autre..."]
     },
-
+    
+"Psychiatrie": {
+  chirurgiens: ["Intervenant à préciser"],
+  interventions: ["Electroconvulsivothérapie"]
+},
+  
     "Ophtalmologie": {
       chirurgiens: [
         "Dr Frédéric BETIS","Dr Florence GASTAUD-NEGRE",

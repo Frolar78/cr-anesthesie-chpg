@@ -275,15 +275,18 @@ function buildGesteLabel(block){
     geste += " " + map[lat];
   }
 
-  const approach = block.querySelector(".approach-select")?.value;
+ const approach = block.querySelector(".approach-select")?.value;
 
-  if(approach){
-    if(approach === "Robot-assistée"){
-      geste += " robot-assistée";
-    }else{
-      geste += " par " + approach.toLowerCase();
-    }
+if(approach){
+  geste += " par " + approach.toLowerCase();
+
+  const robotActive =
+    block.querySelector(".robot-chip")?.classList.contains("active");
+
+  if(robotActive){
+    geste += " robot-assistée";
   }
+}
 
   const p = block.querySelector(".precision-input")?.value;
   if(p) geste += ` (${p})`;

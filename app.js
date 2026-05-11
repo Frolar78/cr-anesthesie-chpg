@@ -166,6 +166,9 @@ function renderGesteExtra(wrapper, geste){
   
 if(DATA.approachOptions && DATA.approachOptions[geste]){
   const s = document.createElement("select");
+  const approachRow = document.createElement("div");
+  approachRow.className = "row-inline";
+  approachRow.style.marginTop = "8px";
   s.className = "approach-select";
   s.style.marginTop = "8px";
   fillSelect(s, DATA.approachOptions[geste], "Voie d'abord...");
@@ -182,7 +185,7 @@ if(DATA.approachOptions && DATA.approachOptions[geste]){
   robotZone.classList.toggle("hidden", !robotAllowed);
 });
   
-  extra.appendChild(s);
+  approachRow.appendChild(s);
 }
   
 if(DATA.robotGestes && DATA.robotGestes.includes(geste)){
@@ -196,7 +199,8 @@ if(DATA.robotGestes && DATA.robotGestes.includes(geste)){
     </div>
   `;
 
-  extra.appendChild(chipZone);
+  approachRow.appendChild(chipZone);
+  extra.appendChild(approachRow);
 }
   
 if(geste === "Autre..."){

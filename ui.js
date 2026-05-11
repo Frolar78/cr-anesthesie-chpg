@@ -92,6 +92,15 @@ chip.className =
       if(key === "curare") updateCurare();
       if(key === "transfusion") renderTransfusionDetails();
       if(key === "drains") renderDrainsDetails();
+      if(key === "reveil" && isSedationMode()){
+     if(item === "Simples" && state.reveil.includes("Simples")){
+    state.reveil = ["Simples"];
+  }
+
+  if(item === "Autre" && state.reveil.includes("Autre")){
+    state.reveil = ["Autre"];
+  }
+}
       if(key === "reveil"){
   if(isSedationMode()){
     renderSedationSuitesDetails();

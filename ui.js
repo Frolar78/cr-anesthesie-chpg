@@ -348,6 +348,18 @@ function renderReveilDetails(){
     $("intubeVentileReason").value = "";
   }
 }
+
+function renderAnalgesieDetails(){
+  const other = state.analgesie.includes("Autre");
+
+  $("analgesieOtherBlock")
+    .classList.toggle("hidden", !other);
+
+  if(!other){
+    $("analgesieOtherText").value = "";
+  }
+}
+
 function renderALRDetails(){
   const other = state.alr.includes("Autre");
   $("alrOtherText").classList.toggle("hidden", !other);

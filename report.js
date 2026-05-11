@@ -74,11 +74,29 @@ if(position || mon.length || state.monitorage.includes("KTA") || state.monitorag
     txt += "\n";
   }
 
-  const ordre = isSedationMode()
-  ? ["Midazolam","Propofol","Sufentanil","Kétamine"]
-  : ["Sufentanil","Rémifentanil","Kétamine","Etomidate","Propofol"];  
-  const meds = ordre.filter(x=>state.induction.includes(x));
-  const curares = state.curare.filter(x=>x !== "Aucun");
+  let ordre;
+
+if(isECTMode()){
+  ordre = ["Propofol","Célocurine","Kétamine"];
+}else if(isSedationMode()){
+  ordre = ["Midazolam","Propofol","Sufentanil","Kétamine"];
+}else{
+  ordre = ["Sufentanil","Rémifentanil","Kétamine","Etomidate","Propofol"];
+}
+  
+const meds = ordre
+  .filter(x=>state.induction.includes(x))
+  .map(x=>{
+    if(isECTMode()){
+      const dose = state.ectDoses?.[x];
+
+      return dose ? `${x} ${dose} mg` : x;
+    }
+
+    return x;
+  });  
+  
+const curares = state.curare.filter(x=>x !== "Aucun");
 
 if(meds.length){
 

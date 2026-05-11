@@ -338,7 +338,9 @@ if(reveil.length){
         txt += txtLibre + ".\n";
       }
     }
-
+    
+txt += "Transfert en service pour suite de la prise en charge.\n";
+    
   }else{
 
     const destination = $("destinationPostop")?.value;

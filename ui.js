@@ -101,12 +101,12 @@ chip.className =
       if(key === "transfusion") renderTransfusionDetails();
       if(key === "drains") renderDrainsDetails();
       if(key === "reveil"){
-  if(isSedationMode()){
-    renderSedationSuitesDetails();
-  }else{
-    renderReveilDetails();
-  }
-}
+        if(isSedationMode() || isECTMode()){
+          renderSedationSuitesDetails();
+        }else{
+          renderReveilDetails();
+        }
+    }
       renderALR();
       renderPeropVisibility();
       renderReport();

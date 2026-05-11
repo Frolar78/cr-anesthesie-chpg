@@ -174,7 +174,7 @@ if(DATA.approachOptions && DATA.approachOptions[geste]){
   
 if(DATA.robotGestes && DATA.robotGestes.includes(geste)){
   const chipZone = document.createElement("div");
-  chipZone.className = "chip-zone";
+  chipZone.className = "chip-zone robot-zone hidden";
   chipZone.style.marginTop = "8px";
 
   chipZone.innerHTML = `

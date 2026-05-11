@@ -172,7 +172,21 @@ if(DATA.approachOptions && DATA.approachOptions[geste]){
   extra.appendChild(s);
 }
   
-  if(geste === "Autre..."){
+if(DATA.robotGestes && DATA.robotGestes.includes(geste)){
+  const chipZone = document.createElement("div");
+  chipZone.className = "chip-zone";
+  chipZone.style.marginTop = "8px";
+
+  chipZone.innerHTML = `
+    <div class="chip sub-chip robot-chip">
+      Robot-assistée
+    </div>
+  `;
+
+  extra.appendChild(chipZone);
+}
+  
+if(geste === "Autre..."){
     const i = document.createElement("input");
     i.className = "custom-geste";
     i.placeholder = "Préciser l'intervention";

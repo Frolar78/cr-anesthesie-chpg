@@ -29,7 +29,10 @@
   <main class="layout">
 
     <section class="panel left-panel">
-      <div class="panel-title">Intervention</div>
+   <div class="panel-title title-with-chip">
+  <span>Intervention</span>
+  <div class="chip sub-chip" id="urgenceChip">Urgence</div>
+</div>
 
       <div class="field">
         <label>Date</label>
@@ -56,10 +59,6 @@
 <div class="field">
 <label>Intervention</label>
 <div id="gesteContainer"></div>
-
-<div id="urgenceBlock" class="chip-zone hidden" style="margin-top:8px;">
-  <div class="chip sub-chip" id="urgenceChip">Urgence</div>
-</div>
 </div>
 
 <button class="action-btn" id="addGesteBtn" type="button">+ Intervention</button>

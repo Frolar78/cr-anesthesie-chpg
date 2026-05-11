@@ -308,38 +308,70 @@ if(state.drainsActive && state.drains.length){
       : `Antibioprophylaxie par ${state.antibio}.\n`;
   }
 const reveil = state.reveil || [];
-const destination = $("destinationPostop")?.value;
-const complicationExtubation = $("complicationExtubationText")?.value?.trim();
-const intubeVentileReason = $("intubeVentileReason")?.value?.trim();
 
-if(reveil.length || destination){
+if(reveil.length){
+
   txt += "SUITES IMMÉDIATES\n";
 
-  const intube = reveil.includes("Patient transféré intubé ventilé");
-  const complication = reveil.includes("Complication extubation");
-  const extubation = reveil.includes("Extubation");
+  if(isSedationMode()){
 
-  if(intube){
-    let phrase = "Patient transféré intubé ventilé";
-
-    if(destination){
-      phrase += " en " + destination.toLowerCase();
+    if(reveil.includes("Simples")){
+      txt += "Suites simples.\n";
     }
 
-    if(intubeVentileReason){
-      phrase += " en raison de " + intubeVentileReason;
+    if(reveil.includes("Autre")){
+      const txtLibre =
+        $("sedationSuitesOtherText")?.value?.trim();
+
+      if(txtLibre){
+        txt += txtLibre + ".\n";
+      }
     }
 
-    txt += phrase + ".\n";
   }else{
-    if(complication && complicationExtubation){
-      txt += `Complication à l’extubation : ${complicationExtubation}.\n`;
-    }else if(extubation){
-      txt += "Patient extubé en SSPI sans complication.\n";
-    }
 
-    if(destination){
-      txt += `Transfert en ${destination.toLowerCase()} pour suite de la prise en charge.\n`;
+    const destination = $("destinationPostop")?.value;
+    const complicationExtubation =
+      $("complicationExtubationText")?.value?.trim();
+
+    const intubeVentileReason =
+      $("intubeVentileReason")?.value?.trim();
+
+    const intube =
+      reveil.includes("Patient transféré intubé ventilé");
+
+    const complication =
+      reveil.includes("Complication extubation");
+
+    const extubation =
+      reveil.includes("Extubation");
+
+    if(intube){
+
+      let phrase =
+        "Patient transféré intubé ventilé";
+
+      if(destination){
+        phrase += " en " + destination.toLowerCase();
+      }
+
+      if(intubeVentileReason){
+        phrase += " en raison de " + intubeVentileReason;
+      }
+
+      txt += phrase + ".\n";
+
+    }else{
+
+      if(complication && complicationExtubation){
+        txt += `Complication à l’extubation : ${complicationExtubation}.\n`;
+      }else if(extubation){
+        txt += "Patient extubé en SSPI sans complication.\n";
+      }
+
+      if(destination){
+        txt += `Transfert en ${destination.toLowerCase()} pour suite de la prise en charge.\n`;
+      }
     }
   }
 

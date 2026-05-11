@@ -30,7 +30,17 @@ const DATA = {
   induction: ["Sufentanil","Rémifentanil","Kétamine","Etomidate","Propofol"],
 
   entretien: ["Sevoflurane","Propofol AIVOC"],
+  
+  sedationGestes: [
+  "Cataracte"
+],
 
+  sedationMedications: [
+  "Midazolam",
+  "Propofol",
+  "Rémifentanil"
+],
+  
   laterality: ["Droite","Gauche","Bilatéral"],
 
   lateralizedGestes: [

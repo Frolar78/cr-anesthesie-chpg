@@ -74,7 +74,16 @@ ectMedications: [
   "Mastectomie partielle",
   "Mastectomie totale",
   "Surrénalectomie",
-],
+  "Néphrectomie",
+  "Montée de JJ",
+  "URS + Laser",
+  "UPR",
+  "Ostéosynthèse plateau tibial",
+  "Arthroscopie cheville",
+  "Ethmoïdectomie",
+  "Blépharoplastie",
+  ],
+  
 approachOptions: {
   "Colectomie": ["Cœlioscopie", "Laparotomie"],
   "Appendicectomie": ["Cœlioscopie", "Laparotomie"],

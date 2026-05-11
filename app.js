@@ -388,6 +388,18 @@ if(ect){
       "induction"
     );
 
+  state.reveil = state.reveil.filter(x =>
+  ["Simples", "Autre"].includes(x)
+);
+
+createChips(
+  "reveilOptions",
+  ["Simples", "Autre"],
+  "reveil"
+);
+
+renderSedationSuitesDetails();
+  
 }else if(sedation){
   
     state.curare = [];

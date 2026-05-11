@@ -169,6 +169,19 @@ if(DATA.approachOptions && DATA.approachOptions[geste]){
   s.className = "approach-select";
   s.style.marginTop = "8px";
   fillSelect(s, DATA.approachOptions[geste], "Voie d'abord...");
+  
+  s.addEventListener("change", ()=>{
+  const robotZone = extra.querySelector(".robot-zone");
+
+  if(!robotZone) return;
+
+  const robotAllowed =
+    s.value === "Cœlioscopie" ||
+    s.value === "Thoracoscopie";
+
+  robotZone.classList.toggle("hidden", !robotAllowed);
+});
+  
   extra.appendChild(s);
 }
   

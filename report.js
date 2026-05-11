@@ -216,14 +216,14 @@ alrList.forEach(alr=>{
   if(state.continuousALR?.[alr]){
 
     let ktTxt =
-      `${alr} avec cathéter périnerveux continu`;
+  `puis mise en place d’un cathéter périnerveux continu sur le ${alr.toLowerCase()}`;
 
-    const precision =
-      state.continuousALRText?.[alr];
+const precision =
+  state.continuousALRText?.[alr];
 
-    if(precision){
-      ktTxt += ` (${precision})`;
-    }
+if(precision){
+  ktTxt += ` (ropivacaïne 0,2% à ${precision} mL/h)`;
+}
 
     ktList.push(ktTxt);
   }

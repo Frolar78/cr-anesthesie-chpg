@@ -364,7 +364,19 @@ function applyAnesthesiaMode(){
       DATA.sedationMedications,
       "induction"
     );
+    
+createChips(
+  "analgesieOptions",
+  ["Paracétamol", "Autre"],
+  "analgesie"
+);
 
+state.analgesie = state.analgesie.filter(x =>
+  ["Paracétamol", "Autre"].includes(x)
+);
+
+renderAnalgesieDetails();
+    
   }else{
 
     createChips(
@@ -378,7 +390,15 @@ function applyAnesthesiaMode(){
       DATA.induction,
       "induction"
     );
+    
+createChips(
+  "analgesieOptions",
+  ["Paracétamol", "Kétoprofène", "Néfopam", "Tramadol", "Morphine"],
+  "analgesie"
+);
 
+renderAnalgesieDetails();
+    
     updateCurare();
   }
 

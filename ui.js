@@ -421,7 +421,8 @@ function renderALRDetails(){
       (state.continuousALR[alr] ? " active" : "");
 
     chip.textContent = "KT continu";
-
+    chip.style.display = "inline-flex";
+    chip.style.width = "fit-content";
     chip.onclick = ()=>{
       state.continuousALR[alr] =
         !state.continuousALR[alr];
@@ -436,7 +437,7 @@ function renderALRDetails(){
 
       const input = document.createElement("input");
       input.type = "number";
-      input.placeholder = "Débit mL/h";
+      input.placeholder = "mL/h";
       input.value = state.continuousALRText[alr] || "";
       input.style.marginTop = "8px";
 

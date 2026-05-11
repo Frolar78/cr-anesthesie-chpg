@@ -88,6 +88,7 @@ chip.className =
       if(key === "neuraxial") renderNeuraxialDetails();
       if(key === "antibio") renderAntibioDetails();
       if(key === "alr") renderALRDetails();
+      if(key === "analgesie") renderAnalgesieDetails();
       if(key === "curare") updateCurare();
       if(key === "transfusion") renderTransfusionDetails();
       if(key === "drains") renderDrainsDetails();

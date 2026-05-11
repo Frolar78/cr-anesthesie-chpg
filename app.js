@@ -393,6 +393,18 @@ if(!["Aucune", "Autre"].includes(state.antibio)){
 
 renderAntibioDetails();
     
+    state.reveil = state.reveil.filter(x =>
+  ["Simples", "Autre"].includes(x)
+);
+
+createChips(
+  "reveilOptions",
+  ["Simples", "Autre"],
+  "reveil"
+);
+
+renderSedationSuitesDetails();
+    
   }else{
     
 renderPeropVisibility();
@@ -418,6 +430,18 @@ createChips(
 renderAnalgesieDetails();
     
     renderAntibio();
+    
+    state.reveil = state.reveil.filter(x =>
+  ["Extubation", "Complication extubation", "Patient transféré intubé ventilé"].includes(x)
+);
+
+createChips(
+  "reveilOptions",
+  ["Extubation", "Complication extubation", "Patient transféré intubé ventilé"],
+  "reveil"
+);
+
+renderReveilDetails();
     
     updateCurare();
   }

@@ -86,6 +86,7 @@ ectMedications: [
   
 approachOptions: {
   "Colectomie": ["Cœlioscopie", "Laparotomie"],
+  "Néphrectomie": ["Totale", "Partielle"],
   "Appendicectomie": ["Cœlioscopie", "Laparotomie"],
   "Cholécystectomie": ["Cœlioscopie", "Laparotomie"],
   "Annexectomie": ["Cœlioscopie", "Laparotomie"],

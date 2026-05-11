@@ -388,12 +388,78 @@ function renderAnalgesieDetails(){
 }
 
 function renderALRDetails(){
+
   const other = state.alr.includes("Autre");
+
   $("alrOtherText").classList.toggle("hidden", !other);
 
   if(!other){
     $("alrOtherText").value = "";
   }
+
+  let ktBox = $("continuousALRBox");
+
+  if(!ktBox){
+    ktBox = document.createElement("div");
+    ktBox.id = "continuousALRBox";
+    ktBox.style.marginTop = "10px";
+
+    $("alrCard").appendChild(ktBox);
+  }
+
+  ktBox.innerHTML = "";
+
+  state.alr.forEach(alr=>{
+
+    if(!CONTINUOUS_ALR.includes(alr)) return;
+
+    const row = document.createElement("div");
+    row.className = "detail-box";
+
+    const chip = document.createElement("div");
+    chip.className =
+      "chip sub-chip" +
+      (state.continuousALR[alr] ? " active" : "");
+
+    chip.textContent = `${alr} — KT continu`;
+
+    chip.onclick = ()=>{
+
+      state.continuousALR[alr] =
+        !state.continuousALR[alr];
+
+      renderALRDetails();
+      renderReport();
+    };
+
+    row.appendChild(chip);
+
+    if(state.continuousALR[alr]){
+
+      const input = document.createElement("input");
+
+      input.type = "text";
+
+      input.placeholder =
+        "Ex : Ropivacaïne 0,2% 5 mL/h";
+
+      input.value =
+        state.continuousALRText[alr] || "";
+
+      input.style.marginTop = "8px";
+
+      input.oninput = ()=>{
+        state.continuousALRText[alr] =
+          input.value;
+
+        renderReport();
+      };
+
+      row.appendChild(input);
+    }
+
+    ktBox.appendChild(row);
+  });
 }
 
 function renderECTMedications(){

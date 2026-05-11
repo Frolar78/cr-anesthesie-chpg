@@ -174,3 +174,14 @@ const SIMPLE_PEROP_GESTES = [
   "URS + Laser",
   "Montée de JJ"
 ];
+
+const CONTINUOUS_ALR = [
+  "Bloc inter-scalénique",
+  "Bloc fémoral",
+  "Bloc saphène",
+  "Bloc sciatique",
+  "Bloc sciatique au creux poplité",
+  "PENG bloc",
+  "Bloc paravertébral",
+  "Bloc érecteur du rachis"
+];

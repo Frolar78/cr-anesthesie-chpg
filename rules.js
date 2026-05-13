@@ -185,3 +185,33 @@ const CONTINUOUS_ALR = [
   "Bloc paravertébral",
   "Bloc érecteur du rachis"
 ];
+
+const SMART_PRESETS = {
+
+  "Cataracte": {
+    monitorage: ["Scope", "SpO2", "VVP"],
+    va: "Ventilation spontanée",
+    entretien: "",
+    induction: ["Midazolam"],
+    reveil: ["Simples"]
+  },
+
+  "Electroconvulsivothérapie": {
+    monitorage: ["Scope", "SpO2", "VVP"],
+    induction: ["Propofol", "Célocurine"],
+    reveil: ["Simples"]
+  },
+
+  "Œsophagectomie Lewis-Santy": {
+    monitorage: ["Scope", "SpO2", "VVP", "KTA", "KTC", "BIS", "TOF"]
+  },
+
+  "Duodénopancréatectomie céphalique": {
+    monitorage: ["Scope", "SpO2", "VVP", "KTA", "KTC", "BIS", "TOF"]
+  },
+
+  "Lobectomie pulmonaire": {
+    monitorage: ["Scope", "SpO2", "VVP", "KTA", "KTC", "BIS", "TOF"]
+  }
+
+};

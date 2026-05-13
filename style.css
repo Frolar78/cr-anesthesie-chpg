@@ -447,3 +447,18 @@ box-shadow: 0 4px 12px rgba(176,48,96,.28);
   border-color:#b5121b;
   box-shadow:0 8px 18px rgba(181,18,27,.28);
 }
+
+.laryngo-icon{
+  width:18px;
+  height:18px;
+  object-fit:contain;
+  margin-right:7px;
+  filter:brightness(0) saturate(100%)
+    invert(16%) sepia(76%)
+    saturate(3578%) hue-rotate(347deg)
+    brightness(87%) contrast(92%);
+}
+
+#endoscopyIntubationChip.active .laryngo-icon{
+  filter:brightness(0) invert(1);
+}

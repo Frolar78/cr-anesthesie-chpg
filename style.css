@@ -462,3 +462,7 @@ box-shadow: 0 4px 12px rgba(176,48,96,.28);
 #endoscopyIntubationChip.active .laryngo-icon{
   filter:brightness(0) invert(1);
 }
+
+.laryngo-icon{
+  pointer-events:none;
+}

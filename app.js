@@ -383,7 +383,20 @@ function isECTMode(){
     DATA.ectGestes && DATA.ectGestes.includes(g)
   );
 }
+function isEndoscopyMode(){
 
+  if(state.endoscopyIntubation){
+    return false;
+  }
+
+  const gestes = getSelectedGestesRaw();
+
+  if(!gestes.length) return false;
+
+  return gestes.every(g =>
+    ENDOSCOPY_GESTES.includes(g)
+  );
+}
 function applyAnesthesiaMode(){
 const ect = isECTMode();
 const sedation = !ect && isSedationMode();

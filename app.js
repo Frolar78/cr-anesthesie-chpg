@@ -630,7 +630,17 @@ renderReveilDetails();
     
     updateCurare();
   }
+const endoscopyGesture = isEndoscopyGestureSelected();
 
+$("endoscopyIntubationChip").classList.toggle(
+  "hidden",
+  !endoscopyGesture
+);
+
+$("endoscopyIntubationChip").classList.toggle(
+  "active",
+  endoscopyGesture && state.endoscopyIntubation
+);
   renderMonitorageDetails();
 }
 

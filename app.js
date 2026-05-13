@@ -398,6 +398,15 @@ function isEndoscopyMode(){
     ENDOSCOPY_GESTES.includes(g)
   );
 }
+function isEndoscopyGestureSelected(){
+  const gestes = getSelectedGestesRaw();
+
+  if(!gestes.length) return false;
+
+  return gestes.every(g =>
+    ENDOSCOPY_GESTES.includes(g)
+  );
+}
 function applyAnesthesiaMode(){
 const ect = isECTMode();
 const endoscopy = !ect && isEndoscopyMode();
@@ -417,8 +426,17 @@ const sedation = !ect && !endoscopy && isSedationMode();
   $("antibioCard").classList.toggle("hidden", ect);
   $("analgesieCard").classList.toggle("hidden", ect);
   if(endoscopy){
-  $("endoscopyIntubationChip")
-  .classList.remove("hidden");
+$("endoscopyIntubationChip")
+  .classList.toggle(
+    "hidden",
+    !isEndoscopyGestureSelected()
+  );
+
+$("endoscopyIntubationChip")
+  .classList.toggle(
+    "active",
+    state.endoscopyIntubation
+  );
   
   $("inductionTitle").textContent = "Sédation";
 

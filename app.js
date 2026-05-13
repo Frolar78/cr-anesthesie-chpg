@@ -334,7 +334,33 @@ function getSelectedGestesRaw(){
     .map(x=>x.value)
     .filter(Boolean);
 }
+function applySmartPreset(geste){
+  const preset = SMART_PRESETS[geste];
 
+  if(!preset) return;
+
+  if(preset.monitorage){
+    state.monitorage = [...preset.monitorage];
+    createChips("monitorage", DATA.monitorage, "monitorage");
+    renderMonitorageDetails();
+  }
+
+  if(preset.induction){
+    state.induction = [...preset.induction];
+  }
+
+  if(preset.va){
+    state.va = preset.va;
+  }
+
+  if(preset.entretien !== undefined){
+    state.entretien = preset.entretien;
+  }
+
+  if(preset.reveil){
+    state.reveil = [...preset.reveil];
+  }
+}
 function isSedationMode(){
   const gestes = getSelectedGestesRaw();
 

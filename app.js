@@ -917,7 +917,20 @@ $("sequenceRapideToggle").onclick = ()=>{
 
   renderReport();
 };
+$("endoscopyIntubationChip").onclick = ()=>{
 
+  state.endoscopyIntubation =
+    !state.endoscopyIntubation;
+
+  $("endoscopyIntubationChip")
+    .classList.toggle(
+      "active",
+      state.endoscopyIntubation
+    );
+
+  applyAnesthesiaMode();
+  renderReport();
+};
  $("incidentToggle").onclick = ()=>{
   const active = $("incidentToggle").classList.toggle("active");
 

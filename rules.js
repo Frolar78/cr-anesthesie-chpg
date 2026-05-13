@@ -215,3 +215,9 @@ const SMART_PRESETS = {
   }
 
 };
+
+const ENDOSCOPY_GESTES = [
+  "Gastroscopie",
+  "Coloscopie",
+  "RSF"
+];

@@ -430,3 +430,29 @@ box-shadow: 0 4px 12px rgba(176,48,96,.28);
   width:90px;
   padding:7px 10px;
 }
+
+#endoscopyIntubationChip{
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:700;
+  border-color:#b5121b;
+  color:#8f1118;
+  background:#fff5f6;
+  box-shadow:0 4px 12px rgba(181,18,27,.12);
+}
+
+#endoscopyIntubationChip::before{
+  content:"⌐";
+  display:inline-flex;
+  margin-right:7px;
+  font-size:15px;
+  font-weight:800;
+  transform:rotate(-20deg);
+}
+
+#endoscopyIntubationChip.active{
+  background:#b5121b;
+  color:#fff;
+  border-color:#b5121b;
+  box-shadow:0 8px 18px rgba(181,18,27,.28);
+}

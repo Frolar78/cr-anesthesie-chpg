@@ -417,7 +417,9 @@ const sedation = !ect && !endoscopy && isSedationMode();
   $("antibioCard").classList.toggle("hidden", ect);
   $("analgesieCard").classList.toggle("hidden", ect);
   if(endoscopy){
-
+  $("endoscopyIntubationChip")
+  .classList.remove("hidden");
+  
   $("inductionTitle").textContent = "Sédation";
 
   $("curareCard").classList.add("hidden");
@@ -453,7 +455,8 @@ const sedation = !ect && !endoscopy && isSedationMode();
   renderSedationSuitesDetails();
 
 }else if(ect){
-
+  $("endoscopyIntubationChip")
+  .classList.add("hidden");
     state.curare = [];
     state.antagonisation = false;
     state.va = "";
@@ -566,7 +569,9 @@ createChips(
 renderSedationSuitesDetails();
     
   }else{
-    
+    $("endoscopyIntubationChip")
+  .classList.add("hidden");
+  
     $("destinationPostopBlock").classList.remove("hidden");
     
 renderPeropVisibility();

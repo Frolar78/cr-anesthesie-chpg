@@ -418,8 +418,20 @@ function isEndoscopyIntubatedMode(){
 }
 function applyAnesthesiaMode(){
 const ect = isECTMode();
-const endoscopy = !ect && isEndoscopyMode();
-const sedation = !ect && !endoscopy && isSedationMode();
+
+const endoscopyIntubated =
+  !ect && isEndoscopyIntubatedMode();
+
+const endoscopy =
+  !ect &&
+  !endoscopyIntubated &&
+  isEndoscopyMode();
+
+const sedation =
+  !ect &&
+  !endoscopy &&
+  !endoscopyIntubated &&
+  isSedationMode();
   
   if(ect){
   $("inductionTitle").textContent = "Anesthésie";

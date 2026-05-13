@@ -135,6 +135,9 @@ fillSelect(sel, list, "Choisir...");
     state.peropForced = false;
     state.peropHidden = false;
     renderGesteExtra(wrapper, sel.value);
+
+    applySmartPreset(sel.value);
+
     renderALR();
     renderAntibio();
     renderPeropVisibility();

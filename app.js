@@ -1001,6 +1001,37 @@ $("endoscopyIntubationChip").onclick = ()=>{
   state.endoscopyIntubation =
     !state.endoscopyIntubation;
 
+  if(!state.endoscopyIntubation){
+
+    state.curare = [];
+    state.va = "";
+    state.ventilation = "";
+    state.entretien = "";
+    state.antagonisation = false;
+
+    $("sequenceRapide").checked = false;
+
+    $("sequenceRapideToggle")
+      ?.classList.remove("active");
+
+    createChips(
+      "curare",
+      ["Aucun","Atracurium","Rocuronium"],
+      "curare"
+    );
+
+    createChips(
+      "vaOptions",
+      [
+        "Ventilation spontanée",
+        "Masque laryngé",
+        "Intubation oro-trachéale"
+      ],
+      "va",
+      true
+    );
+  }
+
   $("endoscopyIntubationChip")
     .classList.toggle(
       "active",

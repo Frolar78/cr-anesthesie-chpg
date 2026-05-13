@@ -23,10 +23,11 @@ const state = {
   transfusionActive: false,
   transfusion: [],
   drainsActive: false,
-drains: [],
+  drains: [],
   peropForced: false,
-peropHidden: false,
-urgence: false
+  peropHidden: false,
+  urgence: false,
+  endoscopyIntubation: false
 };
 
 function initDate(){

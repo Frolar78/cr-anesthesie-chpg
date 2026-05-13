@@ -446,7 +446,37 @@ const sedation =
   $("entretienCard").classList.toggle("hidden", sedation || ect);
   $("antibioCard").classList.toggle("hidden", ect);
   $("analgesieCard").classList.toggle("hidden", ect);
-  if(endoscopy){
+  if(endoscopyIntubated){
+
+  $("inductionTitle").textContent = "Induction";
+
+  $("curareCard").classList.remove("hidden");
+  $("vaCard").classList.remove("hidden");
+  $("entretienCard").classList.remove("hidden");
+
+  $("peropCard").classList.add("hidden");
+  $("showPeropBtn").classList.add("hidden");
+
+  $("analgesieCard").classList.add("hidden");
+  $("alrCard").classList.add("hidden");
+  $("neuraxialCard").classList.add("hidden");
+  $("antibioCard").classList.add("hidden");
+
+  $("destinationPostopBlock").classList.add("hidden");
+  $("destinationPostop").value = "";
+
+  state.va = "Intubation oro-trachéale";
+
+  createChips(
+    "vaOptions",
+    ["Intubation oro-trachéale"],
+    "va",
+    true
+  );
+
+  renderVADetails();
+
+}else if(endoscopy){
 $("endoscopyIntubationChip")
   .classList.toggle(
     "hidden",

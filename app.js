@@ -416,8 +416,43 @@ const sedation = !ect && !endoscopy && isSedationMode();
   $("entretienCard").classList.toggle("hidden", sedation || ect);
   $("antibioCard").classList.toggle("hidden", ect);
   $("analgesieCard").classList.toggle("hidden", ect);
-  
-if(ect){
+  if(endoscopy){
+
+  $("inductionTitle").textContent = "Sédation";
+
+  $("curareCard").classList.add("hidden");
+  $("vaCard").classList.add("hidden");
+  $("entretienCard").classList.add("hidden");
+
+  $("peropCard").classList.add("hidden");
+  $("showPeropBtn").classList.add("hidden");
+
+  $("destinationPostopBlock").classList.add("hidden");
+  $("destinationPostop").value = "";
+
+  state.induction =
+    state.induction.filter(x => ["Propofol"].includes(x));
+
+  createChips(
+    "induction",
+    ["Propofol"],
+    "induction"
+  );
+
+  state.reveil =
+    state.reveil.filter(x =>
+      ["Simples", "Autre"].includes(x)
+    );
+
+  createChips(
+    "reveilOptions",
+    ["Simples", "Autre"],
+    "reveil"
+  );
+
+  renderSedationSuitesDetails();
+
+}else if(ect){
 
     state.curare = [];
     state.antagonisation = false;

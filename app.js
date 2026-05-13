@@ -399,12 +399,21 @@ function isEndoscopyMode(){
   );
 }
 function isEndoscopyGestureSelected(){
+
   const gestes = getSelectedGestesRaw();
 
   if(!gestes.length) return false;
 
   return gestes.every(g =>
     ENDOSCOPY_GESTES.includes(g)
+  );
+}
+
+function isEndoscopyIntubatedMode(){
+
+  return (
+    isEndoscopyGestureSelected() &&
+    state.endoscopyIntubation
   );
 }
 function applyAnesthesiaMode(){

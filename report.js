@@ -314,20 +314,20 @@ if(state.drainsActive && state.drains.length){
     drains.push(txt ? `Drain thoracique ${txt}` : "Drain thoracique");
   }
 
-  if(state.drains.includes("Redon")){
-    const txt = $("redonText").value.trim();
-    drains.push(txt ? `Redon ${txt}` : "Redon");
-  }
+if(state.drains.includes("Redon")){
+  const redonVal = $("redonText").value.trim();
+  drains.push(redonVal ? `Redon ${redonVal}` : "Redon");
+}
 
-  if(state.drains.includes("Lame")){
-    const txt = $("lameText").value.trim();
-    drains.push(txt ? `Lame ${txt}` : "Lame");
-  }
+if(state.drains.includes("Lame")){
+  const lameVal = $("lameText").value.trim();
+  drains.push(lameVal ? `Lame ${lameVal}` : "Lame");
+}
 
-  if(state.drains.includes("Sonde vésicale")){
-    const txt = $("svText").value.trim();
-    drains.push(txt ? `Sonde vésicale ${txt} Fr` : "Sonde vésicale");
-  }
+if(state.drains.includes("Sonde vésicale")){
+  const svVal = $("svText").value.trim();
+  drains.push(svVal ? `Sonde vésicale ${svVal} Fr` : "Sonde vésicale");
+}
 
   if(state.drains.includes("SNG")){
     drains.push("SNG");

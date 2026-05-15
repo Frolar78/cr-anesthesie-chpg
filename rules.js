@@ -106,7 +106,7 @@ const ANTIBIO_MAP = {
 
   "Prostatectomie totale": "Aucune",
   "Biopsies de prostate": "Céfazoline",
-  "REP": "Céfazoline",
+  "REP HOLEP": "Céfazoline",
   "REV": "Céfazoline",
   "URS + Laser": "Céfazoline",
   "Montée de JJ": "Céfazoline",

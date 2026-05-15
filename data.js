@@ -1,4 +1,34 @@
 const DATA = {
+  const GESTE_GENRE = {
+  feminin: [
+    "PTH",
+    "PTG",
+    "Ostéosynthèse cheville",
+    "Ostéosynthèse poignet",
+    "Hernie inguinale",
+    "Colectomie",
+    "Annexectomie",
+    "Kystectomie ovarienne",
+    "Cataracte",
+    "Néphrectomie",
+    "Prothèse d'épaule",
+    "Arthroscopie de genou",
+    "Arthroscopie d'épaule",
+    "Mastectomie partielle",
+    "Mastectomie totale",
+    "Arthroscopie cheville",
+    "Ostéosynthèse plateau tibial",
+    "Blépharoplastie",
+    "Surrénalectomie",
+    "Thyroïdectomie totale",
+    "Thyroïdectomie partielle",
+    "Parathyroïdectomie"
+  ],
+  pluriel: [
+    "Varices"
+  ]
+};
+
   anesthesistes: [
     "Dr Stéphanie ALBOUY",
     "Dr Guy ARMANDO",

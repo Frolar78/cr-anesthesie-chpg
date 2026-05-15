@@ -847,16 +847,19 @@ async function copyReport(){
 function resetForm(){
   location.reload();
 }
-function init(){
-  initDate();
-
+function initState(){
   if(!DATA.monitorage.includes("PICC Line")) DATA.monitorage.push("PICC Line");
   if(!DATA.monitorage.includes("Mid Line")) DATA.monitorage.push("Mid Line");
+}
 
-$("anesthContainer").innerHTML = "";
-addAnesth(false);
-fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
-  
+function initUI(){
+  initDate();
+
+  $("anesthContainer").innerHTML = "";
+  addAnesth(false);
+
+  fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
+
   $("chirContainer").innerHTML = "";
   $("gesteContainer").innerHTML = "";
 
@@ -881,171 +884,159 @@ fillSelect(specialiteSelect, Object.keys(DATA.specialites), "Choisir...");
     ["Paracétamol", "Kétoprofène", "Néfopam", "Tramadol", "Morphine"],
     "analgesie"
   );
-   createChips(
-  "reveilOptions",
-  ["Extubation", "Complication extubation", "Patient transféré intubé ventilé"],
-  "reveil"
-);
+
   createChips(
-  "transfusionOptions",
-  ["CGR", "PFC", "Plaquettes", "Fibrinogène", "Calcium", "Autre"],
-  "transfusion"
-);
-$("transfusionToggle").onclick = ()=>{
-  state.transfusionActive = !state.transfusionActive;
-  $("transfusionToggle").classList.toggle("active", state.transfusionActive);
-  $("transfusionBlock").classList.toggle("hidden", !state.transfusionActive);
+    "reveilOptions",
+    ["Extubation", "Complication extubation", "Patient transféré intubé ventilé"],
+    "reveil"
+  );
 
-  if(!state.transfusionActive){
-    state.transfusion = [];
-    createChips(
-  "transfusionOptions",
-  ["CGR", "PFC", "Plaquettes", "Fibrinogène", "Calcium", "Autre"],
-  "transfusion"
-);
-  }
+  createChips(
+    "transfusionOptions",
+    ["CGR", "PFC", "Plaquettes", "Fibrinogène", "Calcium", "Autre"],
+    "transfusion"
+  );
 
-  renderReport();
-};
+  createChips(
+    "drainsOptions",
+    ["Drain thoracique", "Redon", "Lame", "Sonde vésicale", "SNG", "Autre"],
+    "drains"
+  );
 
   renderAntibio();
-createChips(
-  "drainsOptions",
-  ["Drain thoracique", "Redon", "Lame", "Sonde vésicale", "SNG", "Autre"],
-  "drains"
-);
+  renderALR();
+  renderPeropVisibility();
+  renderReport();
+}
 
-$("drainsToggle").onclick = ()=>{
-  state.drainsActive = !state.drainsActive;
-  $("drainsToggle").classList.toggle("active", state.drainsActive);
-  $("drainsBlock").classList.toggle("hidden", !state.drainsActive);
+function initListeners(){
+  $("addAnesthBtn").onclick = ()=>addAnesth(true);
+  $("addChirBtn").onclick = ()=>addChir(true);
+  $("addGesteBtn").onclick = ()=>addGeste(true);
+  $("resetBtn").onclick = resetForm;
+  $("copyBtn").onclick = copyReport;
 
-  if(!state.drainsActive){
-    state.drains = [];
-    createChips(
-      "drainsOptions",
-      ["Drain thoracique", "Redon", "Lame", "Sonde vésicale", "SNG", "Autre"],
-      "drains"
-    );
+  if($("urgenceChip")){
+    $("urgenceChip").onclick = ()=>{
+      state.urgence = !state.urgence;
+      $("urgenceChip").classList.toggle("active", state.urgence);
+      renderReport();
+    };
   }
 
-  renderReport();
-};
-$("addAnesthBtn").onclick = ()=>addAnesth(true);
-$("addChirBtn").onclick = ()=>addChir(true);
-$("addGesteBtn").onclick = ()=>addGeste(true);
-$("resetBtn").onclick = resetForm;
-$("copyBtn").onclick = copyReport;
-if($("urgenceChip")){
-  $("urgenceChip").onclick = ()=>{
-    state.urgence = !state.urgence;
-    $("urgenceChip").classList.toggle("active", state.urgence);
+  $("antagonisationChip").onclick = ()=>{
+    state.antagonisation = !state.antagonisation;
+    $("antagonisationChip").classList.toggle("active", state.antagonisation);
     renderReport();
   };
-}
-$("antagonisationChip").onclick = ()=>{
-  state.antagonisation = !state.antagonisation;
-  $("antagonisationChip").classList.toggle("active", state.antagonisation);
-  renderReport();
-};
-$("showPeropBtn").onclick = ()=>{
-  state.peropForced = true;
-  state.peropHidden = false;
-  renderPeropVisibility();
-  renderReport();
-};
 
-$("removePeropBtn").onclick = ()=>{
-  state.peropHidden = true;
-  state.peropForced = false;
-  renderPeropVisibility();
-  renderReport();
-};
+  $("showPeropBtn").onclick = ()=>{
+    state.peropForced = true;
+    state.peropHidden = false;
+    renderPeropVisibility();
+    renderReport();
+  };
+
+  $("removePeropBtn").onclick = ()=>{
+    state.peropHidden = true;
+    state.peropForced = false;
+    renderPeropVisibility();
+    renderReport();
+  };
 
   $("sequenceRapide").addEventListener("change", handleSequenceRapideChange);
-$("sequenceRapideToggle").onclick = ()=>{
-  $("sequenceRapide").checked = !$("sequenceRapide").checked;
-  $("sequenceRapideToggle").classList.toggle("active", $("sequenceRapide").checked);
-  handleSequenceRapideChange();
-};
- $("noradToggle").onclick = ()=>{
-  const active = $("noradToggle").classList.toggle("active");
 
-  $("noradBlock").classList.toggle("hidden", !active);
+  $("sequenceRapideToggle").onclick = ()=>{
+    $("sequenceRapide").checked = !$("sequenceRapide").checked;
+    $("sequenceRapideToggle").classList.toggle("active", $("sequenceRapide").checked);
+    handleSequenceRapideChange();
+  };
 
-  if(!active){
-    $("noradText").value = "";
-  }
+  $("noradToggle").onclick = ()=>{
+    const active = $("noradToggle").classList.toggle("active");
+    $("noradBlock").classList.toggle("hidden", !active);
+    if(!active) $("noradText").value = "";
+    renderReport();
+  };
 
-  renderReport();
-};
-$("endoscopyIntubationChip").onclick = ()=>{
+  $("endoscopyIntubationChip").onclick = ()=>{
+    state.endoscopyIntubation = !state.endoscopyIntubation;
 
-  state.endoscopyIntubation =
-    !state.endoscopyIntubation;
+    if(!state.endoscopyIntubation){
+      state.curare = [];
+      state.va = "";
+      state.ventilation = "";
+      state.entretien = "";
+      state.antagonisation = false;
 
-  if(!state.endoscopyIntubation){
+      $("sequenceRapide").checked = false;
+      $("sequenceRapideToggle")?.classList.remove("active");
 
-    state.curare = [];
-    state.va = "";
-    state.ventilation = "";
-    state.entretien = "";
-    state.antagonisation = false;
+      createChips("curare", ["Aucun","Atracurium","Rocuronium"], "curare");
+      createChips(
+        "vaOptions",
+        ["Ventilation spontanée","Masque laryngé","Intubation oro-trachéale"],
+        "va",
+        true
+      );
+    }
 
-    $("sequenceRapide").checked = false;
+    $("endoscopyIntubationChip").classList.toggle("active", state.endoscopyIntubation);
+    applyAnesthesiaMode();
+    renderReport();
+  };
 
-    $("sequenceRapideToggle")
-      ?.classList.remove("active");
+  $("incidentToggle").onclick = ()=>{
+    const active = $("incidentToggle").classList.toggle("active");
+    $("incidentBlock").classList.toggle("hidden", !active);
+    if(!active) $("incidentText").value = "";
+    renderReport();
+  };
 
-    createChips(
-      "curare",
-      ["Aucun","Atracurium","Rocuronium"],
-      "curare"
-    );
+  $("transfusionToggle").onclick = ()=>{
+    state.transfusionActive = !state.transfusionActive;
+    $("transfusionToggle").classList.toggle("active", state.transfusionActive);
+    $("transfusionBlock").classList.toggle("hidden", !state.transfusionActive);
 
-    createChips(
-      "vaOptions",
-      [
-        "Ventilation spontanée",
-        "Masque laryngé",
-        "Intubation oro-trachéale"
-      ],
-      "va",
-      true
-    );
-  }
+    if(!state.transfusionActive){
+      state.transfusion = [];
+      createChips(
+        "transfusionOptions",
+        ["CGR", "PFC", "Plaquettes", "Fibrinogène", "Calcium", "Autre"],
+        "transfusion"
+      );
+    }
 
-  $("endoscopyIntubationChip")
-    .classList.toggle(
-      "active",
-      state.endoscopyIntubation
-    );
+    renderReport();
+  };
 
-  applyAnesthesiaMode();
-  renderReport();
-};
- $("incidentToggle").onclick = ()=>{
-  const active = $("incidentToggle").classList.toggle("active");
+  $("drainsToggle").onclick = ()=>{
+    state.drainsActive = !state.drainsActive;
+    $("drainsToggle").classList.toggle("active", state.drainsActive);
+    $("drainsBlock").classList.toggle("hidden", !state.drainsActive);
 
-  $("incidentBlock").classList.toggle("hidden", !active);
+    if(!state.drainsActive){
+      state.drains = [];
+      createChips(
+        "drainsOptions",
+        ["Drain thoracique", "Redon", "Lame", "Sonde vésicale", "SNG", "Autre"],
+        "drains"
+      );
+    }
 
-  if(!active){
-    $("incidentText").value = "";
-  }
-
-  renderReport();
-};
+    renderReport();
+  };
 
   specialiteSelect.onchange = ()=>{
     state.peropForced = false;
     state.peropHidden = false;
     updateChirurgiens();
 
-   $("chirLabel").textContent =
+    $("chirLabel").textContent =
       ["Psychiatrie", "Endoscopie digestive"].includes(specialiteSelect.value)
         ? "Intervenant"
         : "Chirurgien";
-    
+
     document.querySelectorAll(".field").forEach(block=>{
       const sel = block.querySelector(".geste-select");
 
@@ -1055,7 +1046,6 @@ $("endoscopyIntubationChip").onclick = ()=>{
           DATA.specialites[specialiteSelect.value]?.interventions || [],
           "Intervention..."
         );
-
         renderGesteExtra(block, sel.value);
       }
     });
@@ -1066,30 +1056,27 @@ $("endoscopyIntubationChip").onclick = ()=>{
     renderReport();
   };
 
-document.addEventListener("change", (e)=>{
-  const modeSelectors = [
-    "specialite",
-    ...Array.from(document.querySelectorAll(".geste-select")).map(s => s.id)
-  ];
+  document.addEventListener("change", (e)=>{
+    const shouldUpdateMode =
+      e.target.classList.contains("geste-select") ||
+      e.target.classList.contains("anesthesiste") ||
+      e.target.id === "specialite";
 
-  const shouldUpdateMode =
-    e.target.classList.contains("geste-select") ||
-    e.target.classList.contains("anesthesiste") ||
-    e.target.id === "specialite";
+    if(shouldUpdateMode){
+      applyAnesthesiaMode();
+    }
 
-  if(shouldUpdateMode){
-    applyAnesthesiaMode();
-  }
+    renderReport();
+  });
 
-  renderReport();
-});
+  document.addEventListener("input", renderReport);
+}
 
-document.addEventListener("input", renderReport);
-
-  renderALR();
-  renderAntibio();
-  renderPeropVisibility();
-  renderReport();
+function init(){
+  initState();
+  initUI();
+  initListeners();
 }
 
 init();
+

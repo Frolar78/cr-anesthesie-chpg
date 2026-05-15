@@ -255,25 +255,8 @@ function buildGesteLabel(block){
     const lat = block.querySelector(".laterality-select")?.value;
 
   if(lat){
-    const feminin = [
-      "PTH",
-      "PTG",
-      "Ostéosynthèse cheville",
-      "Ostéosynthèse poignet",
-      "Hernie inguinale",
-      "Colectomie",
-      "Annexectomie",
-      "Kystectomie ovarienne",
-      "Cataracte",
-      "Néphrectomie",
-      "Prothèse d'épaule",
-      "Arthroscopie de genou",
-      "Arthroscopie d'épaule",
-      "Mastectomie partielle",
-      "Mastectomie totale"
-    ];
-
-    const pluriel = ["Varices"];
+const feminin = GESTE_GENRE.feminin;
+const pluriel = GESTE_GENRE.pluriel;
 
     let map = {
   "Droite":"droit",

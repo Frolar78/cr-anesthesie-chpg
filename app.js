@@ -1083,8 +1083,21 @@ $("endoscopyIntubationChip").onclick = ()=>{
     renderReport();
   };
 
-document.addEventListener("change", ()=>{
-  applyAnesthesiaMode();
+document.addEventListener("change", (e)=>{
+  const modeSelectors = [
+    "specialite",
+    ...Array.from(document.querySelectorAll(".geste-select")).map(s => s.id)
+  ];
+
+  const shouldUpdateMode =
+    e.target.classList.contains("geste-select") ||
+    e.target.classList.contains("anesthesiste") ||
+    e.target.id === "specialite";
+
+  if(shouldUpdateMode){
+    applyAnesthesiaMode();
+  }
+
   renderReport();
 });
 

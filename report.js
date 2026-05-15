@@ -306,36 +306,36 @@ if(state.transfusion.includes("Calcium")){
     txt += `Transfusion peropératoire : ${transf.join(", ")}.\n`;
   }
 }
-if(state.drainsActive && state.drains.length){
-  const drains = [];
-
+  if(state.drainsActive && state.drains.length){
+    const drains = [];
+  
   if(state.drains.includes("Drain thoracique")){
-    const txt = $("drainThoraciqueText").value.trim();
-    drains.push(txt ? `Drain thoracique ${txt}` : "Drain thoracique");
+      const drainThoraciqueVal = $("drainThoraciqueText").value.trim();
+      drains.push(drainThoraciqueVal ? `Drain thoracique ${drainThoraciqueVal}` : "Drain thoracique");
+    }
+
+  if(state.drains.includes("Redon")){
+    const redonVal = $("redonText").value.trim();
+    drains.push(redonVal ? `Redon ${redonVal}` : "Redon");
   }
 
-if(state.drains.includes("Redon")){
-  const redonVal = $("redonText").value.trim();
-  drains.push(redonVal ? `Redon ${redonVal}` : "Redon");
-}
+  if(state.drains.includes("Lame")){
+    const lameVal = $("lameText").value.trim();
+    drains.push(lameVal ? `Lame ${lameVal}` : "Lame");
+  }
 
-if(state.drains.includes("Lame")){
-  const lameVal = $("lameText").value.trim();
-  drains.push(lameVal ? `Lame ${lameVal}` : "Lame");
-}
-
-if(state.drains.includes("Sonde vésicale")){
-  const svVal = $("svText").value.trim();
-  drains.push(svVal ? `Sonde vésicale ${svVal} Fr` : "Sonde vésicale");
-}
+  if(state.drains.includes("Sonde vésicale")){
+    const svVal = $("svText").value.trim();
+    drains.push(svVal ? `Sonde vésicale ${svVal} Fr` : "Sonde vésicale");
+  }
 
   if(state.drains.includes("SNG")){
     drains.push("SNG");
   }
 
   if(state.drains.includes("Autre")){
-    const txt = $("drainsOtherText").value.trim();
-    if(txt) drains.push(txt);
+    const drainsAutreVal = $("drainsOtherText").value.trim();
+    if(drainsAutreVal) drains.push(drainsAutreVal);
   }
 
   if(drains.length){
